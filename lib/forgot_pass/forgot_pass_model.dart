@@ -24,5 +24,4 @@ class ForgotPassModel extends FlutterFlowModel {
   }
 
   /// Additional helper methods are added here.
-
 }

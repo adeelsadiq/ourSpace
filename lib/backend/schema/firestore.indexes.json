@@ -1,0 +1,18 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "parking_spaces",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "area",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "daily_rate",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ]
+}

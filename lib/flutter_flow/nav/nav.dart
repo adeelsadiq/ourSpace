@@ -132,19 +132,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                     ),
             ),
             FFRoute(
-              name: 'availableBookingSpaces',
-              path: 'availableBookingSpaces',
-              asyncParams: {
-                'spaceRef':
-                    getDoc(['parking_spaces'], ParkingSpacesRecord.serializer),
-              },
-              builder: (context, params) => AvailableBookingSpacesWidget(
-                spaceRef: params.getParam('spaceRef', ParamType.Document),
-                next30: params.getParam<DateTime>(
-                    'next30', ParamType.DateTime, true),
-              ),
-            ),
-            FFRoute(
               name: 'forgotPass',
               path: 'forgotPass',
               builder: (context, params) => ForgotPassWidget(),

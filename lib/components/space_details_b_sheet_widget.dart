@@ -66,11 +66,11 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
     try {
       int value = double.parse(amount).round().toInt();
       String totalPrice = (value * 100).toString();
-      paymentIntent = await createPaymentIntent(totalPrice, 'USD');
+      paymentIntent = await createPaymentIntent(totalPrice, 'EUR');
       print(paymentIntent);
 
       var gpay = PaymentSheetGooglePay(
-          merchantCountryCode: "US", currencyCode: "USD", testEnv: true);
+          merchantCountryCode: "IE", currencyCode: "EUR", testEnv: true);
 
       //STEP 2: Initialize Payment Sheet
       await Stripe.instance
@@ -79,7 +79,7 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
                   paymentIntentClientSecret: paymentIntent![
                       'client_secret'], //Gotten from payment intent
                   style: ThemeMode.light,
-                  merchantDisplayName: 'Abhi',
+                  merchantDisplayName: 'OurSpace Parking inc',
                   googlePay: gpay))
           .then((value) {});
 
@@ -101,8 +101,8 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
   }
 
   createPaymentIntent(String amount, String currency) async {
-    print("MAMSJADNASKJDHJSAHDSAGDKJSHAGDKJBHASGDKJHSAGDBKJHAS");
-    print(amount);
+    // print("MAMSJADNASKJDHJSAHDSAGDKJSHAGDKJBHASGDKJHSAGDBKJHAS");
+    // print(amount);
     try {
       Map<String, dynamic> body = {
         'amount': amount,
@@ -113,7 +113,7 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
         Uri.parse('https://api.stripe.com/v1/payment_intents'),
         headers: {
           'Authorization':
-              'Bearer sk_test_51MWx8OAVMyklfe3C3gP4wKOhTsRdF6r1PYhhg1PqupXDITMrV3asj5Mmf0G5F9moPL6zNfG3juK8KHgV9XNzFPlq00wmjWwZYA',
+              'Bearer sk_test_51Ms8klHP4fXKJAPbjz0Y6p6qTkko7mGxJjImrUpOe3pY6NTS5ABeR1KXXNT66MwEAYRcGLSms70D5jTcLsgjIcqz00EN6sauD5',
           'Content-Type': 'application/x-www-form-urlencoded'
         },
         body: body,
@@ -167,201 +167,207 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
           ),
           child: Padding(
             padding: EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 16.0, 16.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      width: 60.0,
-                      height: 4.0,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).primaryBackground,
-                        borderRadius: BorderRadius.circular(2.0),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: 60.0,
+                        height: 4.0,
+                        decoration: BoxDecoration(
+                          color: FlutterFlowTheme.of(context).primaryBackground,
+                          borderRadius: BorderRadius.circular(2.0),
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
-                  child: Text(
-                    valueOrDefault<String>(
-                      widget.spaceBsSheet!.name,
-                      'no name',
-                    ),
-                    style: FlutterFlowTheme.of(context).title3,
+                    ],
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
-                  child: Text(
-                    'Review your order below before checking out.',
-                    style: FlutterFlowTheme.of(context).bodySmall,
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                    child: Text(
+                      valueOrDefault<String>(
+                        widget.spaceBsSheet!.name,
+                        'no name',
+                      ),
+                      style: FlutterFlowTheme.of(context).headlineSmall,
+                    ),
                   ),
-                ),
-                Divider(
-                  height: 24.0,
-                  thickness: 2.0,
-                  color: FlutterFlowTheme.of(context).primaryBackground,
-                ),
-                ListView(
-                  padding: EdgeInsets.zero,
-                  primary: false,
-                  shrinkWrap: true,
-                  scrollDirection: Axis.vertical,
-                  children: [
-                    Text(
-                      'Hello World',
-                      style: FlutterFlowTheme.of(context).bodyMedium,
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
+                    child: Text(
+                      'Review your order below before checking out.',
+                      style: FlutterFlowTheme.of(context).bodySmall,
                     ),
-                  ],
-                ),
-                Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(24.0, 16.0, 24.0, 4.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Text(
-                            'Price:',
-                            style:
-                                FlutterFlowTheme.of(context).bodySmall.override(
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                          ),
-                        ],
+                  ),
+                  Divider(
+                    height: 24.0,
+                    thickness: 2.0,
+                    color: FlutterFlowTheme.of(context).primaryBackground,
+                  ),
+                  ListView(
+                    padding: EdgeInsets.zero,
+                    primary: false,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    children: [
+                      Text(
+                        'Hello World',
+                        style: FlutterFlowTheme.of(context).bodyMedium,
                       ),
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(24.0, 4.0, 24.0, 0.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Daily Price in €',
-                            style: FlutterFlowTheme.of(context).bodySmall,
-                          ),
-                          Text(
-                            widget.spaceBsSheet!.dailyRate.toString(),
-                            style: FlutterFlowTheme.of(context).titleSmall,
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 24.0),
-                      child: FFButtonWidget(
-                        onPressed: () async {
-                          List<DateTime?>? dateRange =
-                              await showCalendarDatePicker2Dialog(
-                            context: context,
-                            config: CalendarDatePicker2WithActionButtonsConfig(
-                              calendarType: CalendarDatePicker2Type.range,
-                              selectableDayPredicate: _isValidDateRange,
-                              firstDate: DateTime.now(),
-                              lastDate: DateTime(2030),
-                            ),
-
-                            dialogSize: const Size(325, 400),
-                            // value: _dates,
-                            borderRadius: BorderRadius.circular(15),
-                          );
-                          if (dateRange != null) {
-                            if (dateRange.isNotEmpty) {
-                              Duration difference =
-                                  dateRange[1]!.difference(dateRange[0]!);
-                              double totalPrice =
-                                  widget.spaceBsSheet!.dailyRate! *
-                                      difference.inDays;
-                              // print("Hello");
-                              // Navigator.of(context).pop();
-                              makePayment(totalPrice.toString(), dateRange[0]!,
-                                  dateRange[1]!);
-                            }
-                          }
-
-                          // showCustomDateRangePicker(
-                          //   context,
-                          //   dismissible: true,
-                          //   minimumDate: DateTime.now(),
-                          //   maximumDate: DateTime(2035),
-                          //   endDate: endTime,
-                          //   startDate: startTime,
-                          //   backgroundColor: Colors.white,
-                          //   primaryColor: Colors.green,
-                          //   onApplyClick: (start, end) async {
-                          //     final range =
-                          //         DateTimeRange(start: start, end: end);
-                          //     print(_isValidDateRange(range));
-                          //     return;
-                          //     if (!_isValidDateRange(range)) {
-                          //       setState(() {
-                          //         endTime = end;
-                          //         startTime = start;
-                          //       });
-
-                          //     } else {
-                          //       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          //           content: Text(
-                          //               "You can't able to selected between 28 to 31 march ")));
-                          //     }
-                          //   },
-                          //   onCancelClick: () {
-                          //     setState(() {
-                          //       endTime = null;
-                          //       startTime = null;
-                          //     });
-                          //   },
-                          // );
-
-                          // context.pushNamed(
-                          //   'availableBookingSpaces',
-                          //   queryParams: {
-                          //     'spaceRef': serializeParam(
-                          //       widget.spaceBsSheet,
-                          //       ParamType.Document,
-                          //     ),
-                          //   }.withoutNulls,
-                          //   extra: <String, dynamic>{
-                          //     'spaceRef': widget.spaceBsSheet,
-                          //   },
-                          // );
-                        },
-                        text: 'View Available Slots',
-                        options: FFButtonOptions(
-                          width: double.infinity,
-                          height: 50.0,
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          color: FlutterFlowTheme.of(context).secondary,
-                          textStyle:
-                              FlutterFlowTheme.of(context).titleSmall.override(
+                    ],
+                  ),
+                  Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            24.0, 16.0, 24.0, 4.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Text(
+                              'Price:',
+                              style: FlutterFlowTheme.of(context)
+                                  .bodySmall
+                                  .override(
                                     fontFamily: 'Poppins',
-                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
                                   ),
-                          elevation: 2.0,
-                          borderSide: BorderSide(
-                            color: Colors.transparent,
-                            width: 1.0,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            24.0, 4.0, 24.0, 0.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Daily Price in €',
+                              style: FlutterFlowTheme.of(context).bodySmall,
+                            ),
+                            Text(
+                              widget.spaceBsSheet!.dailyRate.toString(),
+                              style: FlutterFlowTheme.of(context).titleSmall,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            16.0, 0.0, 16.0, 24.0),
+                        child: FFButtonWidget(
+                          onPressed: () async {
+                            List<DateTime?>? dateRange =
+                                await showCalendarDatePicker2Dialog(
+                              context: context,
+                              config:
+                                  CalendarDatePicker2WithActionButtonsConfig(
+                                calendarType: CalendarDatePicker2Type.range,
+                                selectableDayPredicate: _isValidDateRange,
+                                firstDate: DateTime.now(),
+                                lastDate: DateTime(2030),
+                              ),
+
+                              dialogSize: const Size(325, 400),
+                              // value: _dates,
+                              borderRadius: BorderRadius.circular(15),
+                            );
+                            if (dateRange != null) {
+                              if (dateRange.isNotEmpty) {
+                                Duration difference =
+                                    dateRange[1]!.difference(dateRange[0]!);
+                                double totalPrice =
+                                    widget.spaceBsSheet!.dailyRate! *
+                                        difference.inDays;
+                                // print("Hello");
+                                // Navigator.of(context).pop();
+                                makePayment(totalPrice.toString(),
+                                    dateRange[0]!, dateRange[1]!);
+                              }
+                            }
+
+                            // showCustomDateRangePicker(
+                            //   context,
+                            //   dismissible: true,
+                            //   minimumDate: DateTime.now(),
+                            //   maximumDate: DateTime(2035),
+                            //   endDate: endTime,
+                            //   startDate: startTime,
+                            //   backgroundColor: Colors.white,
+                            //   primaryColor: Colors.green,
+                            //   onApplyClick: (start, end) async {
+                            //     final range =
+                            //         DateTimeRange(start: start, end: end);
+                            //     print(_isValidDateRange(range));
+                            //     return;
+                            //     if (!_isValidDateRange(range)) {
+                            //       setState(() {
+                            //         endTime = end;
+                            //         startTime = start;
+                            //       });
+
+                            //     } else {
+                            //       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            //           content: Text(
+                            //               "You can't able to selected between 28 to 31 march ")));
+                            //     }
+                            //   },
+                            //   onCancelClick: () {
+                            //     setState(() {
+                            //       endTime = null;
+                            //       startTime = null;
+                            //     });
+                            //   },
+                            // );
+
+                            // context.pushNamed(
+                            //   'availableBookingSpaces',
+                            //   queryParams: {
+                            //     'spaceRef': serializeParam(
+                            //       widget.spaceBsSheet,
+                            //       ParamType.Document,
+                            //     ),
+                            //   }.withoutNulls,
+                            //   extra: <String, dynamic>{
+                            //     'spaceRef': widget.spaceBsSheet,
+                            //   },
+                            // );
+                          },
+                          text: 'View Available Slots',
+                          options: FFButtonOptions(
+                            width: double.infinity,
+                            height: 50.0,
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 0.0),
+                            iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 0.0),
+                            color: FlutterFlowTheme.of(context).secondary,
+                            textStyle: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .override(
+                                  fontFamily: 'Poppins',
+                                  color: Colors.white,
+                                ),
+                            elevation: 2.0,
+                            borderSide: BorderSide(
+                              color: Colors.transparent,
+                              width: 1.0,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -385,43 +391,29 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
     });
     getBookedDate();
 
-    showDialog(
+    await showDialog(
       context: context,
-      builder: (context) {
-        return Dialog(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SizedBox(
-                height: 24.0,
-              ),
-              Text("Your Park is Successfully Booked "),
-              SizedBox(
-                height: 100.0,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CupertinoButton(
-                    child: Text("Cancel"),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                  CupertinoButton(
-                    child: Text("Ok"),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 24.0,
-              ),
-            ],
-          ),
+      builder: (alertDialogContext) {
+        return AlertDialog(
+          title: Text('Space Added'),
+          content: Text('Booking Succesful'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(alertDialogContext),
+              child: Text('Ok'),
+            ),
+          ],
         );
+      },
+    );
+    context.pushNamed(
+      'myBookings',
+      extra: <String, dynamic>{
+        kTransitionInfoKey: TransitionInfo(
+          hasTransition: true,
+          transitionType: PageTransitionType.leftToRight,
+          duration: Duration(milliseconds: 5),
+        ),
       },
     );
   }

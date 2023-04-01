@@ -7,7 +7,6 @@ import 'backend/firebase/firebase_config.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
-import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
 import 'index.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 
@@ -17,7 +16,7 @@ void main() async {
 
   await FlutterFlowTheme.initialize();
   Stripe.publishableKey =
-      "pk_test_51MWx8OAVMyklfe3CsjEzA1CiiY0XBTlHYbZ8jQlGtVFIwQi4aNeGv8J1HUw4rgSavMTLzTwgn0XRlwoTVRFXyu2h00mRUeWmAf";
+      "pk_test_51Ms8klHP4fXKJAPbxbGgB6xnR5DwC1XNgWUt9WJOWtwJvq8ex2GQ2hagBqV89VVKFbk5yiqL5SZHEd7TfCfFMJmw00tgNqlxcI";
   final appState = FFAppState(); // Initialize FFAppState
 
   runApp(ChangeNotifierProvider(create: (context) => appState, child: MyApp()));

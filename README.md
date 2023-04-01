@@ -34,3 +34,6 @@ run the following commands after adding flutter to your system:
 
 flutter pub get
 flutter packages pub run build_runner build --delete-conflicting-outputs
+
+get SHA-1 Key:
+keytool -list -v -alias androiddebugkey -keystore %USERPROFILE%\.android\debug.keystore

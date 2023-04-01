@@ -73,412 +73,415 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
-                child: TextFormField(
-                  controller: _model.titleController,
-                  autofocus: true,
-                  obscureText: false,
-                  decoration: InputDecoration(
-                    labelText: 'Title',
-                    hintText: 'Add a title for your space',
-                    hintStyle: FlutterFlowTheme.of(context).bodySmall,
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: FlutterFlowTheme.of(context).lineColor,
-                        width: 1.0,
-                      ),
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(4.0),
-                        topRight: Radius.circular(4.0),
-                      ),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0x00000000),
-                        width: 1.0,
-                      ),
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(4.0),
-                        topRight: Radius.circular(4.0),
-                      ),
-                    ),
-                    errorBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0x00000000),
-                        width: 1.0,
-                      ),
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(4.0),
-                        topRight: Radius.circular(4.0),
-                      ),
-                    ),
-                    focusedErrorBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0x00000000),
-                        width: 1.0,
-                      ),
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(4.0),
-                        topRight: Radius.circular(4.0),
-                      ),
-                    ),
-                  ),
-                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily: 'Poppins',
-                        color: Color(0xFF282727),
-                        fontSize: 16.0,
-                      ),
-                  validator:
-                      _model.titleControllerValidator.asValidator(context),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
-                child: TextFormField(
-                  controller: _model.descriptionController,
-                  autofocus: true,
-                  obscureText: false,
-                  decoration: InputDecoration(
-                    labelText: 'Description',
-                    hintText: 'Add a description for your space',
-                    hintStyle: FlutterFlowTheme.of(context).bodySmall,
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: FlutterFlowTheme.of(context).lineColor,
-                        width: 1.0,
-                      ),
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(4.0),
-                        topRight: Radius.circular(4.0),
-                      ),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0x00000000),
-                        width: 1.0,
-                      ),
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(4.0),
-                        topRight: Radius.circular(4.0),
-                      ),
-                    ),
-                    errorBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0x00000000),
-                        width: 1.0,
-                      ),
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(4.0),
-                        topRight: Radius.circular(4.0),
-                      ),
-                    ),
-                    focusedErrorBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0x00000000),
-                        width: 1.0,
-                      ),
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(4.0),
-                        topRight: Radius.circular(4.0),
-                      ),
-                    ),
-                  ),
-                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily: 'Poppins',
-                        color: Color(0xFF282727),
-                        fontSize: 16.0,
-                      ),
-                  validator: _model.descriptionControllerValidator
-                      .asValidator(context),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
-                child: TextFormField(
-                  controller: _model.addressController,
-                  autofocus: true,
-                  obscureText: false,
-                  decoration: InputDecoration(
-                    labelText: 'Address',
-                    hintText: 'Add the address for your space',
-                    hintStyle: FlutterFlowTheme.of(context).bodySmall,
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: FlutterFlowTheme.of(context).lineColor,
-                        width: 1.0,
-                      ),
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(4.0),
-                        topRight: Radius.circular(4.0),
-                      ),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0x00000000),
-                        width: 1.0,
-                      ),
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(4.0),
-                        topRight: Radius.circular(4.0),
-                      ),
-                    ),
-                    errorBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0x00000000),
-                        width: 1.0,
-                      ),
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(4.0),
-                        topRight: Radius.circular(4.0),
-                      ),
-                    ),
-                    focusedErrorBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0x00000000),
-                        width: 1.0,
-                      ),
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(4.0),
-                        topRight: Radius.circular(4.0),
-                      ),
-                    ),
-                  ),
-                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily: 'Poppins',
-                        color: Color(0xFF282727),
-                        fontSize: 16.0,
-                      ),
-                  validator:
-                      _model.addressControllerValidator.asValidator(context),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
-                child: TextFormField(
-                  controller: _model.dailyRateController,
-                  autofocus: true,
-                  obscureText: false,
-                  decoration: InputDecoration(
-                    labelText: 'DailyRate',
-                    hintText: 'Daily Rsate for the space..',
-                    hintStyle: FlutterFlowTheme.of(context).bodySmall,
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: FlutterFlowTheme.of(context).lineColor,
-                        width: 1.0,
-                      ),
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(4.0),
-                        topRight: Radius.circular(4.0),
-                      ),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0x00000000),
-                        width: 1.0,
-                      ),
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(4.0),
-                        topRight: Radius.circular(4.0),
-                      ),
-                    ),
-                    errorBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0x00000000),
-                        width: 1.0,
-                      ),
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(4.0),
-                        topRight: Radius.circular(4.0),
-                      ),
-                    ),
-                    focusedErrorBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0x00000000),
-                        width: 1.0,
-                      ),
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(4.0),
-                        topRight: Radius.circular(4.0),
-                      ),
-                    ),
-                  ),
-                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily: 'Poppins',
-                        color: Color(0xFF282727),
-                        fontSize: 16.0,
-                      ),
-                  validator:
-                      _model.dailyRateControllerValidator.asValidator(context),
-                ),
-              ),
-              Align(
-                alignment: AlignmentDirectional(-0.55, -0.55),
-                child: FlutterFlowDropDown<String>(
-                  controller: _model.areaController ??=
-                      FormFieldController<String>(null),
-                  options: [
-                    'Dublin 1',
-                    'Dublin 2',
-                    'Dublin 3',
-                    'Dublin 4',
-                    'Dublin 5',
-                    'Dublin 6',
-                    'Dublin 6w',
-                    'Dublin 7',
-                    'Dublin 8',
-                    'Dublin 9',
-                    'Dublin 10',
-                    'Dublin 11',
-                    'Dublin 12',
-                    'Dublin 13',
-                    'Dublin 14',
-                    'Swords',
-                    'Lusk',
-                    'Rush'
-                  ],
-                  onChanged: (val) => setState(() => _model.areaValue = val),
-                  width: double.infinity,
-                  height: 50.0,
-                  textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily: 'Poppins',
-                        color: Colors.black,
-                      ),
-                  hintText: 'Please select local area...',
-                  fillColor: Colors.white,
-                  elevation: 2.0,
-                  borderColor: Colors.transparent,
-                  borderWidth: 0.0,
-                  borderRadius: 0.0,
-                  margin: EdgeInsetsDirectional.fromSTEB(12.0, 4.0, 12.0, 4.0),
-                  hidesUnderline: true,
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    FlutterFlowPlacePicker(
-                      iOSGoogleMapsApiKey:
-                          'AIzaSyCOF1LidYj07rxZrXVSt-yGTTWdmdDqdVU',
-                      androidGoogleMapsApiKey:
-                          'AIzaSyAozl79XPyZ_cD-pRkMCP4ItGSW8t5AQOA',
-                      webGoogleMapsApiKey:
-                          'AIzaSyDWwxq-6kAZQl7ABysDdHSGoSY9KSPtLL0',
-                      onSelect: (place) async {
-                        setState(() => _model.exactLocationValue = place);
-                      },
-                      defaultText: 'Select Exact Location',
-                      icon: Icon(
-                        Icons.place,
-                        color: Colors.white,
-                        size: 16.0,
-                      ),
-                      buttonOptions: FFButtonOptions(
-                        width: 200.0,
-                        height: 40.0,
-                        color: FlutterFlowTheme.of(context).primary,
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleSmall.override(
-                                  fontFamily: 'Poppins',
-                                  color: Colors.white,
-                                  fontSize: 14.0,
-                                ),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                  child: TextFormField(
+                    controller: _model.titleController,
+                    autofocus: true,
+                    obscureText: false,
+                    decoration: InputDecoration(
+                      labelText: 'Title',
+                      hintText: 'Add a title for your space',
+                      hintStyle: FlutterFlowTheme.of(context).bodySmall,
+                      enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
-                          color: Colors.transparent,
+                          color: FlutterFlowTheme.of(context).lineColor,
                           width: 1.0,
                         ),
-                        borderRadius: BorderRadius.circular(12.0),
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(4.0),
+                          topRight: Radius.circular(4.0),
+                        ),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0x00000000),
+                          width: 1.0,
+                        ),
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(4.0),
+                          topRight: Radius.circular(4.0),
+                        ),
+                      ),
+                      errorBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0x00000000),
+                          width: 1.0,
+                        ),
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(4.0),
+                          topRight: Radius.circular(4.0),
+                        ),
+                      ),
+                      focusedErrorBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0x00000000),
+                          width: 1.0,
+                        ),
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(4.0),
+                          topRight: Radius.circular(4.0),
+                        ),
                       ),
                     ),
-                  ],
+                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                          fontFamily: 'Poppins',
+                          color: Color(0xFF282727),
+                          fontSize: 16.0,
+                        ),
+                    validator:
+                        _model.titleControllerValidator.asValidator(context),
+                  ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 55.0, 0.0, 25.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    FFButtonWidget(
-                      onPressed: () async {
-                        final parkingSpacesCreateData = {
-                          ...createParkingSpacesRecordData(
-                            name: _model.titleController.text,
-                            location: _model.exactLocationValue.latLng,
-                            description: _model.descriptionController.text,
-                            addressLine1: _model.addressController.text,
-                            area: _model.areaValue,
-                            ownerId: currentUserReference,
-                            dailyRate: double.tryParse(
-                                _model.dailyRateController.text),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                  child: TextFormField(
+                    controller: _model.descriptionController,
+                    autofocus: true,
+                    obscureText: false,
+                    decoration: InputDecoration(
+                      labelText: 'Description',
+                      hintText: 'Add a description for your space',
+                      hintStyle: FlutterFlowTheme.of(context).bodySmall,
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: FlutterFlowTheme.of(context).lineColor,
+                          width: 1.0,
+                        ),
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(4.0),
+                          topRight: Radius.circular(4.0),
+                        ),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0x00000000),
+                          width: 1.0,
+                        ),
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(4.0),
+                          topRight: Radius.circular(4.0),
+                        ),
+                      ),
+                      errorBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0x00000000),
+                          width: 1.0,
+                        ),
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(4.0),
+                          topRight: Radius.circular(4.0),
+                        ),
+                      ),
+                      focusedErrorBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0x00000000),
+                          width: 1.0,
+                        ),
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(4.0),
+                          topRight: Radius.circular(4.0),
+                        ),
+                      ),
+                    ),
+                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                          fontFamily: 'Poppins',
+                          color: Color(0xFF282727),
+                          fontSize: 16.0,
+                        ),
+                    validator: _model.descriptionControllerValidator
+                        .asValidator(context),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                  child: TextFormField(
+                    controller: _model.addressController,
+                    autofocus: true,
+                    obscureText: false,
+                    decoration: InputDecoration(
+                      labelText: 'Address',
+                      hintText: 'Add the address for your space',
+                      hintStyle: FlutterFlowTheme.of(context).bodySmall,
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: FlutterFlowTheme.of(context).lineColor,
+                          width: 1.0,
+                        ),
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(4.0),
+                          topRight: Radius.circular(4.0),
+                        ),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0x00000000),
+                          width: 1.0,
+                        ),
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(4.0),
+                          topRight: Radius.circular(4.0),
+                        ),
+                      ),
+                      errorBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0x00000000),
+                          width: 1.0,
+                        ),
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(4.0),
+                          topRight: Radius.circular(4.0),
+                        ),
+                      ),
+                      focusedErrorBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0x00000000),
+                          width: 1.0,
+                        ),
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(4.0),
+                          topRight: Radius.circular(4.0),
+                        ),
+                      ),
+                    ),
+                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                          fontFamily: 'Poppins',
+                          color: Color(0xFF282727),
+                          fontSize: 16.0,
+                        ),
+                    validator:
+                        _model.addressControllerValidator.asValidator(context),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                  child: TextFormField(
+                    controller: _model.dailyRateController,
+                    autofocus: true,
+                    obscureText: false,
+                    decoration: InputDecoration(
+                      labelText: 'DailyRate',
+                      hintText: 'Daily Rsate for the space..',
+                      hintStyle: FlutterFlowTheme.of(context).bodySmall,
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: FlutterFlowTheme.of(context).lineColor,
+                          width: 1.0,
+                        ),
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(4.0),
+                          topRight: Radius.circular(4.0),
+                        ),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0x00000000),
+                          width: 1.0,
+                        ),
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(4.0),
+                          topRight: Radius.circular(4.0),
+                        ),
+                      ),
+                      errorBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0x00000000),
+                          width: 1.0,
+                        ),
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(4.0),
+                          topRight: Radius.circular(4.0),
+                        ),
+                      ),
+                      focusedErrorBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0x00000000),
+                          width: 1.0,
+                        ),
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(4.0),
+                          topRight: Radius.circular(4.0),
+                        ),
+                      ),
+                    ),
+                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                          fontFamily: 'Poppins',
+                          color: Color(0xFF282727),
+                          fontSize: 16.0,
+                        ),
+                    validator: _model.dailyRateControllerValidator
+                        .asValidator(context),
+                  ),
+                ),
+                Align(
+                  alignment: AlignmentDirectional(-0.55, -0.55),
+                  child: FlutterFlowDropDown<String>(
+                    controller: _model.areaController ??=
+                        FormFieldController<String>(null),
+                    options: [
+                      'Dublin 1',
+                      'Dublin 2',
+                      'Dublin 3',
+                      'Dublin 4',
+                      'Dublin 5',
+                      'Dublin 6',
+                      'Dublin 6w',
+                      'Dublin 7',
+                      'Dublin 8',
+                      'Dublin 9',
+                      'Dublin 10',
+                      'Dublin 11',
+                      'Dublin 12',
+                      'Dublin 13',
+                      'Dublin 14',
+                      'Swords',
+                      'Lusk',
+                      'Rush'
+                    ],
+                    onChanged: (val) => setState(() => _model.areaValue = val),
+                    width: double.infinity,
+                    height: 50.0,
+                    textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
+                          fontFamily: 'Poppins',
+                          color: Colors.black,
+                        ),
+                    hintText: 'Please select local area...',
+                    fillColor: Colors.white,
+                    elevation: 2.0,
+                    borderColor: Colors.transparent,
+                    borderWidth: 0.0,
+                    borderRadius: 0.0,
+                    margin:
+                        EdgeInsetsDirectional.fromSTEB(12.0, 4.0, 12.0, 4.0),
+                    hidesUnderline: true,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      FlutterFlowPlacePicker(
+                        iOSGoogleMapsApiKey:
+                            'AIzaSyCOF1LidYj07rxZrXVSt-yGTTWdmdDqdVU',
+                        androidGoogleMapsApiKey:
+                            'AIzaSyAozl79XPyZ_cD-pRkMCP4ItGSW8t5AQOA',
+                        webGoogleMapsApiKey:
+                            'AIzaSyDWwxq-6kAZQl7ABysDdHSGoSY9KSPtLL0',
+                        onSelect: (place) async {
+                          setState(() => _model.exactLocationValue = place);
+                        },
+                        defaultText: 'Select Exact Location',
+                        icon: Icon(
+                          Icons.place,
+                          color: Colors.white,
+                          size: 16.0,
+                        ),
+                        buttonOptions: FFButtonOptions(
+                          width: 200.0,
+                          height: 40.0,
+                          color: FlutterFlowTheme.of(context).primary,
+                          textStyle:
+                              FlutterFlowTheme.of(context).titleSmall.override(
+                                    fontFamily: 'Poppins',
+                                    color: Colors.white,
+                                    fontSize: 14.0,
+                                  ),
+                          borderSide: BorderSide(
+                            color: Colors.transparent,
+                            width: 1.0,
                           ),
-                          'dateAdded': FieldValue.serverTimestamp(),
-                        };
-                        await ParkingSpacesRecord.collection
-                            .doc()
-                            .set(parkingSpacesCreateData);
-                        await showDialog(
-                          context: context,
-                          builder: (alertDialogContext) {
-                            return AlertDialog(
-                              title: Text('Space Added'),
-                              content: Text(
-                                  'The space was added succesfully, click ok to finish!'),
-                              actions: [
-                                TextButton(
-                                  onPressed: () =>
-                                      Navigator.pop(alertDialogContext),
-                                  child: Text('Ok'),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                        context.pushNamed(
-                          'profilePage',
-                          extra: <String, dynamic>{
-                            kTransitionInfoKey: TransitionInfo(
-                              hasTransition: true,
-                              transitionType: PageTransitionType.leftToRight,
-                              duration: Duration(milliseconds: 5),
-                            ),
-                          },
-                        );
-                      },
-                      text: 'Add Space',
-                      options: FFButtonOptions(
-                        width: 130.0,
-                        height: 40.0,
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).primary,
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleSmall.override(
-                                  fontFamily: 'Poppins',
-                                  color: Colors.white,
-                                ),
-                        elevation: 2.0,
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                          width: 1.0,
+                          borderRadius: BorderRadius.circular(12.0),
                         ),
-                        borderRadius: BorderRadius.circular(8.0),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 55.0, 0.0, 25.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      FFButtonWidget(
+                        onPressed: () async {
+                          final parkingSpacesCreateData = {
+                            ...createParkingSpacesRecordData(
+                              name: _model.titleController.text,
+                              location: _model.exactLocationValue.latLng,
+                              description: _model.descriptionController.text,
+                              addressLine1: _model.addressController.text,
+                              area: _model.areaValue,
+                              ownerId: currentUserReference,
+                              dailyRate: double.tryParse(
+                                  _model.dailyRateController.text),
+                            ),
+                            'dateAdded': FieldValue.serverTimestamp(),
+                          };
+                          await ParkingSpacesRecord.collection
+                              .doc()
+                              .set(parkingSpacesCreateData);
+                          await showDialog(
+                            context: context,
+                            builder: (alertDialogContext) {
+                              return AlertDialog(
+                                title: Text('Space Added'),
+                                content: Text(
+                                    'The space was added succesfully, click ok to finish!'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(alertDialogContext),
+                                    child: Text('Ok'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                          context.pushNamed(
+                            'profilePage',
+                            extra: <String, dynamic>{
+                              kTransitionInfoKey: TransitionInfo(
+                                hasTransition: true,
+                                transitionType: PageTransitionType.leftToRight,
+                                duration: Duration(milliseconds: 5),
+                              ),
+                            },
+                          );
+                        },
+                        text: 'Add Space',
+                        options: FFButtonOptions(
+                          width: 130.0,
+                          height: 40.0,
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 0.0),
+                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 0.0),
+                          color: FlutterFlowTheme.of(context).primary,
+                          textStyle:
+                              FlutterFlowTheme.of(context).titleSmall.override(
+                                    fontFamily: 'Poppins',
+                                    color: Colors.white,
+                                  ),
+                          elevation: 2.0,
+                          borderSide: BorderSide(
+                            color: Colors.transparent,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

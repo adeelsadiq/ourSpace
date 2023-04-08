@@ -54,39 +54,19 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(DateTime)));
     }
+    value = object.bio;
+    if (value != null) {
+      result
+        ..add('bio')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.phoneNumber;
     if (value != null) {
       result
         ..add('phone_number')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
-    }
-    value = object.phone;
-    if (value != null) {
-      result
-        ..add('phone')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
-    value = object.bookedParkingSpaces;
-    if (value != null) {
-      result
-        ..add('bookedParkingSpaces')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(BuiltList, const [
-              const FullType(
-                  DocumentReference, const [const FullType.nullable(Object)])
-            ])));
-    }
-    value = object.ownedParkingSpaces;
-    if (value != null) {
-      result
-        ..add('ownedParkingSpaces')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(BuiltList, const [
-              const FullType(
-                  DocumentReference, const [const FullType.nullable(Object)])
-            ])));
     }
     value = object.ffRef;
     if (value != null) {
@@ -130,27 +110,13 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
           result.createdTime = serializers.deserialize(value,
               specifiedType: const FullType(DateTime)) as DateTime?;
           break;
+        case 'bio':
+          result.bio = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
         case 'phone_number':
           result.phoneNumber = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
-          break;
-        case 'phone':
-          result.phone = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
-          break;
-        case 'bookedParkingSpaces':
-          result.bookedParkingSpaces.replace(serializers.deserialize(value,
-              specifiedType: const FullType(BuiltList, const [
-                const FullType(
-                    DocumentReference, const [const FullType.nullable(Object)])
-              ]))! as BuiltList<Object?>);
-          break;
-        case 'ownedParkingSpaces':
-          result.ownedParkingSpaces.replace(serializers.deserialize(value,
-              specifiedType: const FullType(BuiltList, const [
-                const FullType(
-                    DocumentReference, const [const FullType.nullable(Object)])
-              ]))! as BuiltList<Object?>);
           break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
@@ -177,13 +143,9 @@ class _$UsersRecord extends UsersRecord {
   @override
   final DateTime? createdTime;
   @override
+  final String? bio;
+  @override
   final String? phoneNumber;
-  @override
-  final String? phone;
-  @override
-  final BuiltList<DocumentReference<Object?>>? bookedParkingSpaces;
-  @override
-  final BuiltList<DocumentReference<Object?>>? ownedParkingSpaces;
   @override
   final DocumentReference<Object?>? ffRef;
 
@@ -196,10 +158,8 @@ class _$UsersRecord extends UsersRecord {
       this.photoUrl,
       this.uid,
       this.createdTime,
+      this.bio,
       this.phoneNumber,
-      this.phone,
-      this.bookedParkingSpaces,
-      this.ownedParkingSpaces,
       this.ffRef})
       : super._();
 
@@ -219,33 +179,24 @@ class _$UsersRecord extends UsersRecord {
         photoUrl == other.photoUrl &&
         uid == other.uid &&
         createdTime == other.createdTime &&
+        bio == other.bio &&
         phoneNumber == other.phoneNumber &&
-        phone == other.phone &&
-        bookedParkingSpaces == other.bookedParkingSpaces &&
-        ownedParkingSpaces == other.ownedParkingSpaces &&
         ffRef == other.ffRef;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(
-        $jc(
-            $jc(
-                $jc(
-                    $jc(
-                        $jc(
-                            $jc(
-                                $jc(
-                                    $jc($jc(0, email.hashCode),
-                                        displayName.hashCode),
-                                    photoUrl.hashCode),
-                                uid.hashCode),
-                            createdTime.hashCode),
-                        phoneNumber.hashCode),
-                    phone.hashCode),
-                bookedParkingSpaces.hashCode),
-            ownedParkingSpaces.hashCode),
-        ffRef.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, email.hashCode);
+    _$hash = $jc(_$hash, displayName.hashCode);
+    _$hash = $jc(_$hash, photoUrl.hashCode);
+    _$hash = $jc(_$hash, uid.hashCode);
+    _$hash = $jc(_$hash, createdTime.hashCode);
+    _$hash = $jc(_$hash, bio.hashCode);
+    _$hash = $jc(_$hash, phoneNumber.hashCode);
+    _$hash = $jc(_$hash, ffRef.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -256,10 +207,8 @@ class _$UsersRecord extends UsersRecord {
           ..add('photoUrl', photoUrl)
           ..add('uid', uid)
           ..add('createdTime', createdTime)
+          ..add('bio', bio)
           ..add('phoneNumber', phoneNumber)
-          ..add('phone', phone)
-          ..add('bookedParkingSpaces', bookedParkingSpaces)
-          ..add('ownedParkingSpaces', ownedParkingSpaces)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -288,29 +237,13 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
   DateTime? get createdTime => _$this._createdTime;
   set createdTime(DateTime? createdTime) => _$this._createdTime = createdTime;
 
+  String? _bio;
+  String? get bio => _$this._bio;
+  set bio(String? bio) => _$this._bio = bio;
+
   String? _phoneNumber;
   String? get phoneNumber => _$this._phoneNumber;
   set phoneNumber(String? phoneNumber) => _$this._phoneNumber = phoneNumber;
-
-  String? _phone;
-  String? get phone => _$this._phone;
-  set phone(String? phone) => _$this._phone = phone;
-
-  ListBuilder<DocumentReference<Object?>>? _bookedParkingSpaces;
-  ListBuilder<DocumentReference<Object?>> get bookedParkingSpaces =>
-      _$this._bookedParkingSpaces ??=
-          new ListBuilder<DocumentReference<Object?>>();
-  set bookedParkingSpaces(
-          ListBuilder<DocumentReference<Object?>>? bookedParkingSpaces) =>
-      _$this._bookedParkingSpaces = bookedParkingSpaces;
-
-  ListBuilder<DocumentReference<Object?>>? _ownedParkingSpaces;
-  ListBuilder<DocumentReference<Object?>> get ownedParkingSpaces =>
-      _$this._ownedParkingSpaces ??=
-          new ListBuilder<DocumentReference<Object?>>();
-  set ownedParkingSpaces(
-          ListBuilder<DocumentReference<Object?>>? ownedParkingSpaces) =>
-      _$this._ownedParkingSpaces = ownedParkingSpaces;
 
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
@@ -328,10 +261,8 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
       _photoUrl = $v.photoUrl;
       _uid = $v.uid;
       _createdTime = $v.createdTime;
+      _bio = $v.bio;
       _phoneNumber = $v.phoneNumber;
-      _phone = $v.phone;
-      _bookedParkingSpaces = $v.bookedParkingSpaces?.toBuilder();
-      _ownedParkingSpaces = $v.ownedParkingSpaces?.toBuilder();
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -353,36 +284,19 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
   UsersRecord build() => _build();
 
   _$UsersRecord _build() {
-    _$UsersRecord _$result;
-    try {
-      _$result = _$v ??
-          new _$UsersRecord._(
-              email: email,
-              displayName: displayName,
-              photoUrl: photoUrl,
-              uid: uid,
-              createdTime: createdTime,
-              phoneNumber: phoneNumber,
-              phone: phone,
-              bookedParkingSpaces: _bookedParkingSpaces?.build(),
-              ownedParkingSpaces: _ownedParkingSpaces?.build(),
-              ffRef: ffRef);
-    } catch (_) {
-      late String _$failedField;
-      try {
-        _$failedField = 'bookedParkingSpaces';
-        _bookedParkingSpaces?.build();
-        _$failedField = 'ownedParkingSpaces';
-        _ownedParkingSpaces?.build();
-      } catch (e) {
-        throw new BuiltValueNestedFieldError(
-            r'UsersRecord', _$failedField, e.toString());
-      }
-      rethrow;
-    }
+    final _$result = _$v ??
+        new _$UsersRecord._(
+            email: email,
+            displayName: displayName,
+            photoUrl: photoUrl,
+            uid: uid,
+            createdTime: createdTime,
+            bio: bio,
+            phoneNumber: phoneNumber,
+            ffRef: ffRef);
     replace(_$result);
     return _$result;
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,no_leading_underscores_for_local_identifiers,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new,unnecessary_lambdas
+// ignore_for_file: deprecated_member_use_from_same_package,type=lint

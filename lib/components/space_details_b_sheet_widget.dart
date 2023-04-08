@@ -202,7 +202,7 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
                     child: Text(
-                      'Review your order below before checking out.',
+                      widget.spaceBsSheet!.description!,
                       style: FlutterFlowTheme.of(context).bodySmall,
                     ),
                   ),
@@ -218,7 +218,11 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
                     scrollDirection: Axis.vertical,
                     children: [
                       Text(
-                        'Hello World',
+                        'Local Area: ',
+                        style: FlutterFlowTheme.of(context).bodyMedium,
+                      ),
+                      Text(
+                        widget.spaceBsSheet!.area!,
                         style: FlutterFlowTheme.of(context).bodyMedium,
                       ),
                     ],
@@ -362,7 +366,7 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
               SizedBox(
                 height: 24.0,
               ),
-              Text("Your Park is Successfully Booked "),
+              Text("Your Parking space has been Successfully Booked "),
               SizedBox(
                 height: 100.0,
               ),
@@ -378,7 +382,7 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
                   CupertinoButton(
                     child: Text("Ok"),
                     onPressed: () {
-                      Navigator.of(context).pop();
+                      context.pushNamed('HomePage');
                     },
                   ),
                 ],

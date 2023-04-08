@@ -109,7 +109,7 @@ class _MyBookingsWidgetState extends State<MyBookingsWidget> {
                             width: 50.0,
                             height: 50.0,
                             child: SpinKitCircle(
-                              color: FlutterFlowTheme.of(context).primaryColor,
+                              color: FlutterFlowTheme.of(context).primary,
                               size: 50.0,
                             ),
                           ),

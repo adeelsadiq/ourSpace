@@ -480,12 +480,13 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                   child: Column(
                                     children: [
                                       TabBar(
-                                        labelColor: Color(0xFFFEFEFF),
+                                        labelColor: FlutterFlowTheme.of(context)
+                                            .tertiary,
                                         labelStyle: FlutterFlowTheme.of(context)
-                                            .bodyText1,
+                                            .bodyMedium,
                                         indicatorColor:
                                             FlutterFlowTheme.of(context)
-                                                .secondaryColor,
+                                                .secondary,
                                         tabs: [
                                           Row(
                                             children: [

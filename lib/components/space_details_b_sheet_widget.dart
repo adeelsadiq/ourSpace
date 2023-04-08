@@ -29,6 +29,9 @@ class SpaceDetailsBSheetWidget extends StatefulWidget {
       _SpaceDetailsBSheetWidgetState();
 }
 
+final today = DateTime.now();
+final fiftyDaysFromNow = today.add(const Duration(days: 50));
+
 class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
   late SpaceDetailsBSheetModel _model;
 
@@ -62,7 +65,7 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
   }
 
   Future<void> makePayment(
-      String amount, DateTime dateStart, DateTime dateEnd) async {
+      String amount, DateTime dateStart, DateTime? dateEnd) async {
     try {
       int value = double.parse(amount).round().toInt();
       String totalPrice = (value * 100).toString();
@@ -78,22 +81,23 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
               paymentSheetParameters: SetupPaymentSheetParameters(
                   paymentIntentClientSecret: paymentIntent![
                       'client_secret'], //Gotten from payment intent
-                  style: ThemeMode.light,
+                  style: ThemeMode.dark,
                   merchantDisplayName: 'OurSpace Parking inc',
                   googlePay: gpay))
           .then((value) {});
 
       //STEP 3: Display Payment sheet
-      displayPaymentSheet(dateStart, dateEnd);
+      displayPaymentSheet(amount, dateStart, dateEnd);
     } catch (err) {
       print(err);
     }
   }
 
-  displayPaymentSheet(DateTime dateStart, DateTime dateEnd) async {
+  displayPaymentSheet(
+      String totalPrice, DateTime dateStart, DateTime? dateEnd) async {
     try {
       await Stripe.instance.presentPaymentSheet().then((value) {
-        addBookingToFirebase(dateStart, dateEnd);
+        addBookingToFirebase(totalPrice, dateStart, dateEnd);
       });
     } catch (e) {
       print('$e');
@@ -101,8 +105,6 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
   }
 
   createPaymentIntent(String amount, String currency) async {
-    // print("MAMSJADNASKJDHJSAHDSAGDKJSHAGDKJBHASGDKJHSAGDBKJHAS");
-    // print(amount);
     try {
       Map<String, dynamic> body = {
         'amount': amount,
@@ -233,7 +235,7 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
                             Text(
                               'Price:',
                               style: FlutterFlowTheme.of(context)
-                                  .bodySmall
+                                  .bodyText2
                                   .override(
                                     fontFamily: 'Poppins',
                                     fontWeight: FontWeight.bold,
@@ -251,11 +253,11 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
                           children: [
                             Text(
                               'Daily Price in €',
-                              style: FlutterFlowTheme.of(context).bodySmall,
+                              style: FlutterFlowTheme.of(context).bodyText2,
                             ),
                             Text(
                               widget.spaceBsSheet!.dailyRate.toString(),
-                              style: FlutterFlowTheme.of(context).titleSmall,
+                              style: FlutterFlowTheme.of(context).subtitle2,
                             ),
                           ],
                         ),
@@ -273,7 +275,7 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
                                 calendarType: CalendarDatePicker2Type.range,
                                 selectableDayPredicate: _isValidDateRange,
                                 firstDate: DateTime.now(),
-                                lastDate: DateTime(2030),
+                                lastDate: fiftyDaysFromNow,
                               ),
 
                               dialogSize: const Size(325, 400),
@@ -282,64 +284,24 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
                             );
                             if (dateRange != null) {
                               if (dateRange.isNotEmpty) {
-                                Duration difference =
-                                    dateRange[1]!.difference(dateRange[0]!);
-                                double totalPrice =
-                                    widget.spaceBsSheet!.dailyRate! *
-                                        difference.inDays;
-                                // print("Hello");
-                                // Navigator.of(context).pop();
-                                makePayment(totalPrice.toString(),
-                                    dateRange[0]!, dateRange[1]!);
+                                if (dateRange.length > 1) {
+                                  Duration difference =
+                                      dateRange[1]!.difference(dateRange[0]!);
+                                  double totalPrice =
+                                      widget.spaceBsSheet!.dailyRate! *
+                                          difference.inDays;
+
+                                  makePayment(totalPrice.toString(),
+                                      dateRange[0]!, dateRange[1]!);
+                                } else {
+                                  makePayment(
+                                      widget.spaceBsSheet!.dailyRate!
+                                          .toString(),
+                                      dateRange[0]!,
+                                      dateRange[0]!);
+                                }
                               }
                             }
-
-                            // showCustomDateRangePicker(
-                            //   context,
-                            //   dismissible: true,
-                            //   minimumDate: DateTime.now(),
-                            //   maximumDate: DateTime(2035),
-                            //   endDate: endTime,
-                            //   startDate: startTime,
-                            //   backgroundColor: Colors.white,
-                            //   primaryColor: Colors.green,
-                            //   onApplyClick: (start, end) async {
-                            //     final range =
-                            //         DateTimeRange(start: start, end: end);
-                            //     print(_isValidDateRange(range));
-                            //     return;
-                            //     if (!_isValidDateRange(range)) {
-                            //       setState(() {
-                            //         endTime = end;
-                            //         startTime = start;
-                            //       });
-
-                            //     } else {
-                            //       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            //           content: Text(
-                            //               "You can't able to selected between 28 to 31 march ")));
-                            //     }
-                            //   },
-                            //   onCancelClick: () {
-                            //     setState(() {
-                            //       endTime = null;
-                            //       startTime = null;
-                            //     });
-                            //   },
-                            // );
-
-                            // context.pushNamed(
-                            //   'availableBookingSpaces',
-                            //   queryParams: {
-                            //     'spaceRef': serializeParam(
-                            //       widget.spaceBsSheet,
-                            //       ParamType.Document,
-                            //     ),
-                            //   }.withoutNulls,
-                            //   extra: <String, dynamic>{
-                            //     'spaceRef': widget.spaceBsSheet,
-                            //   },
-                            // );
                           },
                           text: 'View Available Slots',
                           options: FFButtonOptions(
@@ -349,13 +311,12 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
                                 0.0, 0.0, 0.0, 0.0),
                             iconPadding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context).secondary,
-                            textStyle: FlutterFlowTheme.of(context)
-                                .titleSmall
-                                .override(
-                                  fontFamily: 'Poppins',
-                                  color: Colors.white,
-                                ),
+                            color: FlutterFlowTheme.of(context).secondaryColor,
+                            textStyle:
+                                FlutterFlowTheme.of(context).subtitle2.override(
+                                      fontFamily: 'Poppins',
+                                      color: Colors.white,
+                                    ),
                             elevation: 2.0,
                             borderSide: BorderSide(
                               color: Colors.transparent,
@@ -375,12 +336,12 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
     );
   }
 
-  void addBookingToFirebase(DateTime startTime, DateTime endTime) async {
+  void addBookingToFirebase(
+      String totalPrice, DateTime startTime, DateTime? endTime) async {
     DocumentReference userReference = FirebaseFirestore.instance
         .collection("users")
         .doc(FirebaseAuth.instance.currentUser!.uid);
-    Duration difference = endTime.difference(startTime);
-    double totalPrice = widget.spaceBsSheet!.dailyRate! * difference.inDays;
+
     await FirebaseFirestore.instance.collection("bookings").add({
       "bookingStart": startTime,
       "bookingEnd": endTime,
@@ -391,29 +352,43 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
     });
     getBookedDate();
 
-    await showDialog(
+    showDialog(
       context: context,
-      builder: (alertDialogContext) {
-        return AlertDialog(
-          title: Text('Space Added'),
-          content: Text('Booking Succesful'),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(alertDialogContext),
-              child: Text('Ok'),
-            ),
-          ],
+      builder: (context) {
+        return Dialog(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(
+                height: 24.0,
+              ),
+              Text("Your Park is Successfully Booked "),
+              SizedBox(
+                height: 100.0,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CupertinoButton(
+                    child: Text("Cancel"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  CupertinoButton(
+                    child: Text("Ok"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 24.0,
+              ),
+            ],
+          ),
         );
-      },
-    );
-    context.pushNamed(
-      'myBookings',
-      extra: <String, dynamic>{
-        kTransitionInfoKey: TransitionInfo(
-          hasTransition: true,
-          transitionType: PageTransitionType.leftToRight,
-          duration: Duration(milliseconds: 5),
-        ),
       },
     );
   }

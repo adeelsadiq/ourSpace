@@ -8,6 +8,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/place.dart';
 import 'dart:io';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -58,6 +59,21 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
       appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).primary,
         automaticallyImplyLeading: false,
+        leading: // Generated code for this IconButton Widget...
+            FlutterFlowIconButton(
+          borderColor: Colors.transparent,
+          borderRadius: 30,
+          borderWidth: 1,
+          buttonSize: 60,
+          icon: Icon(
+            Icons.arrow_back_rounded,
+            color: FlutterFlowTheme.of(context).black600,
+            size: 30,
+          ),
+          onPressed: () async {
+            context.pop();
+          },
+        ),
         title: Text(
           'Add  Parking Space',
           style: FlutterFlowTheme.of(context).headlineMedium.override(

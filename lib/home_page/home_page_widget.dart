@@ -14,6 +14,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'home_page_model.dart';
 export 'home_page_model.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 
 class HomePageWidget extends StatefulWidget {
   const HomePageWidget({
@@ -57,137 +58,182 @@ class _HomePageWidgetState extends State<HomePageWidget> {
     return Scaffold(
       key: scaffoldKey,
       resizeToAvoidBottomInset: false,
-      backgroundColor: Color(0x5CC0C0C0),
+      backgroundColor: Color(0x7595426E),
       drawer: Drawer(
-        elevation: 16.0,
+        elevation: 16,
         child: Container(
-          width: 100.0,
-          height: 100.0,
+          width: 100,
+          height: 100,
           decoration: BoxDecoration(
-            color: FlutterFlowTheme.of(context).secondaryBackground,
+            gradient: LinearGradient(
+              colors: [
+                FlutterFlowTheme.of(context).primary,
+                FlutterFlowTheme.of(context).secondary
+              ],
+              stops: [0, 1],
+              begin: AlignmentDirectional(0, -1),
+              end: AlignmentDirectional(0, 1),
+            ),
           ),
-          child: Stack(
-            children: [
-              Align(
-                alignment: AlignmentDirectional(-0.55, -0.77),
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
-                  child: FlutterFlowDropDown<String>(
-                    controller: _model.areaController ??=
-                        FormFieldController<String>(null),
-                    options: [
-                      'Adamstown',
-                      'Ard Na Greine',
-                      'Artane',
-                      'Ashington',
-                      'Ashtown',
-                      'Aylesbury',
-                      'Ayrfield',
-                      'Balbriggan',
-                      'Baldonnell',
-                      'Baldoyle',
-                      'Balgriffin',
-                      'Ballinascorney',
-                      'Ballinteer',
-                      'Ballsbridge',
-                      'Ballyboden',
-                      'Ballybough',
-                      'Ballyboughal',
-                      'Ballybrack',
-                      'Ballycorus',
-                      'Ballycullen',
-                      'Ballyfermot',
-                      'Ballymount',
-                      'Ballymun',
-                      'Balrothery',
-                      'Balscaddan',
-                      'Beaumont',
-                      'Blackrock',
-                      'Booterstown',
-                      'Castleknock',
-                      'Cabra',
-                      'Christchurch',
-                      'Clarehall',
-                      'Clondalkin',
-                      'Dublin 1',
-                      'Dublin 2',
-                      'Dublin 3',
-                      'Dublin 4',
-                      'Dublin 5',
-                      'Dublin 6',
-                      'Dublin 6w',
-                      'Dublin 7',
-                      'Dublin 8',
-                      'Dublin 9',
-                      'Dublin 10',
-                      'Dublin 11',
-                      'Dublin 12',
-                      'Dublin 13',
-                      'Dublin 14',
-                      'Swords',
-                      'Lusk'
-                    ],
-                    onChanged: (val) => setState(() => _model.areaValue = val),
-                    width: 180.0,
-                    height: 50.0,
-                    textStyle: FlutterFlowTheme.of(context).bodyText1.override(
-                          fontFamily: 'Poppins',
-                          color: Colors.black,
+          child: Align(
+            alignment: AlignmentDirectional(0, 0),
+            child: Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0, 50, 0, 0),
+              child: Stack(
+                children: [
+                  Align(
+                    alignment: AlignmentDirectional(0, -0.49),
+                    child: GridView(
+                      padding: EdgeInsets.zero,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10,
+                        childAspectRatio: 1,
+                      ),
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      children: [
+                        Align(
+                          alignment: AlignmentDirectional(0, 0),
+                          child: Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(25, 0, 0, 0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: Align(
+                                    alignment: AlignmentDirectional(-0.5, -0.5),
+                                    child: TextFormField(
+                                      controller: _model.minDailyRateController,
+                                      onChanged: (_) => EasyDebounce.debounce(
+                                        '_model.minDailyRateController',
+                                        Duration(milliseconds: 2000),
+                                        () => setState(() {}),
+                                      ),
+                                      autofocus: true,
+                                      obscureText: false,
+                                      decoration: InputDecoration(
+                                        labelText: 'Min Rate',
+                                        hintText: 'Enter min daily rate',
+                                        hintStyle: FlutterFlowTheme.of(context)
+                                            .bodySmall
+                                            .override(
+                                              fontFamily: 'Poppins',
+                                              fontSize: 10,
+                                            ),
+                                        enabledBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Color(0x00000000),
+                                            width: 1,
+                                          ),
+                                          borderRadius: const BorderRadius.only(
+                                            topLeft: Radius.circular(4.0),
+                                            topRight: Radius.circular(4.0),
+                                          ),
+                                        ),
+                                        focusedBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Color(0x00000000),
+                                            width: 1,
+                                          ),
+                                          borderRadius: const BorderRadius.only(
+                                            topLeft: Radius.circular(4.0),
+                                            topRight: Radius.circular(4.0),
+                                          ),
+                                        ),
+                                        errorBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Color(0x00000000),
+                                            width: 1,
+                                          ),
+                                          borderRadius: const BorderRadius.only(
+                                            topLeft: Radius.circular(4.0),
+                                            topRight: Radius.circular(4.0),
+                                          ),
+                                        ),
+                                        focusedErrorBorder:
+                                            UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Color(0x00000000),
+                                            width: 1,
+                                          ),
+                                          borderRadius: const BorderRadius.only(
+                                            topLeft: Radius.circular(4.0),
+                                            topRight: Radius.circular(4.0),
+                                          ),
+                                        ),
+                                        suffixIcon: _model
+                                                .minDailyRateController!
+                                                .text
+                                                .isNotEmpty
+                                            ? InkWell(
+                                                onTap: () async {
+                                                  _model.minDailyRateController
+                                                      ?.clear();
+                                                  setState(() {});
+                                                },
+                                                child: Icon(
+                                                  Icons.clear,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                  size: 22,
+                                                ),
+                                              )
+                                            : null,
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Poppins',
+                                            fontSize: 15,
+                                          ),
+                                      textAlign: TextAlign.center,
+                                      keyboardType: TextInputType.number,
+                                      validator: _model
+                                          .minDailyRateControllerValidator
+                                          .asValidator(context),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
-                    hintText: 'Please select local area...',
-                    fillColor: Colors.white,
-                    elevation: 2.0,
-                    borderColor: Colors.transparent,
-                    borderWidth: 0.0,
-                    borderRadius: 0.0,
-                    margin:
-                        EdgeInsetsDirectional.fromSTEB(12.0, 4.0, 12.0, 4.0),
-                    hidesUnderline: true,
-                  ),
-                ),
-              ),
-              Align(
-                alignment: AlignmentDirectional(-0.75, -0.87),
-                child: Text(
-                  'Filter options:',
-                  style: FlutterFlowTheme.of(context).bodyText1,
-                ),
-              ),
-              Align(
-                alignment: AlignmentDirectional(0.0, 0.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Align(
-                        alignment: AlignmentDirectional(0.0, 0.0),
-                        child: Row(
+                        Row(
                           mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Expanded(
                               child: Align(
-                                alignment: AlignmentDirectional(-0.5, -0.5),
+                                alignment: AlignmentDirectional(0, -0.5),
                                 child: TextFormField(
-                                  controller: _model.minDailyRateController,
+                                  controller: _model.maxDailyRateController,
+                                  onChanged: (_) => EasyDebounce.debounce(
+                                    '_model.maxDailyRateController',
+                                    Duration(milliseconds: 2000),
+                                    () => setState(() {}),
+                                  ),
                                   autofocus: true,
                                   obscureText: false,
                                   decoration: InputDecoration(
-                                    labelText: 'Min Rate',
-                                    hintText: 'min',
+                                    labelText: 'Max Rate',
+                                    hintText: 'Enter max daily rate',
                                     hintStyle: FlutterFlowTheme.of(context)
                                         .bodySmall
                                         .override(
                                           fontFamily: 'Poppins',
-                                          fontSize: 10.0,
+                                          fontSize: 10,
                                         ),
                                     enabledBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(
                                         color: Color(0x00000000),
-                                        width: 1.0,
+                                        width: 1,
                                       ),
                                       borderRadius: const BorderRadius.only(
                                         topLeft: Radius.circular(4.0),
@@ -197,7 +243,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     focusedBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(
                                         color: Color(0x00000000),
-                                        width: 1.0,
+                                        width: 1,
                                       ),
                                       borderRadius: const BorderRadius.only(
                                         topLeft: Radius.circular(4.0),
@@ -207,7 +253,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     errorBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(
                                         color: Color(0x00000000),
-                                        width: 1.0,
+                                        width: 1,
                                       ),
                                       borderRadius: const BorderRadius.only(
                                         topLeft: Radius.circular(4.0),
@@ -217,169 +263,225 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     focusedErrorBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(
                                         color: Color(0x00000000),
-                                        width: 1.0,
+                                        width: 1,
                                       ),
                                       borderRadius: const BorderRadius.only(
                                         topLeft: Radius.circular(4.0),
                                         topRight: Radius.circular(4.0),
                                       ),
                                     ),
+                                    suffixIcon: _model.maxDailyRateController!
+                                            .text.isNotEmpty
+                                        ? InkWell(
+                                            onTap: () async {
+                                              _model.maxDailyRateController
+                                                  ?.clear();
+                                              setState(() {});
+                                            },
+                                            child: Icon(
+                                              Icons.clear,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                              size: 22,
+                                            ),
+                                          )
+                                        : null,
                                   ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
                                         fontFamily: 'Poppins',
-                                        fontSize: 15.0,
+                                        fontSize: 15,
                                       ),
+                                  textAlign: TextAlign.center,
                                   keyboardType: TextInputType.number,
                                   validator: _model
-                                      .minDailyRateControllerValidator
+                                      .maxDailyRateControllerValidator
                                       .asValidator(context),
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.allow(
+                                        RegExp('[0-9]'))
+                                  ],
                                 ),
                               ),
                             ),
                           ],
                         ),
-                      ),
+                      ],
                     ),
-                    Expanded(
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: Align(
-                              alignment: AlignmentDirectional(0.0, -0.5),
-                              child: TextFormField(
-                                controller: _model.maxDailyRateController,
-                                autofocus: true,
-                                obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'Max Rate',
-                                  hintText: 'Max',
-                                  hintStyle: FlutterFlowTheme.of(context)
-                                      .bodySmall
-                                      .override(
-                                        fontFamily: 'Poppins',
-                                        fontSize: 10.0,
-                                      ),
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: const BorderRadius.only(
-                                      topLeft: Radius.circular(4.0),
-                                      topRight: Radius.circular(4.0),
-                                    ),
-                                  ),
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: const BorderRadius.only(
-                                      topLeft: Radius.circular(4.0),
-                                      topRight: Radius.circular(4.0),
-                                    ),
-                                  ),
-                                  errorBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: const BorderRadius.only(
-                                      topLeft: Radius.circular(4.0),
-                                      topRight: Radius.circular(4.0),
-                                    ),
-                                  ),
-                                  focusedErrorBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: const BorderRadius.only(
-                                      topLeft: Radius.circular(4.0),
-                                      topRight: Radius.circular(4.0),
-                                    ),
-                                  ),
-                                ),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Poppins',
-                                      fontSize: 15.0,
-                                    ),
-                                keyboardType: TextInputType.number,
-                                validator: _model
-                                    .maxDailyRateControllerValidator
-                                    .asValidator(context),
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.allow(
-                                      RegExp('[0-9]'))
-                                ],
-                              ),
-                            ),
-                          ),
+                  ),
+                  Align(
+                    alignment: AlignmentDirectional(0, -0.71),
+                    child: Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(5, 0, 5, 0),
+                      child: FlutterFlowDropDown<String>(
+                        controller: _model.areaController ??=
+                            FormFieldController<String>(null),
+                        options: [
+                          'Dublin 1',
+                          'Dublin 2',
+                          'Dublin 3',
+                          'Dublin 4',
+                          'Dublin 5',
+                          'Dublin 6',
+                          'Dublin 6w',
+                          'Dublin 7',
+                          'Dublin 8',
+                          'Dublin 9',
+                          'Dublin 10',
+                          'Dublin 11',
+                          'Dublin 12',
+                          'Dublin 13',
+                          'Dublin 14',
+                          'Dublin Fingal'
                         ],
+                        onChanged: (val) =>
+                            setState(() => _model.areaValue = val),
+                        width: double.infinity,
+                        height: 50,
+                        textStyle:
+                            FlutterFlowTheme.of(context).bodyMedium.override(
+                                  fontFamily: 'Poppins',
+                                  color: Colors.black,
+                                ),
+                        hintText: 'Please select local area...',
+                        icon: Icon(
+                          Icons.location_on,
+                          color: FlutterFlowTheme.of(context).accent3,
+                          size: 15,
+                        ),
+                        fillColor: Color(0xC195426E),
+                        elevation: 2,
+                        borderColor: Colors.black,
+                        borderWidth: 0,
+                        borderRadius: 25,
+                        margin: EdgeInsetsDirectional.fromSTEB(12, 4, 12, 4),
+                        hidesUnderline: true,
+                        isSearchable: true,
                       ),
                     ),
-                  ],
-                ),
-              ),
-              Align(
-                alignment: AlignmentDirectional(-0.15, -0.15),
-                child: FFButtonWidget(
-                  onPressed: () async {
-                    setState(() => _model.firestoreRequestCompleter = null);
-                    await _model.waitForFirestoreRequestCompleted();
-                    if (scaffoldKey.currentState!.isDrawerOpen ||
-                        scaffoldKey.currentState!.isEndDrawerOpen) {
-                      Navigator.pop(context);
-                    }
-                  },
-                  text: 'Show Results',
-                  options: FFButtonOptions(
-                    width: 130.0,
-                    height: 40.0,
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    iconPadding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    color: FlutterFlowTheme.of(context).primary,
-                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                          fontFamily: 'Poppins',
-                          color: Colors.white,
-                        ),
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
-                      width: 1.0,
+                  ),
+                  Align(
+                    alignment: AlignmentDirectional(0.85, -0.95),
+                    child: FlutterFlowIconButton(
+                      borderColor: Colors.transparent,
+                      borderRadius: 30,
+                      borderWidth: 1,
+                      buttonSize: 60,
+                      icon: Icon(
+                        Icons.close,
+                        color: FlutterFlowTheme.of(context).primaryText,
+                        size: 30,
+                      ),
+                      onPressed: () async {
+                        if (scaffoldKey.currentState!.isDrawerOpen ||
+                            scaffoldKey.currentState!.isEndDrawerOpen) {
+                          Navigator.pop(context);
+                        }
+                      },
                     ),
-                    borderRadius: BorderRadius.circular(8.0),
                   ),
-                ),
-              ),
-              Align(
-                alignment: AlignmentDirectional(0.85, -0.95),
-                child: FlutterFlowIconButton(
-                  borderColor: Colors.transparent,
-                  borderRadius: 30.0,
-                  borderWidth: 1.0,
-                  buttonSize: 60.0,
-                  icon: Icon(
-                    Icons.arrow_back,
-                    color: FlutterFlowTheme.of(context).primaryText,
-                    size: 30.0,
+                  Align(
+                    alignment: AlignmentDirectional(-0.73, -0.8),
+                    child: Text(
+                      'Filter Options',
+                      textAlign: TextAlign.center,
+                      style: FlutterFlowTheme.of(context).bodyMedium,
+                    ),
                   ),
-                  onPressed: () async {
-                    if (scaffoldKey.currentState!.isDrawerOpen ||
-                        scaffoldKey.currentState!.isEndDrawerOpen) {
-                      Navigator.pop(context);
-                    }
-                  },
-                ),
+                  Align(
+                    alignment: AlignmentDirectional(0, -0.21),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        FFButtonWidget(
+                          onPressed: () async {
+                            setState(() {
+                              _model.areaController?.reset();
+                            });
+                            setState(() {
+                              _model.minDailyRateController?.clear();
+                              _model.maxDailyRateController?.clear();
+                            });
+                            setState(
+                                () => _model.firestoreRequestCompleter = null);
+                            await _model.waitForFirestoreRequestCompleted();
+                            if (scaffoldKey.currentState!.isDrawerOpen ||
+                                scaffoldKey.currentState!.isEndDrawerOpen) {
+                              Navigator.pop(context);
+                            }
+                          },
+                          text: 'Clear Filters',
+                          icon: Icon(
+                            Icons.undo,
+                            size: 15,
+                          ),
+                          options: FFButtonOptions(
+                            width: 130,
+                            height: 40,
+                            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                            iconPadding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                            color: FlutterFlowTheme.of(context).primary,
+                            textStyle: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .override(
+                                  fontFamily: 'Poppins',
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                ),
+                            borderSide: BorderSide(
+                              color: Colors.transparent,
+                              width: 1,
+                            ),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        FFButtonWidget(
+                          onPressed: () async {
+                            setState(
+                                () => _model.firestoreRequestCompleter = null);
+                            await _model.waitForFirestoreRequestCompleted();
+                            if (scaffoldKey.currentState!.isDrawerOpen ||
+                                scaffoldKey.currentState!.isEndDrawerOpen) {
+                              Navigator.pop(context);
+                            }
+                          },
+                          text: 'Filter',
+                          icon: Icon(
+                            Icons.filter_alt_outlined,
+                            size: 15,
+                          ),
+                          options: FFButtonOptions(
+                            width: 130,
+                            height: 40,
+                            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                            iconPadding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                            color: FlutterFlowTheme.of(context).primary,
+                            textStyle: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .override(
+                                  fontFamily: 'Poppins',
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  fontSize: 13,
+                                ),
+                            borderSide: BorderSide(
+                              color: Colors.transparent,
+                              width: 1,
+                            ),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),
@@ -481,7 +583,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     children: [
                                       TabBar(
                                         labelColor: FlutterFlowTheme.of(context)
-                                            .tertiary,
+                                            .primaryText,
                                         labelStyle: FlutterFlowTheme.of(context)
                                             .bodyMedium,
                                         indicatorColor:
@@ -582,7 +684,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                           .withoutNulls
                                                           .toList(),
                                                   markerColor:
-                                                      GoogleMarkerColor.violet,
+                                                      GoogleMarkerColor.rose,
                                                   mapType: MapType.normal,
                                                   style:
                                                       GoogleMapStyle.standard,
@@ -593,7 +695,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                   showLocation: true,
                                                   showCompass: false,
                                                   showMapToolbar: false,
-                                                  showTraffic: false,
+                                                  showTraffic: true,
                                                   centerMapOnMarkerTap: true,
                                                 ),
                                               ),

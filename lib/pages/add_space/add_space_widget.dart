@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/place.dart';
+import 'package:our_space_app/backend/server.dart';
 import 'dart:io';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -74,6 +75,21 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
             context.pop();
           },
         ),
+        //     FlutterFlowIconButton(
+        //   borderColor: Colors.transparent,
+        //   borderRadius: 30,
+        //   borderWidth: 1,
+        //   buttonSize: 60,
+        //   icon: Icon(
+        //     Icons.arrow_back_rounded,
+        //     color: FlutterFlowTheme.of(context).black600,
+        //     size: 30,
+        //   ),
+        //   onPressed: () async {
+        //     onPressed:
+        //     createConnectedAccount();
+        //   },
+        // ),
         title: Text(
           'Add  Parking Space',
           style: FlutterFlowTheme.of(context).headlineMedium.override(
@@ -282,7 +298,7 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
                     obscureText: false,
                     decoration: InputDecoration(
                       labelText: 'DailyRate',
-                      hintText: 'Daily Rsate for the space..',
+                      hintText: 'Daily Rate for the space..',
                       hintStyle: FlutterFlowTheme.of(context).bodySmall,
                       enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(

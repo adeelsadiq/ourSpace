@@ -609,10 +609,10 @@ packages:
     dependency: "direct main"
     description:
       name: go_router
-      sha256: "7e14537831d36be655930b7341e8e936dc1ec2efdfd54646dbdbc6f572ab4987"
+      sha256: "403e9b492dbde0962b0f86a8c3519a4725a85dc5f56248fa1ec44dcbfad2d972"
       url: "https://pub.dev"
     source: hosted
-    version: "4.1.0"
+    version: "3.1.0"
   google_api_headers:
     dependency: transitive
     description:

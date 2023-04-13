@@ -68,6 +68,13 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.stripeID;
+    if (value != null) {
+      result
+        ..add('stripeID')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -118,6 +125,10 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
           result.phoneNumber = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'stripeID':
+          result.stripeID = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -147,6 +158,8 @@ class _$UsersRecord extends UsersRecord {
   @override
   final String? phoneNumber;
   @override
+  final String? stripeID;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$UsersRecord([void Function(UsersRecordBuilder)? updates]) =>
@@ -160,6 +173,7 @@ class _$UsersRecord extends UsersRecord {
       this.createdTime,
       this.bio,
       this.phoneNumber,
+      this.stripeID,
       this.ffRef})
       : super._();
 
@@ -181,6 +195,7 @@ class _$UsersRecord extends UsersRecord {
         createdTime == other.createdTime &&
         bio == other.bio &&
         phoneNumber == other.phoneNumber &&
+        stripeID == other.stripeID &&
         ffRef == other.ffRef;
   }
 
@@ -194,6 +209,7 @@ class _$UsersRecord extends UsersRecord {
     _$hash = $jc(_$hash, createdTime.hashCode);
     _$hash = $jc(_$hash, bio.hashCode);
     _$hash = $jc(_$hash, phoneNumber.hashCode);
+    _$hash = $jc(_$hash, stripeID.hashCode);
     _$hash = $jc(_$hash, ffRef.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -209,6 +225,7 @@ class _$UsersRecord extends UsersRecord {
           ..add('createdTime', createdTime)
           ..add('bio', bio)
           ..add('phoneNumber', phoneNumber)
+          ..add('stripeID', stripeID)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -245,6 +262,10 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
   String? get phoneNumber => _$this._phoneNumber;
   set phoneNumber(String? phoneNumber) => _$this._phoneNumber = phoneNumber;
 
+  String? _stripeID;
+  String? get stripeID => _$this._stripeID;
+  set stripeID(String? stripeID) => _$this._stripeID = stripeID;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -263,6 +284,7 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
       _createdTime = $v.createdTime;
       _bio = $v.bio;
       _phoneNumber = $v.phoneNumber;
+      _stripeID = $v.stripeID;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -293,6 +315,7 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
             createdTime: createdTime,
             bio: bio,
             phoneNumber: phoneNumber,
+            stripeID: stripeID,
             ffRef: ffRef);
     replace(_$result);
     return _$result;

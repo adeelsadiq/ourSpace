@@ -1,4 +1,5 @@
 import '/auth/auth_util.dart';
+import 'dart:io';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_place_picker.dart';
@@ -6,15 +7,18 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
-import '/flutter_flow/place.dart';
-import 'dart:io';
-import '/auth/firebase_user_provider.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:uni_links/uni_links.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/services.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'add_space_model.dart';
 export 'add_space_model.dart';
 
@@ -34,6 +38,7 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
   @override
   void initState() {
     super.initState();
+    initUniLinks();
     _model = createModel(context, () => AddSpaceModel());
 
     _model.titleController ??= TextEditingController();
@@ -41,6 +46,74 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
     _model.addressController ??= TextEditingController();
     _model.dailyRateController ??= TextEditingController();
   }
+
+  Future<void> initUniLinks() async {
+    try {
+      Uri? initialLink = await getInitialUri();
+      if (initialLink != null) {
+        handleIncomingLink(initialLink);
+      }
+    } on PlatformException {
+      // Handle exception
+    }
+  }
+
+  void handleIncomingLink(Uri link) async {
+    if (link.path == '/return') {
+      // Extract the Stripe ID from the incoming link
+      final stripeId = link.queryParameters['accountId'];
+
+      // Check if the Stripe ID is not null
+      if (stripeId != null) {
+        // Get the current user's UID
+        final userUid = FirebaseAuth.instance.currentUser!.uid;
+
+        // Update the user's account data in Firestore with the new Stripe ID
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(userUid)
+            .update({'stripe_id': stripeId});
+
+        // Take the appropriate action after the user has completed onboarding and the Stripe ID has been saved
+      } else {
+        print('Stripe ID not found in the incoming link');
+      }
+    }
+  }
+
+  Future<void> Function() createStripeAccount = () async {
+    final Map<String, dynamic> requestBody = {
+      'email': currentUserDocument?.email,
+      'name': currentUserDocument?.displayName,
+    };
+    print(currentUserDocument?.email);
+    String url = Platform.isAndroid
+        ? 'http://192.168.1.4:3000'
+        : 'http://localhost:3000';
+    final response = await http.post(
+      Uri.parse('$url/create-stripe-account'),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: json.encode(requestBody),
+    );
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> account = json.decode(response.body);
+      print('Stripe account created: $account');
+      final Uri onboardingUri = Uri.parse(account['onboardingUri']);
+      print('Stripe account created: $account');
+
+      if (onboardingUri != null && await canLaunchUrl(onboardingUri)) {
+        await launchUrl(onboardingUri);
+      } else {
+        print('Failed to launch onboarding URL.');
+      }
+    } else {
+      print(
+          'Failed to create Stripe account. Status code: ${response.statusCode}');
+    }
+  };
 
   @override
   void dispose() {
@@ -540,7 +613,7 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
                     ),
                   ],
                 ),
-                if (currentUserDocument?.stripeID != '')
+                if (currentUserDocument?.stripeID == '')
                   AuthUserStreamWidget(
                     builder: (context) => Container(
                       width: double.infinity,
@@ -579,7 +652,7 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
                             children: [
                               FFButtonWidget(
                                 onPressed: () {
-                                  print('Button pressed ...');
+                                  createStripeAccount();
                                 },
                                 text: 'Set up stripe',
                                 options: FFButtonOptions(
@@ -617,3 +690,4 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
     );
   }
 }
+//link ourspaceapp://ourspaceapp.com 

@@ -1,7 +1,6 @@
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -398,11 +397,6 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
   }
 
   bool _isValidDateRange(DateTime day) {
-    // Only allow selection of dates within a certain range
-    // listOfBookingDate.map((e) => range.isBefore(e.start) || range.isAfter(e.end)).toList();
-    // final minDate = DateTime(2023, 4, 16);
-    // final maxDate = DateTime(2023, 4, 20);
-    // return range.isBefore(minDate) || range.isAfter(maxDate);
     return !(_blockedRanges.any((range) =>
         day.isAfter(range.start.subtract(Duration(days: 1))) &&
         day.isBefore(range.end.add(Duration(days: 1)))));

@@ -28,7 +28,7 @@ Future initFirebase() async {
             messagingSenderId: "279631615180",
             appId: "1:279631615180:web:9cb8e86b84f3124e07de69"));
   } else {
-    print("Hello");
+    print("Firebse Else");
     await Firebase.initializeApp();
   }
 }

@@ -13,8 +13,10 @@
         android:label="OurSpaceApp"
         tools:replace="android:label"
         android:icon="@mipmap/ic_launcher"
+        android:usesCleartextTraffic="true"
+        android:enableOnBackInvokedCallback="true"
         android:requestLegacyExternalStorage="true">
-
+        
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -50,7 +52,8 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="ourspaceapp" android:host="ourspaceapp.com" />
+                <data android:scheme="ourspaceapp" android:host="ourspaceapp.com" android:pathPrefix="/return" />
+                <data android:scheme="ourspaceapp" android:host="ourspaceapp.com" android:pathPrefix="/reauth" />
             </intent-filter>
 
         </activity>

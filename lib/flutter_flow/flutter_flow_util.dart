@@ -9,11 +9,8 @@ import 'package:intl/intl.dart';
 import 'package:json_path/json_path.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:url_launcher/url_launcher.dart';
-
 import '../main.dart';
-
 import 'lat_lng.dart';
-
 export 'keep_alive_wrapper.dart';
 export 'lat_lng.dart';
 export 'place.dart';

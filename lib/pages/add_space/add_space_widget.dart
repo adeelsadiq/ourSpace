@@ -1,6 +1,7 @@
 import '/auth/auth_util.dart';
 import 'dart:io';
 import '/backend/backend.dart';
+import '/backend/stripeLogicHandling.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_place_picker.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -21,6 +22,21 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'add_space_model.dart';
 export 'add_space_model.dart';
+import 'package:go_router/go_router.dart';
+import 'package:go_router/go_router.dart';
+
+final goRouter = GoRouter(
+  routes: [
+    // Add other route definitions here
+    GoRoute(
+      path: '/return',
+      pageBuilder: (context, state) {
+        // Replace "AddSpaceWidget" with the actual widget for your add space page
+        return MaterialPage(child: AddSpaceWidget());
+      },
+    ),
+  ],
+);
 
 class AddSpaceWidget extends StatefulWidget {
   const AddSpaceWidget({Key? key}) : super(key: key);
@@ -38,7 +54,7 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
   @override
   void initState() {
     super.initState();
-    initUniLinks();
+    initUniLinks(context);
     _model = createModel(context, () => AddSpaceModel());
 
     _model.titleController ??= TextEditingController();
@@ -47,73 +63,73 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
     _model.dailyRateController ??= TextEditingController();
   }
 
-  Future<void> initUniLinks() async {
-    try {
-      Uri? initialLink = await getInitialUri();
-      if (initialLink != null) {
-        handleIncomingLink(initialLink);
-      }
-    } on PlatformException {
-      // Handle exception
-    }
-  }
+  // Future<void> initUniLinks() async {
+  //   try {
+  //     Uri? initialLink = await getInitialUri();
+  //     if (initialLink != null) {
+  //       handleIncomingLink(initialLink);
+  //     }
+  //   } on PlatformException {
+  //     // Handle exception
+  //   }
+  // }
 
-  void handleIncomingLink(Uri link) async {
-    if (link.path == '/return') {
-      // Extract the Stripe ID from the incoming link
-      final stripeId = link.queryParameters['accountId'];
+  // void handleIncomingLink(Uri link) async {
+  //   if (link.path == '/return') {
+  //     // Extract the Stripe ID from the incoming link
+  //     final stripeId = link.queryParameters['accountId'];
 
-      // Check if the Stripe ID is not null
-      if (stripeId != null) {
-        // Get the current user's UID
-        final userUid = FirebaseAuth.instance.currentUser!.uid;
+  //     // Check if the Stripe ID is not null
+  //     if (stripeId != null) {
+  //       // Get the current user's UID
+  //       final userUid = FirebaseAuth.instance.currentUser!.uid;
 
-        // Update the user's account data in Firestore with the new Stripe ID
-        await FirebaseFirestore.instance
-            .collection('users')
-            .doc(userUid)
-            .update({'stripe_id': stripeId});
+  //       // Update the user's account data in Firestore with the new Stripe ID
+  //       await FirebaseFirestore.instance
+  //           .collection('users')
+  //           .doc(userUid)
+  //           .update({'stripe_id': stripeId});
 
-        // Take the appropriate action after the user has completed onboarding and the Stripe ID has been saved
-      } else {
-        print('Stripe ID not found in the incoming link');
-      }
-    }
-  }
+  //       // Take the appropriate action after the user has completed onboarding and the Stripe ID has been saved
+  //     } else {
+  //       print('Stripe ID not found in the incoming link');
+  //     }
+  //   }
+  // }
 
-  Future<void> Function() createStripeAccount = () async {
-    final Map<String, dynamic> requestBody = {
-      'email': currentUserDocument?.email,
-      'name': currentUserDocument?.displayName,
-    };
-    print(currentUserDocument?.email);
-    String url = Platform.isAndroid
-        ? 'http://192.168.1.4:3000'
-        : 'http://localhost:3000';
-    final response = await http.post(
-      Uri.parse('$url/create-stripe-account'),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: json.encode(requestBody),
-    );
+  // Future<void> Function() createStripeAccount = () async {
+  //   final Map<String, dynamic> requestBody = {
+  //     'email': currentUserDocument?.email,
+  //     'name': currentUserDocument?.displayName,
+  //   };
+  //   print(currentUserDocument?.email);
+  //   String url = Platform.isAndroid
+  //       ? 'http://192.168.1.4:3000'
+  //       : 'http://localhost:3000';
+  //   final response = await http.post(
+  //     Uri.parse('$url/create-stripe-account'),
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: json.encode(requestBody),
+  //   );
 
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> account = json.decode(response.body);
-      print('Stripe account created: $account');
-      final Uri onboardingUri = Uri.parse(account['onboardingUri']);
-      print('Stripe account created: $account');
+  //   if (response.statusCode == 200) {
+  //     final Map<String, dynamic> account = json.decode(response.body);
+  //     print('Stripe account created: $account');
+  //     final Uri onboardingUri = Uri.parse(account['onboardingUri']);
+  //     print('Stripe account created: $account');
 
-      if (onboardingUri != null && await canLaunchUrl(onboardingUri)) {
-        await launchUrl(onboardingUri);
-      } else {
-        print('Failed to launch onboarding URL.');
-      }
-    } else {
-      print(
-          'Failed to create Stripe account. Status code: ${response.statusCode}');
-    }
-  };
+  //     if (onboardingUri != null && await canLaunchUrl(onboardingUri)) {
+  //       await launchUrl(onboardingUri);
+  //     } else {
+  //       print('Failed to launch onboarding URL.');
+  //     }
+  //   } else {
+  //     print(
+  //         'Failed to create Stripe account. Status code: ${response.statusCode}');
+  //   }
+  // };
 
   @override
   void dispose() {

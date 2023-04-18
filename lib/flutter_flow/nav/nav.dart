@@ -141,16 +141,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               path: 'myBookings',
               builder: (context, params) => MyBookingsWidget(),
             ),
-            FFRoute(
-              name: 'Return',
-              path: 'return',
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'AddSpace')
-                  : NavBarPage(
-                      initialPage: 'AddSpace',
-                      page: AddSpaceWidget(),
-                    ),
-            ),
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
       ].map((r) => r.toRoute(appStateNotifier)).toList(),

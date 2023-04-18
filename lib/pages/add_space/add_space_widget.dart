@@ -23,20 +23,8 @@ import 'package:http/http.dart' as http;
 import 'add_space_model.dart';
 export 'add_space_model.dart';
 import 'package:go_router/go_router.dart';
-import 'package:go_router/go_router.dart';
-
-final goRouter = GoRouter(
-  routes: [
-    // Add other route definitions here
-    GoRoute(
-      path: '/return',
-      pageBuilder: (context, state) {
-        // Replace "AddSpaceWidget" with the actual widget for your add space page
-        return MaterialPage(child: AddSpaceWidget());
-      },
-    ),
-  ],
-);
+import 'package:our_space_app/backend/stripeLogicHandling.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class AddSpaceWidget extends StatefulWidget {
   const AddSpaceWidget({Key? key}) : super(key: key);
@@ -47,7 +35,8 @@ class AddSpaceWidget extends StatefulWidget {
 
 class _AddSpaceWidgetState extends State<AddSpaceWidget> {
   late AddSpaceModel _model;
-
+  Uri? _onboardingUri;
+  bool _showStripeOnboarding = false;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _unfocusNode = FocusNode();
 
@@ -63,41 +52,18 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
     _model.dailyRateController ??= TextEditingController();
   }
 
-  // Future<void> initUniLinks() async {
+  // Future<void> initUniLinks(context) async {
   //   try {
   //     Uri? initialLink = await getInitialUri();
   //     if (initialLink != null) {
-  //       handleIncomingLink(initialLink);
+  //       handleIncomingLink(initialLink, context);
   //     }
   //   } on PlatformException {
   //     // Handle exception
   //   }
   // }
 
-  // void handleIncomingLink(Uri link) async {
-  //   if (link.path == '/return') {
-  //     // Extract the Stripe ID from the incoming link
-  //     final stripeId = link.queryParameters['accountId'];
-
-  //     // Check if the Stripe ID is not null
-  //     if (stripeId != null) {
-  //       // Get the current user's UID
-  //       final userUid = FirebaseAuth.instance.currentUser!.uid;
-
-  //       // Update the user's account data in Firestore with the new Stripe ID
-  //       await FirebaseFirestore.instance
-  //           .collection('users')
-  //           .doc(userUid)
-  //           .update({'stripe_id': stripeId});
-
-  //       // Take the appropriate action after the user has completed onboarding and the Stripe ID has been saved
-  //     } else {
-  //       print('Stripe ID not found in the incoming link');
-  //     }
-  //   }
-  // }
-
-  // Future<void> Function() createStripeAccount = () async {
+  // Future<Uri?> Function() createStripeAccount = () async {
   //   final Map<String, dynamic> requestBody = {
   //     'email': currentUserDocument?.email,
   //     'name': currentUserDocument?.displayName,
@@ -119,17 +85,39 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
   //     print('Stripe account created: $account');
   //     final Uri onboardingUri = Uri.parse(account['onboardingUri']);
   //     print('Stripe account created: $account');
-
-  //     if (onboardingUri != null && await canLaunchUrl(onboardingUri)) {
-  //       await launchUrl(onboardingUri);
-  //     } else {
-  //       print('Failed to launch onboarding URL.');
-  //     }
+  //     return onboardingUri;
   //   } else {
   //     print(
   //         'Failed to create Stripe account. Status code: ${response.statusCode}');
+  //     return null;
   //   }
+  //   //
   // };
+
+  // void handleIncomingLink(Uri link, context) async {
+  //   if (link.path == '/return') {
+  //     // Extract the Stripe ID from the incoming link
+  //     final stripeId = link.queryParameters['accountId'];
+
+  //     // Check if the Stripe ID is not null
+  //     if (stripeId != null) {
+  //       // Get the current user's UID
+  //       final userUid = FirebaseAuth.instance.currentUser!.uid;
+
+  //       // Update the user's account data in Firestore with the new Stripe ID
+  //       await FirebaseFirestore.instance
+  //           .collection('users')
+  //           .doc(userUid)
+  //           .update({'stripeID': stripeId});
+  //       print("Stripe ID Added to firebase");
+
+  //       Navigator.of(context).pushNamed('AddSpace');
+  //       // Take the appropriate action after the user has completed onboarding and the Stripe ID has been saved
+  //     } else {
+  //       print('Stripe ID not found in the incoming link');
+  //     }
+  //   }
+  // }
 
   @override
   void dispose() {
@@ -641,60 +629,75 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
                       decoration: BoxDecoration(
                         color: Color.fromARGB(244, 241, 244, 248),
                       ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 0, 0, 25),
-                                child: Text(
-                                  'Please add your Stripe details first!',
-                                  style:
-                                      FlutterFlowTheme.of(context).titleSmall,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              FFButtonWidget(
-                                onPressed: () {
-                                  createStripeAccount();
-                                },
-                                text: 'Set up stripe',
-                                options: FFButtonOptions(
-                                  width: 130,
-                                  height: 40,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 0, 0),
-                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 0, 0),
-                                  color: FlutterFlowTheme.of(context).primary,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .titleSmall
-                                      .override(
-                                        fontFamily: 'Poppins',
-                                        color: Colors.white,
-                                      ),
-                                  borderSide: BorderSide(
-                                    color: Colors.transparent,
-                                    width: 1,
+                                      0, 0, 0, 25),
+                                  child: Text(
+                                    'Please add your Stripe details first!',
+                                    style:
+                                        FlutterFlowTheme.of(context).titleSmall,
                                   ),
-                                  borderRadius: BorderRadius.circular(8),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
+                              ],
+                            ),
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                ElevatedButton(
+                                  onPressed: () async {
+                                    final Uri? onboardingUri =
+                                        await createStripeAccount();
+                                    if (onboardingUri != null) {
+                                      setState(() {
+                                        _onboardingUri = onboardingUri;
+                                        _showStripeOnboarding = true;
+                                      });
+                                    }
+                                  },
+                                  child: Text('Set up Stripe'),
+                                ),
+                              ],
+                            ),
+                            _showStripeOnboarding
+                                ? SingleChildScrollView(
+                                    child: SizedBox(
+                                      height: 600,
+                                      width: double.infinity,
+                                      child: WebView(
+                                        initialUrl: _onboardingUri.toString(),
+                                        javascriptMode:
+                                            JavascriptMode.unrestricted,
+                                        navigationDelegate:
+                                            (NavigationRequest request) {
+                                          print(
+                                              "Navigating to: ${request.url}");
+                                          if (request.url
+                                              .startsWith("ourspaceapp://")) {
+                                            handleIncomingLink(
+                                                request.url, context);
+
+                                            return NavigationDecision.prevent;
+                                          }
+                                          return NavigationDecision.navigate;
+                                        },
+                                      ),
+                                    ),
+                                  )
+                                : Container(),
+                          ],
+                        ),
                       ),
                     ),
                   ),

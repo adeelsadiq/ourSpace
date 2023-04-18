@@ -9,6 +9,9 @@ import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
 import 'index.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:uni_links/uni_links.dart';
+import 'backend/stripeLogicHandling.dart';
+import 'package:flutter/services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -45,6 +48,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    initUniLinks();
     _appStateNotifier = AppStateNotifier();
     _router = createRouter(_appStateNotifier);
     userStream = ourSpaceAppFirebaseUserStream()
@@ -54,6 +58,25 @@ class _MyAppState extends State<MyApp> {
       Duration(seconds: 1),
       () => _appStateNotifier.stopShowingSplashImage(),
     );
+  }
+
+  void initUniLinks() async {
+    // Attach a listener to the stream
+    linkStream.listen((String? link) {
+      handleIncomingLink(link!, context);
+    }, onError: (error) {
+      print('Failed to handle incoming link: $error');
+    });
+
+    // Get the initial link
+    try {
+      final initialLink = await getInitialLink();
+      if (initialLink != null) {
+        handleIncomingLink(initialLink, context);
+      }
+    } catch (error) {
+      print('Failed to get initial link: $error');
+    }
   }
 
   @override

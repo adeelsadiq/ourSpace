@@ -37,3 +37,6 @@ flutter packages pub run build_runner build --delete-conflicting-outputs
 
 get SHA-1 Key:
 keytool -list -v -alias androiddebugkey -keystore %USERPROFILE%\.android\debug.keystore
+
+send adb command to test returning URL
+adb shell am start -a android.intent.action.VIEW -d "ourspaceapp://ourspaceapp.com/return?accountId="

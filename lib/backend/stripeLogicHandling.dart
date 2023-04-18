@@ -20,6 +20,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+export 'package:our_space_app/backend/stripeLogicHandling.dart';
 
 // Future<void> refreshUserData(BuildContext context) async {
 //   // Get the current user's ID
@@ -36,14 +37,15 @@ Future<void> initUniLinks(context) async {
   try {
     Uri? initialLink = await getInitialUri();
     if (initialLink != null) {
-      handleIncomingLink(initialLink, context);
+      String url = initialLink.toString();
+      handleIncomingLink(url, context);
     }
   } on PlatformException {
     // Handle exception
   }
 }
 
-Future<void> Function() createStripeAccount = () async {
+Future<Uri?> createStripeAccount() async {
   final Map<String, dynamic> requestBody = {
     'email': currentUserDocument?.email,
     'name': currentUserDocument?.displayName,
@@ -58,25 +60,22 @@ Future<void> Function() createStripeAccount = () async {
     },
     body: json.encode(requestBody),
   );
-
   if (response.statusCode == 200) {
     final Map<String, dynamic> account = json.decode(response.body);
     print('Stripe account created: $account');
     final Uri onboardingUri = Uri.parse(account['onboardingUri']);
-    print('Stripe account created: $account');
-
-    if (onboardingUri != null && await canLaunchUrl(onboardingUri)) {
-      await launchUrl(onboardingUri);
-    } else {
-      print('Failed to launch onboarding URL.');
-    }
+    print('Stripe account created (line 67 handling): $onboardingUri');
+    return onboardingUri;
   } else {
     print(
         'Failed to create Stripe account. Status code: ${response.statusCode}');
   }
-};
 
-void handleIncomingLink(Uri link, context) async {
+  return null;
+}
+
+void handleIncomingLink(String url, context) async {
+  Uri link = Uri.parse(url);
   if (link.path == '/return') {
     // Extract the Stripe ID from the incoming link
     final stripeId = link.queryParameters['accountId'];

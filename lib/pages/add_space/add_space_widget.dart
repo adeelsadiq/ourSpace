@@ -37,6 +37,7 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
   late AddSpaceModel _model;
   Uri? _onboardingUri;
   bool _showStripeOnboarding = false;
+  FocusNode _webViewFocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _unfocusNode = FocusNode();
 
@@ -635,39 +636,36 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Row(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 0, 25),
-                                  child: Text(
-                                    'Please add your Stripe details first!',
-                                    style:
-                                        FlutterFlowTheme.of(context).titleSmall,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                ElevatedButton(
-                                  onPressed: () async {
-                                    final Uri? onboardingUri =
-                                        await createStripeAccount();
-                                    if (onboardingUri != null) {
-                                      setState(() {
-                                        _onboardingUri = onboardingUri;
-                                        _showStripeOnboarding = true;
-                                      });
-                                    }
-                                  },
-                                  child: Text('Set up Stripe'),
-                                ),
+                                !_showStripeOnboarding
+                                    ? ElevatedButton(
+                                        onPressed: () async {
+                                          final Uri? onboardingUri =
+                                              await createStripeAccount();
+                                          if (onboardingUri != null) {
+                                            setState(() {
+                                              _onboardingUri = onboardingUri;
+                                              _showStripeOnboarding = true;
+                                            });
+                                          }
+                                        },
+                                        child: Text('Set up Stripe'),
+                                      )
+                                    : Container(),
+                                !_showStripeOnboarding
+                                    ? Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 0, 0, 25),
+                                        child: Text(
+                                          'Please add your Stripe details first!',
+                                          style: FlutterFlowTheme.of(context)
+                                              .titleSmall,
+                                        ),
+                                      )
+                                    : Container(),
                               ],
                             ),
                             _showStripeOnboarding
@@ -675,23 +673,25 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
                                     child: SizedBox(
                                       height: 600,
                                       width: double.infinity,
-                                      child: WebView(
-                                        initialUrl: _onboardingUri.toString(),
-                                        javascriptMode:
-                                            JavascriptMode.unrestricted,
-                                        navigationDelegate:
-                                            (NavigationRequest request) {
-                                          print(
-                                              "Navigating to: ${request.url}");
-                                          if (request.url
-                                              .startsWith("ourspaceapp://")) {
-                                            handleIncomingLink(
-                                                request.url, context);
-
-                                            return NavigationDecision.prevent;
-                                          }
-                                          return NavigationDecision.navigate;
-                                        },
+                                      child: FocusScope(
+                                        node: FocusScopeNode(),
+                                        child: WebView(
+                                          initialUrl: _onboardingUri.toString(),
+                                          javascriptMode:
+                                              JavascriptMode.unrestricted,
+                                          navigationDelegate:
+                                              (NavigationRequest request) {
+                                            print(
+                                                "Navigating to: ${request.url}");
+                                            if (request.url
+                                                .startsWith("ourspaceapp://")) {
+                                              handleIncomingLink(
+                                                  request.url, context);
+                                              return NavigationDecision.prevent;
+                                            }
+                                            return NavigationDecision.navigate;
+                                          },
+                                        ),
                                       ),
                                     ),
                                   )
@@ -709,4 +709,4 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
     );
   }
 }
-//link ourspaceapp://ourspaceapp.com 
+//link ourspaceapp://ourspaceapp.com

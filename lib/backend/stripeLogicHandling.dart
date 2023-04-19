@@ -91,6 +91,7 @@ void handleIncomingLink(String url, context) async {
           .doc(userUid)
           .update({'stripeID': stripeId});
       print("Stripe ID Added to firebase");
+      //look at this later! might need some more testing
       Navigator.of(context).pop(true);
       // Navigator.of(context).pushNamed('addSpace');
       // Take the appropriate action after the user has completed onboarding and the Stripe ID has been saved

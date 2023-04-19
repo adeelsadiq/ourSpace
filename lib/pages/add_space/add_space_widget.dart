@@ -36,6 +36,7 @@ class AddSpaceWidget extends StatefulWidget {
 class _AddSpaceWidgetState extends State<AddSpaceWidget> {
   late AddSpaceModel _model;
   Uri? _onboardingUri;
+  bool _isLoading = false;
   bool _showStripeOnboarding = false;
   FocusNode _webViewFocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -52,73 +53,6 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
     _model.addressController ??= TextEditingController();
     _model.dailyRateController ??= TextEditingController();
   }
-
-  // Future<void> initUniLinks(context) async {
-  //   try {
-  //     Uri? initialLink = await getInitialUri();
-  //     if (initialLink != null) {
-  //       handleIncomingLink(initialLink, context);
-  //     }
-  //   } on PlatformException {
-  //     // Handle exception
-  //   }
-  // }
-
-  // Future<Uri?> Function() createStripeAccount = () async {
-  //   final Map<String, dynamic> requestBody = {
-  //     'email': currentUserDocument?.email,
-  //     'name': currentUserDocument?.displayName,
-  //   };
-  //   print(currentUserDocument?.email);
-  //   String url = Platform.isAndroid
-  //       ? 'http://192.168.1.4:3000'
-  //       : 'http://localhost:3000';
-  //   final response = await http.post(
-  //     Uri.parse('$url/create-stripe-account'),
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: json.encode(requestBody),
-  //   );
-
-  //   if (response.statusCode == 200) {
-  //     final Map<String, dynamic> account = json.decode(response.body);
-  //     print('Stripe account created: $account');
-  //     final Uri onboardingUri = Uri.parse(account['onboardingUri']);
-  //     print('Stripe account created: $account');
-  //     return onboardingUri;
-  //   } else {
-  //     print(
-  //         'Failed to create Stripe account. Status code: ${response.statusCode}');
-  //     return null;
-  //   }
-  //   //
-  // };
-
-  // void handleIncomingLink(Uri link, context) async {
-  //   if (link.path == '/return') {
-  //     // Extract the Stripe ID from the incoming link
-  //     final stripeId = link.queryParameters['accountId'];
-
-  //     // Check if the Stripe ID is not null
-  //     if (stripeId != null) {
-  //       // Get the current user's UID
-  //       final userUid = FirebaseAuth.instance.currentUser!.uid;
-
-  //       // Update the user's account data in Firestore with the new Stripe ID
-  //       await FirebaseFirestore.instance
-  //           .collection('users')
-  //           .doc(userUid)
-  //           .update({'stripeID': stripeId});
-  //       print("Stripe ID Added to firebase");
-
-  //       Navigator.of(context).pushNamed('AddSpace');
-  //       // Take the appropriate action after the user has completed onboarding and the Stripe ID has been saved
-  //     } else {
-  //       print('Stripe ID not found in the incoming link');
-  //     }
-  //   }
-  // }
 
   @override
   void dispose() {
@@ -646,9 +580,9 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
                                           Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
-                                                    0, 0, 0, 25),
+                                                    0, 150, 0, 25),
                                             child: Text(
-                                              'Please add your Stripe details first!',
+                                              'Please provide your Stripe account \ndetails before adding a space. It is \nessential to have a connected Stripe \naccount to ensure you receive payments. ',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .titleSmall,
@@ -656,6 +590,10 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
                                           ),
                                           ElevatedButton(
                                             onPressed: () async {
+                                              setState(() {
+                                                _isLoading =
+                                                    true; // Show spinner
+                                              });
                                               final Uri? onboardingUri =
                                                   await createStripeAccount();
                                               if (onboardingUri != null) {
@@ -663,14 +601,51 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
                                                   _onboardingUri =
                                                       onboardingUri;
                                                   _showStripeOnboarding = true;
+                                                  _isLoading = false;
+                                                });
+                                              } else {
+                                                setState(() {
+                                                  _isLoading = //hide teh spinner
+                                                      false;
                                                 });
                                               }
                                             },
                                             child: Text('Set up Stripe'),
+                                            style: ElevatedButton.styleFrom(
+                                              backgroundColor: FlutterFlowTheme
+                                                      .of(context)
+                                                  .primary, // Set the button color
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.circular(
+                                                    30.0), // Set the rounded edges
+                                              ),
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 20,
+                                                  vertical:
+                                                      12), // Set the padding
+                                              textStyle: TextStyle(
+                                                  fontSize:
+                                                      16), // Set the text style
+                                            ),
                                           )
                                         ],
                                       )
                                     : Container(),
+                                if (_isLoading)
+                                  //look at this later, needs testing with the spinner placement
+                                  Container(
+                                    color: Colors.black.withOpacity(
+                                        0.5), // Set the black background with opacity
+                                    width: double.infinity,
+                                    height: 1200,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        CircularProgressIndicator(),
+                                      ],
+                                    ),
+                                  ),
                               ],
                             ),
                             _showStripeOnboarding

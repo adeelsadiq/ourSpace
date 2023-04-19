@@ -641,56 +641,71 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 !_showStripeOnboarding
-                                    ? ElevatedButton(
-                                        onPressed: () async {
-                                          final Uri? onboardingUri =
-                                              await createStripeAccount();
-                                          if (onboardingUri != null) {
-                                            setState(() {
-                                              _onboardingUri = onboardingUri;
-                                              _showStripeOnboarding = true;
-                                            });
-                                          }
-                                        },
-                                        child: Text('Set up Stripe'),
-                                      )
-                                    : Container(),
-                                !_showStripeOnboarding
-                                    ? Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 0, 25),
-                                        child: Text(
-                                          'Please add your Stripe details first!',
-                                          style: FlutterFlowTheme.of(context)
-                                              .titleSmall,
-                                        ),
+                                    ? Column(
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0, 0, 0, 25),
+                                            child: Text(
+                                              'Please add your Stripe details first!',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmall,
+                                            ),
+                                          ),
+                                          ElevatedButton(
+                                            onPressed: () async {
+                                              final Uri? onboardingUri =
+                                                  await createStripeAccount();
+                                              if (onboardingUri != null) {
+                                                setState(() {
+                                                  _onboardingUri =
+                                                      onboardingUri;
+                                                  _showStripeOnboarding = true;
+                                                });
+                                              }
+                                            },
+                                            child: Text('Set up Stripe'),
+                                          )
+                                        ],
                                       )
                                     : Container(),
                               ],
                             ),
                             _showStripeOnboarding
-                                ? SingleChildScrollView(
-                                    child: SizedBox(
-                                      height: 600,
-                                      width: double.infinity,
-                                      child: FocusScope(
-                                        node: FocusScopeNode(),
-                                        child: WebView(
-                                          initialUrl: _onboardingUri.toString(),
-                                          javascriptMode:
-                                              JavascriptMode.unrestricted,
-                                          navigationDelegate:
-                                              (NavigationRequest request) {
-                                            print(
-                                                "Navigating to: ${request.url}");
-                                            if (request.url
-                                                .startsWith("ourspaceapp://")) {
-                                              handleIncomingLink(
-                                                  request.url, context);
-                                              return NavigationDecision.prevent;
-                                            }
-                                            return NavigationDecision.navigate;
-                                          },
+                                ? Padding(
+                                    // test case: doing this for getting keyboard height dynamically so the field scrolls up automatically
+                                    padding: EdgeInsets.only(
+                                        bottom: MediaQuery.of(context)
+                                            .viewInsets
+                                            .bottom),
+                                    child: SingleChildScrollView(
+                                      child: Container(
+                                        height: 1500,
+                                        width: double.infinity,
+                                        child: FocusScope(
+                                          node: FocusScopeNode(),
+                                          child: WebView(
+                                            initialUrl:
+                                                _onboardingUri.toString(),
+                                            javascriptMode:
+                                                JavascriptMode.unrestricted,
+                                            navigationDelegate:
+                                                (NavigationRequest request) {
+                                              print(
+                                                  "Navigating to: ${request.url}");
+                                              if (request.url.startsWith(
+                                                  "ourspaceapp://")) {
+                                                handleIncomingLink(
+                                                    request.url, context);
+                                                return NavigationDecision
+                                                    .prevent;
+                                              }
+                                              return NavigationDecision
+                                                  .navigate;
+                                            },
+                                          ),
                                         ),
                                       ),
                                     ),

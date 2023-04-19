@@ -40,3 +40,6 @@ keytool -list -v -alias androiddebugkey -keystore %USERPROFILE%\.android\debug.k
 
 send adb command to test returning URL
 adb shell am start -a android.intent.action.VIEW -d "ourspaceapp://ourspaceapp.com/return?accountId="
+
+Look at this
+test case

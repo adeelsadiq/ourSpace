@@ -569,84 +569,89 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                !_showStripeOnboarding
-                                    ? Column(
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0, 150, 0, 25),
-                                            child: Text(
-                                              'Please provide your Stripe account \ndetails before adding a space. It is \nessential to have a connected Stripe \naccount to ensure you receive payments. ',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleSmall,
-                                            ),
-                                          ),
-                                          ElevatedButton(
-                                            onPressed: () async {
-                                              setState(() {
-                                                _isLoading =
-                                                    true; // Show spinner
-                                              });
-                                              final Uri? onboardingUri =
-                                                  await createStripeAccount();
-                                              if (onboardingUri != null) {
-                                                setState(() {
-                                                  _onboardingUri =
-                                                      onboardingUri;
-                                                  _showStripeOnboarding = true;
-                                                  _isLoading = false;
-                                                });
-                                              } else {
-                                                setState(() {
-                                                  _isLoading = //hide teh spinner
-                                                      false;
-                                                });
-                                              }
-                                            },
-                                            child: Text('Set up Stripe'),
-                                            style: ElevatedButton.styleFrom(
-                                              backgroundColor: FlutterFlowTheme
-                                                      .of(context)
-                                                  .primary, // Set the button color
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.circular(
-                                                    30.0), // Set the rounded edges
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  !_showStripeOnboarding
+                                      ? Column(
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0, 150, 0, 25),
+                                              child: Text(
+                                                'Please provide your Stripe account \ndetails before adding a space. It is \nessential to have a connected Stripe \naccount to ensure you receive payments. ',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleSmall,
                                               ),
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 20,
-                                                  vertical:
-                                                      12), // Set the padding
-                                              textStyle: TextStyle(
-                                                  fontSize:
-                                                      16), // Set the text style
                                             ),
-                                          )
+                                            ElevatedButton(
+                                              onPressed: () async {
+                                                setState(() {
+                                                  _isLoading =
+                                                      true; // Show spinner
+                                                });
+                                                final Uri? onboardingUri =
+                                                    await createStripeAccount();
+                                                if (onboardingUri != null) {
+                                                  setState(() {
+                                                    _onboardingUri =
+                                                        onboardingUri;
+                                                    _showStripeOnboarding =
+                                                        true;
+                                                    _isLoading = false;
+                                                  });
+                                                } else {
+                                                  setState(() {
+                                                    _isLoading = //hide teh spinner
+                                                        false;
+                                                  });
+                                                }
+                                              },
+                                              child: Text('Set up Stripe'),
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor: FlutterFlowTheme
+                                                        .of(context)
+                                                    .primary, // Set the button color
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          30.0), // Set the rounded edges
+                                                ),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 20,
+                                                    vertical:
+                                                        12), // Set the padding
+                                                textStyle: TextStyle(
+                                                    fontSize:
+                                                        16), // Set the text style
+                                              ),
+                                            )
+                                          ],
+                                        )
+                                      : Container(),
+                                  if (_isLoading)
+                                    //look at this later, needs testing with the spinner placement
+
+                                    Container(
+                                      color: Colors.black.withOpacity(
+                                          0.5), // Set the black background with opacity
+                                      width: double.infinity,
+                                      height: 800,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          CircularProgressIndicator(),
                                         ],
-                                      )
-                                    : Container(),
-                                if (_isLoading)
-                                  //look at this later, needs testing with the spinner placement
-                                  Container(
-                                    color: Colors.black.withOpacity(
-                                        0.5), // Set the black background with opacity
-                                    width: double.infinity,
-                                    height: 1200,
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        CircularProgressIndicator(),
-                                      ],
+                                      ),
                                     ),
-                                  ),
-                              ],
+                                ],
+                              ),
                             ),
                             _showStripeOnboarding
                                 ? Padding(

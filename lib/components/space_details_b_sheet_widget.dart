@@ -290,9 +290,12 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
                                 if (dateRange.length > 1) {
                                   Duration difference =
                                       dateRange[1]!.difference(dateRange[0]!);
+                                  //doing this to ensure that the last day is not left off the total price because as it turns out difference is exclusice
+                                  Duration nDifference =
+                                      difference + Duration(days: 1);
                                   double totalPrice =
                                       widget.spaceBsSheet!.dailyRate! *
-                                          difference.inDays;
+                                          nDifference.inDays;
 
                                   makePayment(totalPrice.toString(),
                                       dateRange[0]!, dateRange[1]!);
@@ -351,7 +354,7 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
       "bookedAt": DateTime.now(),
       "bookingUser": userReference,
       "parking_space_ref": widget.spaceBsSheet!.ffRef,
-      "totalPrice": totalPrice,
+      "totalPrice": double.parse(totalPrice),
     });
     getBookedDate();
 

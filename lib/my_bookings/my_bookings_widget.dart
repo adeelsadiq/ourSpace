@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+
 import 'my_bookings_model.dart';
 export 'my_bookings_model.dart';
 
@@ -39,43 +40,40 @@ class _MyBookingsWidgetState extends State<MyBookingsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-        automaticallyImplyLeading: false,
-        title: Text(
-          'My Bookings',
-          style: FlutterFlowTheme.of(context).title2,
-        ),
-        actions: [
-          Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
-            child: FlutterFlowIconButton(
-              borderColor: Colors.transparent,
-              borderRadius: 30.0,
-              borderWidth: 1.0,
-              buttonSize: 60.0,
-              icon: Icon(
-                Icons.add_circle_outline_rounded,
-                color: FlutterFlowTheme.of(context).secondaryText,
-                size: 30.0,
-              ),
-              onPressed: () async {
-                context.pushNamed('HomePage');
-              },
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).primary,
+          automaticallyImplyLeading: false,
+          leading: FlutterFlowIconButton(
+            borderColor: Colors.transparent,
+            borderRadius: 30,
+            borderWidth: 1,
+            buttonSize: 60,
+            icon: Icon(
+              Icons.arrow_back_rounded,
+              color: FlutterFlowTheme.of(context).black600,
+              size: 30,
             ),
+            onPressed: () async {
+              context.pop();
+            },
           ),
-        ],
-        centerTitle: false,
-        elevation: 0.0,
-      ),
-      body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+          title: Text(
+            'My Bookings',
+            style: FlutterFlowTheme.of(context).headlineMedium.override(
+                  fontFamily: 'Poppins',
+                  color: FlutterFlowTheme.of(context).primaryText,
+                ),
+          ),
+          actions: [],
+          centerTitle: true,
+          elevation: 2,
+        ),
+        body: SafeArea(
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,
@@ -86,15 +84,15 @@ class _MyBookingsWidgetState extends State<MyBookingsWidget> {
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                     boxShadow: [
                       BoxShadow(
-                        blurRadius: 3.0,
+                        blurRadius: 3,
                         color: Color(0x33000000),
-                        offset: Offset(0.0, 1.0),
+                        offset: Offset(0, 1),
                       )
                     ],
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 1.0, 0.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 1, 0, 0),
                   child: FutureBuilder<List<BookingsRecord>>(
                     future: queryBookingsRecordOnce(
                       queryBuilder: (bookingsRecord) => bookingsRecord.where(
@@ -106,11 +104,11 @@ class _MyBookingsWidgetState extends State<MyBookingsWidget> {
                       if (!snapshot.hasData) {
                         return Center(
                           child: SizedBox(
-                            width: 50.0,
-                            height: 50.0,
+                            width: 50,
+                            height: 50,
                             child: SpinKitCircle(
                               color: FlutterFlowTheme.of(context).primary,
-                              size: 50.0,
+                              size: 50,
                             ),
                           ),
                         );
@@ -126,121 +124,254 @@ class _MyBookingsWidgetState extends State<MyBookingsWidget> {
                           final listViewBookingsRecord =
                               listViewBookingsRecordList[listViewIndex];
                           return Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 1.0),
-                            child: StreamBuilder<ParkingSpacesRecord>(
-                              stream: ParkingSpacesRecord.getDocument(
-                                  listViewBookingsRecord.parkingSpaceRef!),
-                              builder: (context, snapshot) {
-                                // Customize what your widget looks like when it's loading.
-                                if (!snapshot.hasData) {
-                                  return Center(
-                                    child: SizedBox(
-                                      width: 50.0,
-                                      height: 50.0,
-                                      child: SpinKitCircle(
+                            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
+                            child: Container(
+                              width: 100,
+                              height: 120,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurRadius: 0,
+                                    color:
+                                        FlutterFlowTheme.of(context).lineColor,
+                                    offset: Offset(0, 1),
+                                  )
+                                ],
+                              ),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    16, 0, 16, 0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      width: 44,
+                                      height: 44,
+                                      decoration: BoxDecoration(
                                         color: FlutterFlowTheme.of(context)
-                                            .primaryColor,
-                                        size: 50.0,
+                                            .primary,
+                                        shape: BoxShape.circle,
                                       ),
-                                    ),
-                                  );
-                                }
-                                final containerParkingSpacesRecord =
-                                    snapshot.data!;
-                                return Container(
-                                  width: 100.0,
-                                  height: 80.0,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        blurRadius: 0.0,
-                                        color: FlutterFlowTheme.of(context)
-                                            .lineColor,
-                                        offset: Offset(0.0, 1.0),
-                                      )
-                                    ],
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        16.0, 0.0, 16.0, 0.0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          width: 44.0,
-                                          height: 44.0,
-                                          decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryColor,
-                                            shape: BoxShape.circle,
-                                          ),
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    2.0, 2.0, 2.0, 2.0),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(44.0),
-                                              child: Image.network(
-                                                'https://picsum.photos/seed/183/600',
-                                                width: 44.0,
-                                                height: 44.0,
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            2, 2, 2, 2),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(44),
+                                          child: Image.network(
+                                            'https://picsum.photos/seed/183/600',
+                                            width: 44,
+                                            height: 44,
+                                            fit: BoxFit.cover,
                                           ),
                                         ),
-                                        Expanded(
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    12.0, 0.0, 0.0, 0.0),
-                                            child: Column(
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            12, 0, 0, 0),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
                                               mainAxisSize: MainAxisSize.max,
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                                  MainAxisAlignment.spaceEvenly,
                                               children: [
                                                 Padding(
                                                   padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 0.0, 0.0, 4.0),
+                                                      .fromSTEB(0, 0, 0, 4),
                                                   child: Text(
-                                                    containerParkingSpacesRecord
-                                                        .name!,
+                                                    'Booked made on: ',
                                                     style: FlutterFlowTheme.of(
                                                             context)
-                                                        .title3,
+                                                        .headlineSmall
+                                                        .override(
+                                                          fontFamily: 'Poppins',
+                                                          fontSize: 16,
+                                                        ),
                                                   ),
                                                 ),
-                                                Text(
-                                                  containerParkingSpacesRecord
-                                                      .addressLine1!,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodySmall,
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(0, 0, 0, 4),
+                                                  child: Text(
+                                                    dateTimeFormat(
+                                                        'd/M/y',
+                                                        listViewBookingsRecord
+                                                            .bookedAt!),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .headlineSmall
+                                                        .override(
+                                                          fontFamily: 'Poppins',
+                                                          fontSize: 16,
+                                                        ),
+                                                  ),
                                                 ),
                                               ],
                                             ),
-                                          ),
+                                            Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(0, 0, 0, 4),
+                                                  child: Text(
+                                                    'Start:',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .headlineSmall
+                                                        .override(
+                                                          fontFamily: 'Poppins',
+                                                          fontSize: 14,
+                                                        ),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(0, 0, 0, 4),
+                                                  child: Text(
+                                                    dateTimeFormat(
+                                                        'd/M/y',
+                                                        listViewBookingsRecord
+                                                            .bookingStart!),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .headlineSmall
+                                                        .override(
+                                                          fontFamily: 'Poppins',
+                                                          fontSize: 14,
+                                                        ),
+                                                  ),
+                                                ),
+                                                Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0, 0, 0, 4),
+                                                      child: Text(
+                                                        ' - End:',
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .headlineSmall
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Poppins',
+                                                                  fontSize: 14,
+                                                                ),
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0, 0, 0, 4),
+                                                      child: Text(
+                                                        dateTimeFormat(
+                                                            'd/M/y',
+                                                            listViewBookingsRecord
+                                                                .bookingEnd!),
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .headlineSmall
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Poppins',
+                                                                  fontSize: 14,
+                                                                ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                Text(
+                                                  'Booked: ',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodySmall
+                                                      .override(
+                                                        fontFamily: 'Poppins',
+                                                        fontSize: 12,
+                                                      ),
+                                                ),
+                                                Text(
+                                                  dateTimeFormat(
+                                                      'relative',
+                                                      listViewBookingsRecord
+                                                          .bookedAt!),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodySmall
+                                                      .override(
+                                                        fontFamily: 'Poppins',
+                                                        fontSize: 12,
+                                                      ),
+                                                ),
+                                                Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: [
+                                                    Text(
+                                                      ' - Total: ',
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodySmall
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Poppins',
+                                                                fontSize: 12,
+                                                              ),
+                                                    ),
+                                                    Text(
+                                                      formatNumber(
+                                                        listViewBookingsRecord
+                                                            .totalPrice!,
+                                                        formatType:
+                                                            FormatType.decimal,
+                                                        decimalType: DecimalType
+                                                            .automatic,
+                                                        currency: '€',
+                                                      ),
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodySmall,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ],
                                         ),
-                                        Icon(
-                                          Icons.chevron_right_rounded,
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          size: 24.0,
-                                        ),
-                                      ],
+                                      ),
                                     ),
-                                  ),
-                                );
-                              },
+                                  ],
+                                ),
+                              ),
                             ),
                           );
                         },

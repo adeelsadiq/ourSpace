@@ -16,7 +16,11 @@ abstract class BookingsRecord
 
   DocumentReference? get bookingUser;
 
-  DateTime? get bookingDate;
+  double? get totalPrice;
+
+  DateTime? get bookingStart;
+
+  DateTime? get bookingEnd;
 
   DateTime? get bookedAt;
 
@@ -24,7 +28,8 @@ abstract class BookingsRecord
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
 
-  static void _initializeBuilder(BookingsRecordBuilder builder) => builder;
+  static void _initializeBuilder(BookingsRecordBuilder builder) =>
+      builder..totalPrice = 0.0;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('bookings');
@@ -50,7 +55,9 @@ abstract class BookingsRecord
 Map<String, dynamic> createBookingsRecordData({
   DocumentReference? parkingSpaceRef,
   DocumentReference? bookingUser,
-  DateTime? bookingDate,
+  double? totalPrice,
+  DateTime? bookingStart,
+  DateTime? bookingEnd,
   DateTime? bookedAt,
 }) {
   final firestoreData = serializers.toFirestore(
@@ -59,7 +66,9 @@ Map<String, dynamic> createBookingsRecordData({
       (b) => b
         ..parkingSpaceRef = parkingSpaceRef
         ..bookingUser = bookingUser
-        ..bookingDate = bookingDate
+        ..totalPrice = totalPrice
+        ..bookingStart = bookingStart
+        ..bookingEnd = bookingEnd
         ..bookedAt = bookedAt,
     ),
   );

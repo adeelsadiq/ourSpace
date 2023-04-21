@@ -37,10 +37,24 @@ class _$BookingsRecordSerializer
             specifiedType: const FullType(
                 DocumentReference, const [const FullType.nullable(Object)])));
     }
-    value = object.bookingDate;
+    value = object.totalPrice;
     if (value != null) {
       result
-        ..add('bookingDate')
+        ..add('totalPrice')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(double)));
+    }
+    value = object.bookingStart;
+    if (value != null) {
+      result
+        ..add('bookingStart')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(DateTime)));
+    }
+    value = object.bookingEnd;
+    if (value != null) {
+      result
+        ..add('bookingEnd')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(DateTime)));
     }
@@ -86,8 +100,16 @@ class _$BookingsRecordSerializer
                 const FullType.nullable(Object)
               ])) as DocumentReference<Object?>?;
           break;
-        case 'bookingDate':
-          result.bookingDate = serializers.deserialize(value,
+        case 'totalPrice':
+          result.totalPrice = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double?;
+          break;
+        case 'bookingStart':
+          result.bookingStart = serializers.deserialize(value,
+              specifiedType: const FullType(DateTime)) as DateTime?;
+          break;
+        case 'bookingEnd':
+          result.bookingEnd = serializers.deserialize(value,
               specifiedType: const FullType(DateTime)) as DateTime?;
           break;
         case 'bookedAt':
@@ -113,7 +135,11 @@ class _$BookingsRecord extends BookingsRecord {
   @override
   final DocumentReference<Object?>? bookingUser;
   @override
-  final DateTime? bookingDate;
+  final double? totalPrice;
+  @override
+  final DateTime? bookingStart;
+  @override
+  final DateTime? bookingEnd;
   @override
   final DateTime? bookedAt;
   @override
@@ -125,7 +151,9 @@ class _$BookingsRecord extends BookingsRecord {
   _$BookingsRecord._(
       {this.parkingSpaceRef,
       this.bookingUser,
-      this.bookingDate,
+      this.totalPrice,
+      this.bookingStart,
+      this.bookingEnd,
       this.bookedAt,
       this.ffRef})
       : super._();
@@ -144,19 +172,25 @@ class _$BookingsRecord extends BookingsRecord {
     return other is BookingsRecord &&
         parkingSpaceRef == other.parkingSpaceRef &&
         bookingUser == other.bookingUser &&
-        bookingDate == other.bookingDate &&
+        totalPrice == other.totalPrice &&
+        bookingStart == other.bookingStart &&
+        bookingEnd == other.bookingEnd &&
         bookedAt == other.bookedAt &&
         ffRef == other.ffRef;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(
-        $jc(
-            $jc($jc($jc(0, parkingSpaceRef.hashCode), bookingUser.hashCode),
-                bookingDate.hashCode),
-            bookedAt.hashCode),
-        ffRef.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, parkingSpaceRef.hashCode);
+    _$hash = $jc(_$hash, bookingUser.hashCode);
+    _$hash = $jc(_$hash, totalPrice.hashCode);
+    _$hash = $jc(_$hash, bookingStart.hashCode);
+    _$hash = $jc(_$hash, bookingEnd.hashCode);
+    _$hash = $jc(_$hash, bookedAt.hashCode);
+    _$hash = $jc(_$hash, ffRef.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -164,7 +198,9 @@ class _$BookingsRecord extends BookingsRecord {
     return (newBuiltValueToStringHelper(r'BookingsRecord')
           ..add('parkingSpaceRef', parkingSpaceRef)
           ..add('bookingUser', bookingUser)
-          ..add('bookingDate', bookingDate)
+          ..add('totalPrice', totalPrice)
+          ..add('bookingStart', bookingStart)
+          ..add('bookingEnd', bookingEnd)
           ..add('bookedAt', bookedAt)
           ..add('ffRef', ffRef))
         .toString();
@@ -185,9 +221,18 @@ class BookingsRecordBuilder
   set bookingUser(DocumentReference<Object?>? bookingUser) =>
       _$this._bookingUser = bookingUser;
 
-  DateTime? _bookingDate;
-  DateTime? get bookingDate => _$this._bookingDate;
-  set bookingDate(DateTime? bookingDate) => _$this._bookingDate = bookingDate;
+  double? _totalPrice;
+  double? get totalPrice => _$this._totalPrice;
+  set totalPrice(double? totalPrice) => _$this._totalPrice = totalPrice;
+
+  DateTime? _bookingStart;
+  DateTime? get bookingStart => _$this._bookingStart;
+  set bookingStart(DateTime? bookingStart) =>
+      _$this._bookingStart = bookingStart;
+
+  DateTime? _bookingEnd;
+  DateTime? get bookingEnd => _$this._bookingEnd;
+  set bookingEnd(DateTime? bookingEnd) => _$this._bookingEnd = bookingEnd;
 
   DateTime? _bookedAt;
   DateTime? get bookedAt => _$this._bookedAt;
@@ -206,7 +251,9 @@ class BookingsRecordBuilder
     if ($v != null) {
       _parkingSpaceRef = $v.parkingSpaceRef;
       _bookingUser = $v.bookingUser;
-      _bookingDate = $v.bookingDate;
+      _totalPrice = $v.totalPrice;
+      _bookingStart = $v.bookingStart;
+      _bookingEnd = $v.bookingEnd;
       _bookedAt = $v.bookedAt;
       _ffRef = $v.ffRef;
       _$v = null;
@@ -233,7 +280,9 @@ class BookingsRecordBuilder
         new _$BookingsRecord._(
             parkingSpaceRef: parkingSpaceRef,
             bookingUser: bookingUser,
-            bookingDate: bookingDate,
+            totalPrice: totalPrice,
+            bookingStart: bookingStart,
+            bookingEnd: bookingEnd,
             bookedAt: bookedAt,
             ffRef: ffRef);
     replace(_$result);
@@ -241,4 +290,4 @@ class BookingsRecordBuilder
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,no_leading_underscores_for_local_identifiers,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new,unnecessary_lambdas
+// ignore_for_file: deprecated_member_use_from_same_package,type=lint

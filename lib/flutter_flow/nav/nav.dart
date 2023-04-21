@@ -1,20 +1,16 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:page_transition/page_transition.dart';
 import '../flutter_flow_theme.dart';
 import '../../backend/backend.dart';
-
 import '../../auth/firebase_user_provider.dart';
-
 import '../../index.dart';
 import '../../main.dart';
 import '../lat_lng.dart';
 import '../place.dart';
 import 'serialization_util.dart';
-
 export 'package:go_router/go_router.dart';
 export 'serialization_util.dart';
 
@@ -27,10 +23,7 @@ class AppStateNotifier extends ChangeNotifier {
   String? _redirectLocation;
 
   /// Determines whether the app will refresh and build again when a sign
-  /// in or sign out happens. This is useful when the app is launched or
-  /// on an unexpected logout. However, this must be turned off when we
-  /// intend to sign in/out and then navigate or perform any actions after.
-  /// Otherwise, this will trigger a refresh and interrupt the action(s).
+  /// in or sign out happens.
   bool notifyOnAuthChange = true;
 
   bool get loading => user == null || showSplashImage;
@@ -141,6 +134,22 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               path: 'myBookings',
               builder: (context, params) => MyBookingsWidget(),
             ),
+            FFRoute(
+              name: 'mySpaces',
+              path: 'mySpaces',
+              builder: (context, params) => MySpacesWidget(
+                spaceRef: params.getParam('spaceRef',
+                    ParamType.DocumentReference, false, ['parking_spaces']),
+              ),
+            ),
+            FFRoute(
+              name: 'EditSpace',
+              path: 'editSpace',
+              builder: (context, params) => EditSpaceWidget(
+                spaceRef: params.getParam('spaceRef',
+                    ParamType.DocumentReference, false, ['parking_spaces']),
+              ),
+            )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
       ].map((r) => r.toRoute(appStateNotifier)).toList(),

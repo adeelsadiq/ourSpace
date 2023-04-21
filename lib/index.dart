@@ -7,3 +7,5 @@ export '/pages/profile_page/profile_page_widget.dart' show ProfilePageWidget;
 export '/home_page/home_page_widget.dart' show HomePageWidget;
 export '/forgot_pass/forgot_pass_widget.dart' show ForgotPassWidget;
 export '/my_bookings/my_bookings_widget.dart' show MyBookingsWidget;
+export 'my_spaces/my_spaces_widget.dart' show MySpacesWidget;
+export 'edit_space/edit_space_widget.dart' show EditSpaceWidget;

@@ -38,8 +38,6 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -104,6 +102,10 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                           ),
                           if (Theme.of(context).brightness == Brightness.dark)
                             InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
                               onTap: () async {
                                 setDarkModeSetting(context, ThemeMode.light);
                               },
@@ -126,6 +128,10 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                           if (!(Theme.of(context).brightness ==
                               Brightness.dark))
                             InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
                               onTap: () async {
                                 setDarkModeSetting(context, ThemeMode.dark);
                               },
@@ -210,6 +216,10 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                         shape: BoxShape.rectangle,
                       ),
                       child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
                         onTap: () async {
                           context.pushNamed('myBookings');
                         },
@@ -254,6 +264,10 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                           shape: BoxShape.rectangle,
                         ),
                         child: InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
                           onTap: () async {
                             context.pushNamed('EditProfile');
                           },
@@ -286,6 +300,51 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                     ],
                   ),
                 ),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width * 1.0,
+                      height: 50.0,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                        shape: BoxShape.rectangle,
+                      ),
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          context.pushNamed('mySpaces');
+                        },
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  24.0, 0.0, 0.0, 0.0),
+                              child: Text(
+                                'Your Parking Spaces',
+                                style: FlutterFlowTheme.of(context).bodyMedium,
+                              ),
+                            ),
+                            Expanded(
+                              child: Align(
+                                alignment: AlignmentDirectional(0.9, 0.0),
+                                child: Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: Color(0xFF95A1AC),
+                                  size: 18.0,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 1.0, 0.0, 0.0),
                   child: Row(
@@ -300,6 +359,10 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                           shape: BoxShape.rectangle,
                         ),
                         child: InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
                           onTap: () async {
                             context.pushNamed('forgotPass');
                           },

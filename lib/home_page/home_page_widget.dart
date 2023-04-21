@@ -351,7 +351,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           color: FlutterFlowTheme.of(context).accent3,
                           size: 15,
                         ),
-                        fillColor: Color(0xC195426E),
+                        fillColor: Color.fromARGB(193, 184, 124, 154),
                         elevation: 2,
                         borderColor: Colors.black,
                         borderWidth: 0,
@@ -701,149 +701,195 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                               ),
                                             ),
                                             KeepAliveWidgetWrapper(
-                                              builder: (context) => Stack(
-                                                children: [
-                                                  SingleChildScrollView(
-                                                    child: Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      children: [
-                                                        Builder(
-                                                          builder: (context) {
-                                                            final spaceDetails =
-                                                                tabBarParkingSpacesRecordList
-                                                                    .toList();
-                                                            return ListView
-                                                                .builder(
-                                                              padding:
-                                                                  EdgeInsets
-                                                                      .zero,
-                                                              shrinkWrap: true,
-                                                              scrollDirection:
-                                                                  Axis.vertical,
-                                                              itemCount:
-                                                                  spaceDetails
-                                                                      .length,
-                                                              itemBuilder: (context,
-                                                                  spaceDetailsIndex) {
-                                                                final spaceDetailsItem =
-                                                                    spaceDetails[
-                                                                        spaceDetailsIndex];
-                                                                return Column(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .stretch,
-                                                                  children: [
-                                                                    Container(
-                                                                      width:
-                                                                          100.0,
-                                                                      height:
-                                                                          100.0,
-                                                                      decoration:
-                                                                          BoxDecoration(
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .secondaryBackground,
-                                                                      ),
-                                                                      child:
-                                                                          InkWell(
-                                                                        onTap:
-                                                                            () async {
-                                                                          await showModalBottomSheet(
-                                                                            context:
-                                                                                context,
-                                                                            builder:
-                                                                                (context) {
-                                                                              return Padding(
-                                                                                padding: MediaQuery.of(context).viewInsets,
+                                                builder:
+                                                    (context) => // Generated code for this Stack Widget...
+                                                        Stack(
+                                                          children: [
+                                                            SingleChildScrollView(
+                                                              child: Column(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Builder(
+                                                                    builder:
+                                                                        (context) {
+                                                                      final spaceDetails =
+                                                                          tabBarParkingSpacesRecordList
+                                                                              .toList();
+                                                                      return ListView
+                                                                          .builder(
+                                                                        padding:
+                                                                            EdgeInsets.zero,
+                                                                        shrinkWrap:
+                                                                            true,
+                                                                        scrollDirection:
+                                                                            Axis.vertical,
+                                                                        itemCount:
+                                                                            spaceDetails.length,
+                                                                        itemBuilder:
+                                                                            (context,
+                                                                                spaceDetailsIndex) {
+                                                                          final spaceDetailsItem =
+                                                                              spaceDetails[spaceDetailsIndex];
+                                                                          return Column(
+                                                                            mainAxisSize:
+                                                                                MainAxisSize.max,
+                                                                            crossAxisAlignment:
+                                                                                CrossAxisAlignment.stretch,
+                                                                            children: [
+                                                                              Material(
+                                                                                color: Colors.transparent,
+                                                                                elevation: 1,
+                                                                                shape: RoundedRectangleBorder(
+                                                                                  borderRadius: BorderRadius.circular(15),
+                                                                                ),
                                                                                 child: Container(
-                                                                                  height: 350.0,
-                                                                                  child: SpaceDetailsBSheetWidget(
-                                                                                    spaceBsSheet: spaceDetailsItem,
-                                                                                    listDocs: () async {},
+                                                                                  width: 100,
+                                                                                  height: 100,
+                                                                                  decoration: BoxDecoration(
+                                                                                    color: Color.fromARGB(101, 255, 255, 255),
+                                                                                    borderRadius: BorderRadius.circular(15),
+                                                                                    shape: BoxShape.rectangle,
+                                                                                    border: Border.all(
+                                                                                      color: FlutterFlowTheme.of(context).primary,
+                                                                                      width: 1,
+                                                                                    ),
+                                                                                  ),
+                                                                                  child: InkWell(
+                                                                                    splashColor: Colors.transparent,
+                                                                                    focusColor: Colors.transparent,
+                                                                                    hoverColor: Colors.transparent,
+                                                                                    highlightColor: Colors.transparent,
+                                                                                    onTap: () async {
+                                                                                      await showModalBottomSheet(
+                                                                                        isScrollControlled: true,
+                                                                                        backgroundColor: Colors.transparent,
+                                                                                        barrierColor: Colors.transparent,
+                                                                                        enableDrag: false,
+                                                                                        context: context,
+                                                                                        builder: (bottomSheetContext) {
+                                                                                          return GestureDetector(
+                                                                                            onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+                                                                                            child: Padding(
+                                                                                              padding: MediaQuery.of(bottomSheetContext).viewInsets,
+                                                                                              child: Container(
+                                                                                                height: 350,
+                                                                                                child: SpaceDetailsBSheetWidget(
+                                                                                                  spaceBsSheet: spaceDetailsItem,
+                                                                                                  listDocs: () async {},
+                                                                                                ),
+                                                                                              ),
+                                                                                            ),
+                                                                                          );
+                                                                                        },
+                                                                                      ).then((value) => setState(() {}));
+                                                                                    },
+                                                                                    child: Row(
+                                                                                      mainAxisSize: MainAxisSize.max,
+                                                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                                                      children: [
+                                                                                        Padding(
+                                                                                          padding: EdgeInsetsDirectional.fromSTEB(15, 0, 0, 0),
+                                                                                          child: Container(
+                                                                                            width: 60,
+                                                                                            height: 60,
+                                                                                            clipBehavior: Clip.antiAlias,
+                                                                                            decoration: BoxDecoration(
+                                                                                              shape: BoxShape.circle,
+                                                                                            ),
+                                                                                            child: Image.network(
+                                                                                              spaceDetailsItem.imgUrl!,
+                                                                                              fit: BoxFit.cover,
+                                                                                            ),
+                                                                                          ),
+                                                                                        ),
+                                                                                        Expanded(
+                                                                                          child: Padding(
+                                                                                            padding: EdgeInsetsDirectional.fromSTEB(15, 0, 0, 0),
+                                                                                            child: Column(
+                                                                                              mainAxisSize: MainAxisSize.max,
+                                                                                              mainAxisAlignment: MainAxisAlignment.center,
+                                                                                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                                                                                              children: [
+                                                                                                Row(
+                                                                                                  mainAxisSize: MainAxisSize.max,
+                                                                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                  children: [
+                                                                                                    Text(
+                                                                                                      spaceDetailsItem.name!.maybeHandleOverflow(
+                                                                                                        maxChars: 35,
+                                                                                                        replacement: '…',
+                                                                                                      ),
+                                                                                                      style: FlutterFlowTheme.of(context).bodyMedium,
+                                                                                                    ),
+                                                                                                  ],
+                                                                                                ),
+                                                                                                Row(
+                                                                                                  mainAxisSize: MainAxisSize.max,
+                                                                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                  children: [
+                                                                                                    Text(
+                                                                                                      spaceDetailsItem.addressLine1!.maybeHandleOverflow(
+                                                                                                        maxChars: 40,
+                                                                                                        replacement: '…',
+                                                                                                      ),
+                                                                                                      style: FlutterFlowTheme.of(context).bodyMedium,
+                                                                                                    ),
+                                                                                                  ],
+                                                                                                ),
+                                                                                                Row(
+                                                                                                  mainAxisSize: MainAxisSize.max,
+                                                                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                  children: [
+                                                                                                    Text(
+                                                                                                      spaceDetailsItem.area!,
+                                                                                                      style: FlutterFlowTheme.of(context).bodyMedium,
+                                                                                                    ),
+                                                                                                  ],
+                                                                                                ),
+                                                                                                Row(
+                                                                                                  mainAxisSize: MainAxisSize.max,
+                                                                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                  children: [
+                                                                                                    Text(
+                                                                                                      'Daily Rate',
+                                                                                                      style: FlutterFlowTheme.of(context).bodyMedium,
+                                                                                                    ),
+                                                                                                    Padding(
+                                                                                                      padding: EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
+                                                                                                      child: Text(
+                                                                                                        formatNumber(
+                                                                                                          spaceDetailsItem.dailyRate!,
+                                                                                                          formatType: FormatType.decimal,
+                                                                                                          decimalType: DecimalType.automatic,
+                                                                                                          currency: '€',
+                                                                                                        ),
+                                                                                                        style: FlutterFlowTheme.of(context).bodyMedium,
+                                                                                                      ),
+                                                                                                    ),
+                                                                                                  ],
+                                                                                                ),
+                                                                                              ],
+                                                                                            ),
+                                                                                          ),
+                                                                                        ),
+                                                                                      ],
+                                                                                    ),
                                                                                   ),
                                                                                 ),
-                                                                              );
-                                                                            },
-                                                                          ).then((value) =>
-                                                                              setState(() {}));
+                                                                              ),
+                                                                            ],
+                                                                          );
                                                                         },
-                                                                        child:
-                                                                            Row(
-                                                                          mainAxisSize:
-                                                                              MainAxisSize.max,
-                                                                          children: [
-                                                                            Container(
-                                                                              width: 90.0,
-                                                                              height: 90.0,
-                                                                              clipBehavior: Clip.antiAlias,
-                                                                              decoration: BoxDecoration(
-                                                                                shape: BoxShape.circle,
-                                                                              ),
-                                                                              child: Image.network(
-                                                                                'https://picsum.photos/seed/251/600',
-                                                                                fit: BoxFit.cover,
-                                                                              ),
-                                                                            ),
-                                                                            Padding(
-                                                                              padding: EdgeInsetsDirectional.fromSTEB(15.0, 0.0, 0.0, 0.0),
-                                                                              child: Column(
-                                                                                mainAxisSize: MainAxisSize.max,
-                                                                                children: [
-                                                                                  Text(
-                                                                                    spaceDetailsItem.name!,
-                                                                                    style: FlutterFlowTheme.of(context).bodyMedium,
-                                                                                  ),
-                                                                                  Text(
-                                                                                    spaceDetailsItem.addressLine1!,
-                                                                                    style: FlutterFlowTheme.of(context).bodyMedium,
-                                                                                  ),
-                                                                                  Text(
-                                                                                    spaceDetailsItem.area!,
-                                                                                    style: FlutterFlowTheme.of(context).bodyMedium,
-                                                                                  ),
-                                                                                  Row(
-                                                                                    mainAxisSize: MainAxisSize.max,
-                                                                                    children: [
-                                                                                      Text(
-                                                                                        'Daily Rate',
-                                                                                        style: FlutterFlowTheme.of(context).bodyMedium,
-                                                                                      ),
-                                                                                      Padding(
-                                                                                        padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
-                                                                                        child: Text(
-                                                                                          formatNumber(
-                                                                                            spaceDetailsItem.dailyRate!,
-                                                                                            formatType: FormatType.decimal,
-                                                                                            decimalType: DecimalType.automatic,
-                                                                                            currency: '€',
-                                                                                          ),
-                                                                                          style: FlutterFlowTheme.of(context).bodyMedium,
-                                                                                        ),
-                                                                                      ),
-                                                                                    ],
-                                                                                  ),
-                                                                                ],
-                                                                              ),
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                );
-                                                              },
-                                                            );
-                                                          },
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
+                                                                      );
+                                                                    },
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        )),
                                           ],
                                         ),
                                       ),

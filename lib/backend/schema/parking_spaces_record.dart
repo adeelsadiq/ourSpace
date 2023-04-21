@@ -1,7 +1,5 @@
 import 'dart:async';
 
-import 'package:from_css_color/from_css_color.dart';
-
 import 'index.dart';
 import 'serializers.dart';
 import 'package:built_value/built_value.dart';
@@ -29,6 +27,11 @@ abstract class ParkingSpacesRecord
 
   String? get area;
 
+  DateTime? get dateAdded;
+
+  @BuiltValueField(wireName: 'img_url')
+  String? get imgUrl;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -38,7 +41,8 @@ abstract class ParkingSpacesRecord
     ..dailyRate = 0.0
     ..description = ''
     ..addressLine1 = ''
-    ..area = '';
+    ..area = ''
+    ..imgUrl = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('parking_spaces');
@@ -50,37 +54,6 @@ abstract class ParkingSpacesRecord
   static Future<ParkingSpacesRecord> getDocumentOnce(DocumentReference ref) =>
       ref.get().then(
           (s) => serializers.deserializeWith(serializer, serializedData(s))!);
-
-  static ParkingSpacesRecord fromAlgolia(AlgoliaObjectSnapshot snapshot) =>
-      ParkingSpacesRecord(
-        (c) => c
-          ..name = snapshot.data['name']
-          ..location = safeGet(() => LatLng(
-                snapshot.data['_geoloc']['lat'],
-                snapshot.data['_geoloc']['lng'],
-              ))
-          ..dailyRate = snapshot.data['daily_rate']?.toDouble()
-          ..ownerId = safeGet(() => toRef(snapshot.data['owner_id']))
-          ..description = snapshot.data['description']
-          ..addressLine1 = snapshot.data['addressLine1']
-          ..area = snapshot.data['area']
-          ..ffRef = ParkingSpacesRecord.collection.doc(snapshot.objectID),
-      );
-
-  static Future<List<ParkingSpacesRecord>> search(
-          {String? term,
-          FutureOr<LatLng>? location,
-          int? maxResults,
-          double? searchRadiusMeters}) =>
-      FFAlgoliaManager.instance
-          .algoliaQuery(
-            index: 'parking_spaces',
-            term: term,
-            maxResults: maxResults,
-            location: location,
-            searchRadiusMeters: searchRadiusMeters,
-          )
-          .then((r) => r.map(fromAlgolia).toList());
 
   ParkingSpacesRecord._();
   factory ParkingSpacesRecord(
@@ -101,6 +74,8 @@ Map<String, dynamic> createParkingSpacesRecordData({
   String? description,
   String? addressLine1,
   String? area,
+  DateTime? dateAdded,
+  String? imgUrl,
 }) {
   final firestoreData = serializers.toFirestore(
     ParkingSpacesRecord.serializer,
@@ -112,7 +87,9 @@ Map<String, dynamic> createParkingSpacesRecordData({
         ..ownerId = ownerId
         ..description = description
         ..addressLine1 = addressLine1
-        ..area = area,
+        ..area = area
+        ..dateAdded = dateAdded
+        ..imgUrl = imgUrl,
     ),
   );
 

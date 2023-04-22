@@ -96,7 +96,9 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                 shape: BoxShape.circle,
                               ),
                               child: Image.network(
-                                currentUserPhoto,
+                                currentUserPhoto.isNotEmpty
+                                    ? currentUserPhoto
+                                    : "https://picsum.photos/200/300?random=1",
                               ),
                             ),
                           ),

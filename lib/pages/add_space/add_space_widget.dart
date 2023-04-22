@@ -84,7 +84,7 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
             size: 30,
           ),
           onPressed: () async {
-            context.pop();
+            context.pushNamed('homePage');
           },
         ),
         title: Text(

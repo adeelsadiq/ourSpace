@@ -473,42 +473,75 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
                               children: [
                                 FFButtonWidget(
                                   onPressed: () async {
-                                    final parkingSpacesCreateData = {
-                                      ...createParkingSpacesRecordData(
-                                        name: _model.titleController.text,
-                                        location:
-                                            _model.exactLocationValue.latLng,
-                                        description:
-                                            _model.descriptionController.text,
-                                        addressLine1:
-                                            _model.addressController.text,
-                                        area: _model.areaValue,
-                                        ownerId: currentUserReference,
-                                        dailyRate: double.tryParse(
-                                            _model.dailyRateController.text),
-                                      ),
-                                      'dateAdded': FieldValue.serverTimestamp(),
-                                    };
-                                    await ParkingSpacesRecord.collection
-                                        .doc()
-                                        .set(parkingSpacesCreateData);
-                                    await showDialog(
-                                      context: context,
-                                      builder: (alertDialogContext) {
-                                        return AlertDialog(
-                                          title: Text('Space Added'),
+                                    if (((_model
+                                            .titleController.text.isEmpty) ||
+                                        (_model.descriptionController.text
+                                            .isEmpty) ||
+                                        (_model
+                                            .addressController.text.isEmpty) ||
+                                        (_model.dailyRateController.text
+                                            .isEmpty))) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
                                           content: Text(
-                                              'The space was added succesfully, click ok to finish!'),
-                                          actions: [
-                                            TextButton(
-                                              onPressed: () => Navigator.pop(
-                                                  alertDialogContext),
-                                              child: Text('Ok'),
+                                            'Please fill all fields',
+                                            style: TextStyle(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
                                             ),
-                                          ],
-                                        );
-                                      },
-                                    );
+                                          ),
+                                          duration:
+                                              Duration(milliseconds: 4000),
+                                          backgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondary,
+                                        ),
+                                      );
+                                      return;
+                                    } else {
+                                      final parkingSpacesCreateData = {
+                                        ...createParkingSpacesRecordData(
+                                          name: _model.titleController.text,
+                                          location:
+                                              _model.exactLocationValue.latLng,
+                                          description:
+                                              _model.descriptionController.text,
+                                          addressLine1:
+                                              _model.addressController.text,
+                                          area: _model.areaValue,
+                                          ownerId: currentUserReference,
+                                          dailyRate: double.tryParse(
+                                              _model.dailyRateController.text),
+                                          imgUrl:
+                                              'https://picsum.photos/200/300?random=1',
+                                        ),
+                                        'dateAdded':
+                                            FieldValue.serverTimestamp(),
+                                      };
+                                      await ParkingSpacesRecord.collection
+                                          .doc()
+                                          .set(parkingSpacesCreateData);
+                                      await showDialog(
+                                        context: context,
+                                        builder: (alertDialogContext) {
+                                          return AlertDialog(
+                                            title: Text('Space Added'),
+                                            content: Text(
+                                                'The space was added succesfully, click ok to finish!'),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext),
+                                                child: Text('Ok'),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    }
+
                                     context.pushNamed(
                                       'profilePage',
                                       extra: <String, dynamic>{
@@ -523,12 +556,12 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
                                   },
                                   text: 'Add Space',
                                   options: FFButtonOptions(
-                                    width: 130.0,
-                                    height: 40.0,
+                                    width: 130,
+                                    height: 40,
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
+                                        0, 0, 0, 0),
                                     iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
+                                        0, 0, 0, 0),
                                     color: FlutterFlowTheme.of(context).primary,
                                     textStyle: FlutterFlowTheme.of(context)
                                         .titleSmall
@@ -536,14 +569,14 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
                                           fontFamily: 'Poppins',
                                           color: Colors.white,
                                         ),
-                                    elevation: 2.0,
+                                    elevation: 2,
                                     borderSide: BorderSide(
                                       color: Colors.transparent,
-                                      width: 1.0,
+                                      width: 1,
                                     ),
-                                    borderRadius: BorderRadius.circular(8.0),
+                                    borderRadius: BorderRadius.circular(8),
                                   ),
-                                ),
+                                )
                               ],
                             ),
                           ),

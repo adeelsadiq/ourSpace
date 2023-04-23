@@ -24,7 +24,7 @@ import 'add_space_model.dart';
 export 'add_space_model.dart';
 import 'package:go_router/go_router.dart';
 import 'package:our_space_app/backend/stripeLogicHandling.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class AddSpaceWidget extends StatefulWidget {
   const AddSpaceWidget({Key? key}) : super(key: key);
@@ -33,81 +33,14 @@ class AddSpaceWidget extends StatefulWidget {
   _AddSpaceWidgetState createState() => _AddSpaceWidgetState();
 }
 
-class MyInAppWebView extends StatefulWidget {
-  final Uri url;
-  final BuildContext parentContext;
-  final VoidCallback onWebViewFinished;
-
-  const MyInAppWebView({
-    Key? key,
-    required this.url,
-    required this.parentContext,
-    required this.onWebViewFinished,
-  }) : super(key: key);
-
-  @override
-  _MyInAppWebViewState createState() => _MyInAppWebViewState();
-}
-
-class _MyInAppWebViewState extends State<MyInAppWebView> {
-  InAppWebViewController? _webViewController;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Stripe Onboarding'),
-        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-      ),
-      body: InAppWebView(
-        initialUrlRequest: URLRequest(url: widget.url),
-        onWebViewCreated: (InAppWebViewController controller) {
-          _webViewController = controller;
-        },
-        onLoadStart: (controller, url) {
-          if (url.toString().startsWith("ourspaceapp://")) {
-            handleIncomingLink(url.toString(), context);
-            widget.onWebViewFinished();
-            Navigator.pop(widget.parentContext);
-          }
-        },
-      ),
-    );
-  }
-}
-
 class _AddSpaceWidgetState extends State<AddSpaceWidget> {
   late AddSpaceModel _model;
-  bool _showStripeOnboarding = true;
   Uri? _onboardingUri;
-  Uri? link;
   bool _isLoading = false;
-  void _onWebViewFinished() {
-    setState(() {
-      _showStripeOnboarding = false;
-    });
-  }
-
+  bool _showStripeOnboarding = false;
+  FocusNode _webViewFocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _unfocusNode = FocusNode();
-
-  void _launchURL() async {
-    final Uri link = _onboardingUri!;
-    if (_onboardingUri != null && await canLaunchUrl(link)) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => MyInAppWebView(
-            url: _onboardingUri!, // Add the null-check operator here
-            parentContext: context,
-            onWebViewFinished: _onWebViewFinished,
-          ),
-        ),
-      );
-    } else {
-      throw 'Could not launch ${_onboardingUri.toString()}';
-    }
-  }
 
   @override
   void initState() {
@@ -652,8 +585,7 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
                     ),
                   ],
                 ),
-                if (currentUserDocument?.stripeID == '' &&
-                    _showStripeOnboarding)
+                if (currentUserDocument?.stripeID == '')
                   AuthUserStreamWidget(
                     builder: (context) => Container(
                       width: double.infinity,
@@ -677,55 +609,121 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Column(
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 150, 0, 25),
-                                        child: Text(
-                                          'Please provide your Stripe account \ndetails before adding a space. It is \nessential to have a connected Stripe \naccount to ensure you receive payments. ',
-                                          style: FlutterFlowTheme.of(context)
-                                              .titleSmall,
-                                        ),
-                                      ),
-                                      ElevatedButton(
-                                        onPressed: () async {
-                                          final Uri? onboardingUri =
-                                              await createStripeAccount();
-                                          if (onboardingUri != null) {
-                                            setState(() {
-                                              _onboardingUri = onboardingUri;
-                                              _isLoading = false;
-                                            });
-                                            _launchURL();
-                                          } else {
-                                            setState(() {
-                                              _isLoading = false;
-                                            });
-                                          }
-                                        },
-                                        child: Text('Set up Stripe'),
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: FlutterFlowTheme.of(
-                                                  context)
-                                              .primary, // Set the button color
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                                30.0), // Set the rounded edges
-                                          ),
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 20,
-                                              vertical: 12), // Set the padding
-                                          textStyle: TextStyle(
-                                              fontSize:
-                                                  16), // Set the text style
-                                        ),
-                                      )
-                                    ],
-                                  )
+                                  !_showStripeOnboarding
+                                      ? Column(
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0, 150, 0, 25),
+                                              child: Text(
+                                                'Please provide your Stripe account \ndetails before adding a space. It is \nessential to have a connected Stripe \naccount to ensure you receive payments. ',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleSmall,
+                                              ),
+                                            ),
+                                            ElevatedButton(
+                                              onPressed: () async {
+                                                setState(() {
+                                                  _isLoading =
+                                                      true; // Show spinner
+                                                });
+                                                final Uri? onboardingUri =
+                                                    await createStripeAccount();
+                                                if (onboardingUri != null) {
+                                                  setState(() {
+                                                    _onboardingUri =
+                                                        onboardingUri;
+                                                    _showStripeOnboarding =
+                                                        true;
+                                                    _isLoading = false;
+                                                  });
+                                                } else {
+                                                  setState(() {
+                                                    _isLoading = //hide teh spinner
+                                                        false;
+                                                  });
+                                                }
+                                              },
+                                              child: Text('Set up Stripe'),
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor: FlutterFlowTheme
+                                                        .of(context)
+                                                    .primary, // Set the button color
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          30.0), // Set the rounded edges
+                                                ),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 20,
+                                                    vertical:
+                                                        12), // Set the padding
+                                                textStyle: TextStyle(
+                                                    fontSize:
+                                                        16), // Set the text style
+                                              ),
+                                            )
+                                          ],
+                                        )
+                                      : Container(),
+                                  //   if (_isLoading)
+                                  // //look at this later, needs testing with the spinner placement
+
+                                  // Container(
+                                  //   color: Colors.black.withOpacity(
+                                  //       0.5), // Set the black background with opacity
+                                  //   width: 500,
+                                  //   height: 800,
+                                  //   child: Column(
+                                  //     mainAxisAlignment:
+                                  //         MainAxisAlignment.center,
+                                  //     children: [
+                                  //       CircularProgressIndicator(),
+                                  //     ],
+                                  //   ),
+                                  // ),
                                 ],
                               ),
                             ),
+                            _showStripeOnboarding
+                                ? Padding(
+                                    // test case: doing this for getting keyboard height dynamically so the field scrolls up automatically
+                                    padding: EdgeInsets.only(
+                                        bottom: MediaQuery.of(context)
+                                            .viewInsets
+                                            .bottom),
+                                    child: SingleChildScrollView(
+                                      child: Container(
+                                        height: 1500,
+                                        width: double.infinity,
+                                        child: FocusScope(
+                                          node: FocusScopeNode(),
+                                          child: WebView(
+                                            initialUrl:
+                                                _onboardingUri.toString(),
+                                            javascriptMode:
+                                                JavascriptMode.unrestricted,
+                                            navigationDelegate:
+                                                (NavigationRequest request) {
+                                              print(
+                                                  "Navigating to: ${request.url}");
+                                              if (request.url.startsWith(
+                                                  "ourspaceapp://")) {
+                                                handleIncomingLink(
+                                                    request.url, context);
+                                                return NavigationDecision
+                                                    .prevent;
+                                              }
+                                              return NavigationDecision
+                                                  .navigate;
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                : Container(),
                           ],
                         ),
                       ),

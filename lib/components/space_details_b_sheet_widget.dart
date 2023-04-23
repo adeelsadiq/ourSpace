@@ -30,9 +30,11 @@ class SpaceDetailsBSheetWidget extends StatefulWidget {
 
 final today = DateTime.now();
 final fiftyDaysFromNow = today.add(const Duration(days: 50));
+String SpaceOwnerStripeID = '';
 
 class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
   late SpaceDetailsBSheetModel _model;
+  String? spaceOwnerStripeID;
 
   DateTime? endTime, startTime;
 
@@ -44,20 +46,78 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
 
   Map<String, dynamic>? paymentIntent;
 
-  void getBookedDate() async {
+  Future<void> getOwner() async {
+    final spaceDoc = await FirebaseFirestore.instance
+        .collection('parking_spaces')
+        .doc(widget.spaceBsSheet!.ffRef?.id.toString())
+        .get();
+    print("line 54");
+    print(widget.spaceBsSheet!.ffRef?.id.toString());
+    final ownerIdRef = spaceDoc.data()?['owner_id'];
+    final ownerId =
+        ownerIdRef.id; // Get the ID as a string from the DocumentReference
+
+    final ownerDoc =
+        await FirebaseFirestore.instance.collection('users').doc(ownerId).get();
+    final ownerStripeId = ownerDoc.data()?['stripeID'];
+    SpaceOwnerStripeID = ownerStripeId;
+    //got the owner's stripe ID > now I can use this in payment intent to tie the payment to the stripe account.
+
+    if (ownerStripeId == null) {
+      throw Exception("Space owner's stripe_id is not available.");
+    }
+
+    return;
+  }
+
+  Future<Map<String, dynamic>?> createPaymentIntent(
+      String amount, String currency, String spaceOwnerStripeID) async {
+    try {
+      Map<String, dynamic> body = {
+        'amount': amount,
+        'currency': currency,
+        'transfer_data[destination]': spaceOwnerStripeID,
+      };
+
+      final response = await http.post(
+        Uri.parse('https://api.stripe.com/v1/payment_intents'),
+        headers: {
+          'Authorization':
+              'Bearer sk_test_51Ms8klHP4fXKJAPbjz0Y6p6qTkko7mGxJjImrUpOe3pY6NTS5ABeR1KXXNT66MwEAYRcGLSms70D5jTcLsgjIcqz00EN6sauD5',
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: body,
+      );
+
+      if (response.statusCode == 200) {
+        final responseBody = jsonDecode(response.body);
+        print('Response from the backend: $responseBody');
+        return responseBody;
+      } else {
+        print('Request failed with status: ${response.statusCode}.');
+        print('Error response: ${response.body}');
+        return null;
+      }
+    } catch (err) {
+      throw Exception(err.toString());
+    }
+  }
+
+  void getAlreadyBookedDays() async {
     QuerySnapshot<Map<String, dynamic>> querySnapshot = await FirebaseFirestore
         .instance
         .collection("bookings")
         .where("parking_space_ref", isEqualTo: widget.spaceBsSheet!.ffRef)
         .get();
 
-    print(querySnapshot.docs.length);
+    //if snapshot has any data
     if (querySnapshot.size > 0) {
       _blockedRanges = querySnapshot.docs
-          .map((e) => DateTimeRange(
-              start: e.get("bookingStart").toDate(),
-              end: e.get("bookingEnd").toDate()))
+          .map((eachBooking) => DateTimeRange(
+              start: eachBooking.get("bookingStart").toDate(),
+              end: eachBooking.get("bookingEnd").toDate()))
           .toList();
+      //this gives us list type of DateTimeRange, of ranges of already booked days for the space
 
       setState(() {});
     }
@@ -68,17 +128,22 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
     try {
       int value = double.parse(amount).round().toInt();
       String totalPrice = (value * 100).toString();
-      paymentIntent = await createPaymentIntent(totalPrice, 'EUR');
+      String ownerID = spaceOwnerStripeID ?? 'acct_1MznaxQeWD3I90Ag';
+      print('line 155 value');
+      print(value);
+      paymentIntent = await createPaymentIntent(totalPrice, 'EUR', ownerID);
       print(paymentIntent);
+      // print(paymentIntent);
 
       var gpay = PaymentSheetGooglePay(
           merchantCountryCode: "IE", currencyCode: "EUR", testEnv: true);
-
-      //STEP 2: Initialize Payment Sheet
+      print('line 157');
+      print(paymentIntent?['client_secret']);
+      //STEP 2: Initialize Payment Sheet - destination charges here: https://stripe.com/docs/connect/destination-charges
       await Stripe.instance
           .initPaymentSheet(
               paymentSheetParameters: SetupPaymentSheetParameters(
-                  paymentIntentClientSecret: paymentIntent![
+                  paymentIntentClientSecret: paymentIntent?[
                       'client_secret'], //Gotten from payment intent
                   style: ThemeMode.dark,
                   merchantDisplayName: 'OurSpace Parking inc',
@@ -96,6 +161,7 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
       String totalPrice, DateTime dateStart, DateTime? dateEnd) async {
     try {
       await Stripe.instance.presentPaymentSheet().then((value) {
+        // print();
         addBookingToFirebase(totalPrice, dateStart, dateEnd);
       });
     } catch (e) {
@@ -103,32 +169,11 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
     }
   }
 
-  createPaymentIntent(String amount, String currency) async {
-    try {
-      Map<String, dynamic> body = {
-        'amount': amount,
-        'currency': currency,
-      };
-
-      var response = await http.post(
-        Uri.parse('https://api.stripe.com/v1/payment_intents'),
-        headers: {
-          'Authorization':
-              'Bearer sk_test_51Ms8klHP4fXKJAPbjz0Y6p6qTkko7mGxJjImrUpOe3pY6NTS5ABeR1KXXNT66MwEAYRcGLSms70D5jTcLsgjIcqz00EN6sauD5',
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: body,
-      );
-      return json.decode(response.body);
-    } catch (err) {
-      throw Exception(err.toString());
-    }
-  }
-
   @override
   void initState() {
     super.initState();
-    getBookedDate();
+    getAlreadyBookedDays();
+    getOwner();
     _model = createModel(context, () => SpaceDetailsBSheetModel());
   }
 
@@ -317,12 +362,13 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
                                 0.0, 0.0, 0.0, 0.0),
                             iconPadding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context).secondaryColor,
-                            textStyle:
-                                FlutterFlowTheme.of(context).subtitle2.override(
-                                      fontFamily: 'Poppins',
-                                      color: Colors.white,
-                                    ),
+                            color: FlutterFlowTheme.of(context).secondary,
+                            textStyle: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .override(
+                                  fontFamily: 'Poppins',
+                                  color: Colors.white,
+                                ),
                             elevation: 2.0,
                             borderSide: BorderSide(
                               color: Colors.transparent,
@@ -356,7 +402,7 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
       "parking_space_ref": widget.spaceBsSheet!.ffRef,
       "totalPrice": double.parse(totalPrice),
     });
-    getBookedDate();
+    getAlreadyBookedDays();
 
     showDialog(
       context: context,
@@ -368,7 +414,7 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
               SizedBox(
                 height: 24.0,
               ),
-              Text("Your Parking space has been Successfully Booked "),
+              Text("Your Parking space has been Booked Successfully"),
               SizedBox(
                 height: 100.0,
               ),
@@ -384,7 +430,7 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
                   CupertinoButton(
                     child: Text("Ok"),
                     onPressed: () {
-                      context.pushNamed('HomePage');
+                      context.pushNamed('myBookings');
                     },
                   ),
                 ],

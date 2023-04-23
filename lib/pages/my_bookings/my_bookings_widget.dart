@@ -59,7 +59,7 @@ class _MyBookingsWidgetState extends State<MyBookingsWidget> {
               size: 30,
             ),
             onPressed: () async {
-              context.pop();
+              context.pushNamed('profilePage');
             },
           ),
           title: Text(

@@ -51,8 +51,10 @@ Future<Uri?> createStripeAccount() async {
     'name': currentUserDocument?.displayName,
   };
   print(currentUserDocument?.email);
-  String url =
-      Platform.isAndroid ? 'http://192.168.1.4:3000' : 'http://localhost:3000';
+  // String url =
+  //     Platform.isAndroid ? 'http://192.168.1.4:3000' : 'http://localhost:3000';
+  // String url = "https://express-server-tau.vercel.app";
+  String url = "http://192.168.1.4:3000";
   final response = await http.post(
     Uri.parse('$url/create-stripe-account'),
     headers: {
@@ -92,7 +94,7 @@ void handleIncomingLink(String url, context) async {
           .update({'stripeID': stripeId});
       print("Stripe ID Added to firebase");
       //look at this later! might need some more testing
-      Navigator.of(context).pop(true);
+
       // Navigator.of(context).pushNamed('addSpace');
       // Take the appropriate action after the user has completed onboarding and the Stripe ID has been saved
     } else {

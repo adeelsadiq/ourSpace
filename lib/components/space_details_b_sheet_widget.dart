@@ -45,13 +45,13 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
   }
 
   Map<String, dynamic>? paymentIntent;
-
+  //getting the Id of the space owner to add it to payment thus initiating payout directly to the space owner.
   Future<void> getOwner() async {
     final spaceDoc = await FirebaseFirestore.instance
         .collection('parking_spaces')
         .doc(widget.spaceBsSheet!.ffRef?.id.toString())
         .get();
-    print("line 54");
+
     print(widget.spaceBsSheet!.ffRef?.id.toString());
     final ownerIdRef = spaceDoc.data()?['owner_id'];
     final ownerId =
@@ -73,9 +73,19 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
   Future<Map<String, dynamic>?> createPaymentIntent(
       String amount, String currency, String spaceOwnerStripeID) async {
     try {
+      //get int from amount
+      int parsedAmount = int.parse(amount);
+      //get 1% of the amount
+      int calculatedFee = (0.01 * parsedAmount).toInt();
+      //check if calculatedFee is more or 150 (cents) and return the larger amount depending on the result.
+      int applicationFeeAmount = (calculatedFee > 150) ? calculatedFee : 150;
+
       Map<String, dynamic> body = {
         'amount': amount,
         'currency': currency,
+        'automatic_payment_methods': {'enabled': true},
+        // Adding a minimum fee of €1.50 or 1% of the total transaction, whichever is more
+        'application_fee_amount': applicationFeeAmount,
         'transfer_data[destination]': spaceOwnerStripeID,
       };
 
@@ -103,6 +113,7 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
     }
   }
 
+  //getting the days that have already been booked for the space so they can be blocked from the booking calendar
   void getAlreadyBookedDays() async {
     QuerySnapshot<Map<String, dynamic>> querySnapshot = await FirebaseFirestore
         .instance
@@ -110,7 +121,7 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
         .where("parking_space_ref", isEqualTo: widget.spaceBsSheet!.ffRef)
         .get();
 
-    //if snapshot has any data
+    //if snapshot has any data it creates a list of range of days that have been alredy booked
     if (querySnapshot.size > 0) {
       _blockedRanges = querySnapshot.docs
           .map((eachBooking) => DateTimeRange(

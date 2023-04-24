@@ -55,7 +55,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
             size: 30.0,
           ),
           onPressed: () async {
-            context.pop();
+            context.pushNamed('homePage');
           },
         ),
         title: Text(
@@ -116,8 +116,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                 children: [
                                   Text(
                                     'Light Mode',
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyMedium,
+                                    style: FlutterFlowTheme.of(context).bodyMedium,
                                   ),
                                   Icon(
                                     Icons.wb_sunny,
@@ -127,8 +126,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                 ],
                               ),
                             ),
-                          if (!(Theme.of(context).brightness ==
-                              Brightness.dark))
+                          if (!(Theme.of(context).brightness == Brightness.dark))
                             InkWell(
                               splashColor: Colors.transparent,
                               focusColor: Colors.transparent,
@@ -142,8 +140,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                 children: [
                                   Text(
                                     'Dark Mode',
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyMedium,
+                                    style: FlutterFlowTheme.of(context).bodyMedium,
                                   ),
                                   FaIcon(
                                     FontAwesomeIcons.moon,
@@ -159,35 +156,28 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 8.0, 0.0, 0.0),
+                            padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
                             child: AuthUserStreamWidget(
                               builder: (context) => Text(
                                 currentUserDisplayName,
-                                style:
-                                    FlutterFlowTheme.of(context).displaySmall,
+                                style: FlutterFlowTheme.of(context).displaySmall,
                               ),
                             ),
                           ),
                         ],
                       ),
                       Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 12.0),
+                        padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 12.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 8.0, 0.0, 0.0),
+                              padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
                               child: Text(
                                 currentUserEmail,
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
+                                style: FlutterFlowTheme.of(context).bodyMedium.override(
                                       fontFamily: 'Lexend Deca',
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondary,
+                                      color: FlutterFlowTheme.of(context).secondary,
                                       fontSize: 14.0,
                                       fontWeight: FontWeight.normal,
                                     ),
@@ -229,8 +219,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  24.0, 0.0, 0.0, 0.0),
+                              padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
                               child: Text(
                                 'Booking History',
                                 style: FlutterFlowTheme.of(context).bodyMedium,
@@ -261,8 +250,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                         width: MediaQuery.of(context).size.width * 1.0,
                         height: 50.0,
                         decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
+                          color: FlutterFlowTheme.of(context).secondaryBackground,
                           shape: BoxShape.rectangle,
                         ),
                         child: InkWell(
@@ -277,12 +265,10 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    24.0, 0.0, 0.0, 0.0),
+                                padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
                                 child: Text(
                                   'Edit Profile',
-                                  style:
-                                      FlutterFlowTheme.of(context).bodyMedium,
+                                  style: FlutterFlowTheme.of(context).bodyMedium,
                                 ),
                               ),
                               Expanded(
@@ -324,8 +310,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  24.0, 0.0, 0.0, 0.0),
+                              padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
                               child: Text(
                                 'Your Parking Spaces',
                                 style: FlutterFlowTheme.of(context).bodyMedium,
@@ -356,8 +341,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                         width: MediaQuery.of(context).size.width * 1.0,
                         height: 50.0,
                         decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
+                          color: FlutterFlowTheme.of(context).secondaryBackground,
                           shape: BoxShape.rectangle,
                         ),
                         child: InkWell(
@@ -372,12 +356,10 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    24.0, 0.0, 0.0, 0.0),
+                                padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
                                 child: Text(
                                   'Change Password',
-                                  style:
-                                      FlutterFlowTheme.of(context).bodyMedium,
+                                  style: FlutterFlowTheme.of(context).bodyMedium,
                                 ),
                               ),
                               Expanded(
@@ -409,8 +391,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                           await signOut();
                           GoRouter.of(context).clearRedirectLocation();
 
-                          await Future.delayed(
-                              const Duration(milliseconds: 1000));
+                          await Future.delayed(const Duration(milliseconds: 1000));
 
                           context.pushNamedAuth('LoginPage', mounted);
                         },
@@ -418,19 +399,15 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                         options: FFButtonOptions(
                           width: 90.0,
                           height: 40.0,
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          textStyle:
-                              FlutterFlowTheme.of(context).bodySmall.override(
-                                    fontFamily: 'Lexend Deca',
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    fontSize: 14.0,
-                                    fontWeight: FontWeight.normal,
-                                  ),
+                          padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                          iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                          color: FlutterFlowTheme.of(context).secondaryBackground,
+                          textStyle: FlutterFlowTheme.of(context).bodySmall.override(
+                                fontFamily: 'Lexend Deca',
+                                color: FlutterFlowTheme.of(context).primary,
+                                fontSize: 14.0,
+                                fontWeight: FontWeight.normal,
+                              ),
                           elevation: 3.0,
                           borderSide: BorderSide(
                             color: Colors.transparent,

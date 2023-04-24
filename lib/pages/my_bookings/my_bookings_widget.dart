@@ -59,7 +59,7 @@ class _MyBookingsWidgetState extends State<MyBookingsWidget> {
               size: 30,
             ),
             onPressed: () async {
-              context.pushNamed('profilePage');
+              context.pushNamed('homePage');
             },
           ),
           title: Text(
@@ -113,8 +113,7 @@ class _MyBookingsWidgetState extends State<MyBookingsWidget> {
                           ),
                         );
                       }
-                      List<BookingsRecord> listViewBookingsRecordList =
-                          snapshot.data!;
+                      List<BookingsRecord> listViewBookingsRecordList = snapshot.data!;
 
                       if (listViewBookingsRecordList.isEmpty) {
                         return Image.asset(
@@ -127,28 +126,24 @@ class _MyBookingsWidgetState extends State<MyBookingsWidget> {
                         scrollDirection: Axis.vertical,
                         itemCount: listViewBookingsRecordList.length,
                         itemBuilder: (context, listViewIndex) {
-                          final listViewBookingsRecord =
-                              listViewBookingsRecordList[listViewIndex];
+                          final listViewBookingsRecord = listViewBookingsRecordList[listViewIndex];
                           return Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
                             child: Container(
                               width: 100,
                               height: 120,
                               decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
+                                color: FlutterFlowTheme.of(context).secondaryBackground,
                                 boxShadow: [
                                   BoxShadow(
                                     blurRadius: 0,
-                                    color:
-                                        FlutterFlowTheme.of(context).lineColor,
+                                    color: FlutterFlowTheme.of(context).lineColor,
                                     offset: Offset(0, 1),
                                   )
                                 ],
                               ),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16, 0, 16, 0),
+                                padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.start,
@@ -157,16 +152,13 @@ class _MyBookingsWidgetState extends State<MyBookingsWidget> {
                                       width: 44,
                                       height: 44,
                                       decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
+                                        color: FlutterFlowTheme.of(context).primary,
                                         shape: BoxShape.circle,
                                       ),
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            2, 2, 2, 2),
+                                        padding: EdgeInsetsDirectional.fromSTEB(2, 2, 2, 2),
                                         child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(44),
+                                          borderRadius: BorderRadius.circular(44),
                                           child: Image.network(
                                             'https://picsum.photos/seed/183/600?random=4',
                                             width: 44,
@@ -178,46 +170,31 @@ class _MyBookingsWidgetState extends State<MyBookingsWidget> {
                                     ),
                                     Expanded(
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            12, 0, 0, 0),
+                                        padding: EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Row(
                                               mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
+                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                               children: [
                                                 Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(0, 0, 0, 4),
+                                                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 4),
                                                   child: Text(
                                                     'Booked on: ',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .headlineSmall
-                                                        .override(
+                                                    style: FlutterFlowTheme.of(context).headlineSmall.override(
                                                           fontFamily: 'Poppins',
                                                           fontSize: 16,
                                                         ),
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(0, 0, 0, 4),
+                                                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 4),
                                                   child: Text(
-                                                    dateTimeFormat(
-                                                        'd/M/y',
-                                                        listViewBookingsRecord
-                                                            .bookedAt!),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .headlineSmall
-                                                        .override(
+                                                    dateTimeFormat('d/M/y', listViewBookingsRecord.bookedAt!),
+                                                    style: FlutterFlowTheme.of(context).headlineSmall.override(
                                                           fontFamily: 'Poppins',
                                                           fontSize: 16,
                                                         ),
@@ -227,81 +204,49 @@ class _MyBookingsWidgetState extends State<MyBookingsWidget> {
                                             ),
                                             Row(
                                               mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
+                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                               children: [
                                                 Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(0, 0, 0, 4),
+                                                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 4),
                                                   child: Text(
                                                     'Start:',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .headlineSmall
-                                                        .override(
+                                                    style: FlutterFlowTheme.of(context).headlineSmall.override(
                                                           fontFamily: 'Poppins',
                                                           fontSize: 14,
                                                         ),
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(0, 0, 0, 4),
+                                                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 4),
                                                   child: Text(
-                                                    dateTimeFormat(
-                                                        'd/M/y',
-                                                        listViewBookingsRecord
-                                                            .bookingStart!),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .headlineSmall
-                                                        .override(
+                                                    dateTimeFormat('d/M/y', listViewBookingsRecord.bookingStart!),
+                                                    style: FlutterFlowTheme.of(context).headlineSmall.override(
                                                           fontFamily: 'Poppins',
                                                           fontSize: 14,
                                                         ),
                                                   ),
                                                 ),
                                                 Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
+                                                  mainAxisSize: MainAxisSize.max,
                                                   children: [
                                                     Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0, 0, 0, 4),
+                                                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 4),
                                                       child: Text(
                                                         ' - End:',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .headlineSmall
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Poppins',
-                                                                  fontSize: 14,
-                                                                ),
+                                                        style: FlutterFlowTheme.of(context).headlineSmall.override(
+                                                              fontFamily: 'Poppins',
+                                                              fontSize: 14,
+                                                            ),
                                                       ),
                                                     ),
                                                     Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0, 0, 0, 4),
+                                                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 4),
                                                       child: Text(
-                                                        dateTimeFormat(
-                                                            'd/M/y',
-                                                            listViewBookingsRecord
-                                                                .bookingEnd!),
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .headlineSmall
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Poppins',
-                                                                  fontSize: 14,
-                                                                ),
+                                                        dateTimeFormat('d/M/y', listViewBookingsRecord.bookingEnd!),
+                                                        style: FlutterFlowTheme.of(context).headlineSmall.override(
+                                                              fontFamily: 'Poppins',
+                                                              fontSize: 14,
+                                                            ),
                                                       ),
                                                     ),
                                                   ],
@@ -310,62 +255,40 @@ class _MyBookingsWidgetState extends State<MyBookingsWidget> {
                                             ),
                                             Row(
                                               mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
+                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                               children: [
                                                 Text(
                                                   'Booked: ',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodySmall
-                                                      .override(
+                                                  style: FlutterFlowTheme.of(context).bodySmall.override(
                                                         fontFamily: 'Poppins',
                                                         fontSize: 12,
                                                       ),
                                                 ),
                                                 Text(
-                                                  dateTimeFormat(
-                                                      'relative',
-                                                      listViewBookingsRecord
-                                                          .bookedAt!),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodySmall
-                                                      .override(
+                                                  dateTimeFormat('relative', listViewBookingsRecord.bookedAt!),
+                                                  style: FlutterFlowTheme.of(context).bodySmall.override(
                                                         fontFamily: 'Poppins',
                                                         fontSize: 12,
                                                       ),
                                                 ),
                                                 Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
+                                                  mainAxisSize: MainAxisSize.max,
                                                   children: [
                                                     Text(
                                                       ' - Total: ',
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodySmall
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Poppins',
-                                                                fontSize: 12,
-                                                              ),
+                                                      style: FlutterFlowTheme.of(context).bodySmall.override(
+                                                            fontFamily: 'Poppins',
+                                                            fontSize: 12,
+                                                          ),
                                                     ),
                                                     Text(
                                                       formatNumber(
-                                                        listViewBookingsRecord
-                                                            .totalPrice!,
-                                                        formatType:
-                                                            FormatType.decimal,
-                                                        decimalType: DecimalType
-                                                            .automatic,
+                                                        listViewBookingsRecord.totalPrice!,
+                                                        formatType: FormatType.decimal,
+                                                        decimalType: DecimalType.automatic,
                                                         currency: '€',
                                                       ),
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodySmall,
+                                                      style: FlutterFlowTheme.of(context).bodySmall,
                                                     ),
                                                   ],
                                                 ),

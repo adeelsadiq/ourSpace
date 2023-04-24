@@ -83,9 +83,8 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
       Map<String, dynamic> body = {
         'amount': amount,
         'currency': currency,
-        'automatic_payment_methods': {'enabled': true},
-        // Adding a minimum fee of €1.50 or 1% of the total transaction, whichever is more
-        'application_fee_amount': applicationFeeAmount,
+        // Adding a minimum fee of €1.50 or 1% of the total transaction, whichever is more: https://stripe.com/docs/connect/destination-charges
+        'application_fee_amount': applicationFeeAmount.toString(),
         'transfer_data[destination]': spaceOwnerStripeID,
       };
 
@@ -326,6 +325,7 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
                             16.0, 0.0, 16.0, 24.0),
                         child: FFButtonWidget(
                           onPressed: () async {
+                            // using calanderDatePicker2 for showing the booking calendar: https://pub.dev/packages/calendar_date_picker2
                             List<DateTime?>? dateRange =
                                 await showCalendarDatePicker2Dialog(
                               context: context,
@@ -333,7 +333,14 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
                                   CalendarDatePicker2WithActionButtonsConfig(
                                 calendarType: CalendarDatePicker2Type.range,
                                 selectableDayPredicate: _isValidDateRange,
-                                firstDate: DateTime.now(),
+                                selectedDayTextStyle: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w700),
+                                selectedDayHighlightColor:
+                                    FlutterFlowTheme.of(context).primary,
+                                centerAlignModePicker: true,
+                                firstDate:
+                                    DateTime.now().add(Duration(days: 1)),
                                 lastDate: fiftyDaysFromNow,
                               ),
 

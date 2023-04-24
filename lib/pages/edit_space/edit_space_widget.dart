@@ -162,8 +162,7 @@ class _EditSpaceWidgetState extends State<EditSpaceWidget> {
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 16),
                     child: TextFormField(
-                      controller: _model.spaceNameController ??=
-                          TextEditingController(
+                      controller: _model.spaceNameController ??= TextEditingController(
                         text: columnParkingSpacesRecord.name,
                       ),
                       obscureText: false,
@@ -173,8 +172,7 @@ class _EditSpaceWidgetState extends State<EditSpaceWidget> {
                         hintStyle: FlutterFlowTheme.of(context).bodySmall,
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color:
-                                FlutterFlowTheme.of(context).primaryBackground,
+                            color: FlutterFlowTheme.of(context).primaryBackground,
                             width: 2,
                           ),
                           borderRadius: BorderRadius.circular(8),
@@ -201,22 +199,18 @@ class _EditSpaceWidgetState extends State<EditSpaceWidget> {
                           borderRadius: BorderRadius.circular(8),
                         ),
                         filled: true,
-                        fillColor:
-                            FlutterFlowTheme.of(context).secondaryBackground,
-                        contentPadding:
-                            EdgeInsetsDirectional.fromSTEB(20, 24, 0, 24),
+                        fillColor: FlutterFlowTheme.of(context).secondaryBackground,
+                        contentPadding: EdgeInsetsDirectional.fromSTEB(20, 24, 0, 24),
                       ),
                       style: FlutterFlowTheme.of(context).bodyMedium,
                       maxLines: null,
-                      validator: _model.spaceNameControllerValidator
-                          .asValidator(context),
+                      validator: _model.spaceNameControllerValidator.asValidator(context),
                     ),
                   ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 16),
                     child: TextFormField(
-                      controller: _model.addressController ??=
-                          TextEditingController(
+                      controller: _model.addressController ??= TextEditingController(
                         text: columnParkingSpacesRecord.addressLine1,
                       ),
                       obscureText: false,
@@ -226,8 +220,7 @@ class _EditSpaceWidgetState extends State<EditSpaceWidget> {
                         hintStyle: FlutterFlowTheme.of(context).bodySmall,
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color:
-                                FlutterFlowTheme.of(context).primaryBackground,
+                            color: FlutterFlowTheme.of(context).primaryBackground,
                             width: 2,
                           ),
                           borderRadius: BorderRadius.circular(8),
@@ -254,22 +247,18 @@ class _EditSpaceWidgetState extends State<EditSpaceWidget> {
                           borderRadius: BorderRadius.circular(8),
                         ),
                         filled: true,
-                        fillColor:
-                            FlutterFlowTheme.of(context).secondaryBackground,
-                        contentPadding:
-                            EdgeInsetsDirectional.fromSTEB(20, 24, 0, 24),
+                        fillColor: FlutterFlowTheme.of(context).secondaryBackground,
+                        contentPadding: EdgeInsetsDirectional.fromSTEB(20, 24, 0, 24),
                       ),
                       style: FlutterFlowTheme.of(context).bodyMedium,
                       maxLines: null,
-                      validator: _model.addressControllerValidator
-                          .asValidator(context),
+                      validator: _model.addressControllerValidator.asValidator(context),
                     ),
                   ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 16),
                     child: TextFormField(
-                      controller: _model.priceController ??=
-                          TextEditingController(
+                      controller: _model.priceController ??= TextEditingController(
                         text: formatNumber(
                           columnParkingSpacesRecord.dailyRate,
                           formatType: FormatType.decimal,
@@ -284,8 +273,7 @@ class _EditSpaceWidgetState extends State<EditSpaceWidget> {
                         hintStyle: FlutterFlowTheme.of(context).bodySmall,
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color:
-                                FlutterFlowTheme.of(context).primaryBackground,
+                            color: FlutterFlowTheme.of(context).primaryBackground,
                             width: 2,
                           ),
                           borderRadius: BorderRadius.circular(8),
@@ -312,22 +300,18 @@ class _EditSpaceWidgetState extends State<EditSpaceWidget> {
                           borderRadius: BorderRadius.circular(8),
                         ),
                         filled: true,
-                        fillColor:
-                            FlutterFlowTheme.of(context).secondaryBackground,
-                        contentPadding:
-                            EdgeInsetsDirectional.fromSTEB(20, 24, 0, 24),
+                        fillColor: FlutterFlowTheme.of(context).secondaryBackground,
+                        contentPadding: EdgeInsetsDirectional.fromSTEB(20, 24, 0, 24),
                       ),
                       style: FlutterFlowTheme.of(context).bodyMedium,
                       maxLines: null,
-                      validator:
-                          _model.priceControllerValidator.asValidator(context),
+                      validator: _model.priceControllerValidator.asValidator(context),
                     ),
                   ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 12),
                     child: FlutterFlowDropDown<String>(
-                      controller: _model.stateValueController ??=
-                          FormFieldController<String>(
+                      controller: _model.stateValueController ??= FormFieldController<String>(
                         _model.stateValue ??= columnParkingSpacesRecord.area,
                       ),
                       options: [
@@ -351,8 +335,7 @@ class _EditSpaceWidgetState extends State<EditSpaceWidget> {
                         'Swords',
                         'Lusk'
                       ],
-                      onChanged: (val) =>
-                          setState(() => _model.stateValue = val),
+                      onChanged: (val) => setState(() => _model.stateValue = val),
                       width: double.infinity,
                       height: 56,
                       searchHintTextStyle: TextStyle(),
@@ -364,8 +347,7 @@ class _EditSpaceWidgetState extends State<EditSpaceWidget> {
                         color: FlutterFlowTheme.of(context).secondaryText,
                         size: 15,
                       ),
-                      fillColor:
-                          FlutterFlowTheme.of(context).secondaryBackground,
+                      fillColor: FlutterFlowTheme.of(context).secondaryBackground,
                       elevation: 2,
                       borderColor: FlutterFlowTheme.of(context).lineColor,
                       borderWidth: 2,
@@ -378,8 +360,7 @@ class _EditSpaceWidgetState extends State<EditSpaceWidget> {
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 12),
                     child: TextFormField(
-                      controller: _model.myBioController ??=
-                          TextEditingController(
+                      controller: _model.myBioController ??= TextEditingController(
                         text: columnParkingSpacesRecord.description,
                       ),
                       obscureText: false,
@@ -389,8 +370,7 @@ class _EditSpaceWidgetState extends State<EditSpaceWidget> {
                         hintStyle: FlutterFlowTheme.of(context).bodySmall,
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color:
-                                FlutterFlowTheme.of(context).primaryBackground,
+                            color: FlutterFlowTheme.of(context).primaryBackground,
                             width: 2,
                           ),
                           borderRadius: BorderRadius.circular(8),
@@ -417,16 +397,13 @@ class _EditSpaceWidgetState extends State<EditSpaceWidget> {
                           borderRadius: BorderRadius.circular(8),
                         ),
                         filled: true,
-                        fillColor:
-                            FlutterFlowTheme.of(context).secondaryBackground,
-                        contentPadding:
-                            EdgeInsetsDirectional.fromSTEB(20, 24, 0, 24),
+                        fillColor: FlutterFlowTheme.of(context).secondaryBackground,
+                        contentPadding: EdgeInsetsDirectional.fromSTEB(20, 24, 0, 24),
                       ),
                       style: FlutterFlowTheme.of(context).bodyMedium,
                       textAlign: TextAlign.start,
                       maxLines: 3,
-                      validator:
-                          _model.myBioControllerValidator.asValidator(context),
+                      validator: _model.myBioControllerValidator.asValidator(context),
                     ),
                   ),
                   Align(
@@ -435,10 +412,8 @@ class _EditSpaceWidgetState extends State<EditSpaceWidget> {
                       padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
                       child: FFButtonWidget(
                         onPressed: () async {
-                          final parkingSpacesUpdateData =
-                              createParkingSpacesRecordData();
-                          await widget.spaceRef!
-                              .update(parkingSpacesUpdateData);
+                          final parkingSpacesUpdateData = createParkingSpacesRecordData();
+                          await widget.spaceRef!.update(parkingSpacesUpdateData);
                           await showDialog(
                             context: context,
                             builder: (alertDialogContext) {
@@ -447,8 +422,7 @@ class _EditSpaceWidgetState extends State<EditSpaceWidget> {
                                 content: Text('Space was edited succesfully!'),
                                 actions: [
                                   TextButton(
-                                    onPressed: () =>
-                                        Navigator.pop(alertDialogContext),
+                                    onPressed: () => Navigator.pop(alertDialogContext),
                                     child: Text('Ok'),
                                   ),
                                 ],
@@ -461,15 +435,11 @@ class _EditSpaceWidgetState extends State<EditSpaceWidget> {
                           width: 270,
                           height: 50,
                           padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                          iconPadding:
-                              EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                          iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                           color: FlutterFlowTheme.of(context).primary,
-                          textStyle: FlutterFlowTheme.of(context)
-                              .titleMedium
-                              .override(
+                          textStyle: FlutterFlowTheme.of(context).titleMedium.override(
                                 fontFamily: 'Poppins',
-                                color:
-                                    FlutterFlowTheme.of(context).primaryBtnText,
+                                color: FlutterFlowTheme.of(context).primaryBtnText,
                               ),
                           elevation: 2,
                           borderSide: BorderSide(

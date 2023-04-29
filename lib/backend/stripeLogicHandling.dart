@@ -69,8 +69,7 @@ Future<Uri?> createStripeAccount() async {
     print('Stripe account created (line 67 handling): $onboardingUri');
     return onboardingUri;
   } else {
-    print(
-        'Failed to create Stripe account. Status code: ${response.statusCode}');
+    print('Failed to create Stripe account. Status code: ${response.statusCode}');
   }
 
   return null;
@@ -88,10 +87,7 @@ void handleIncomingLink(String url, context) async {
       final userUid = FirebaseAuth.instance.currentUser!.uid;
 
       // Update the user's account data in Firestore with the new Stripe ID
-      await FirebaseFirestore.instance
-          .collection('users')
-          .doc(userUid)
-          .update({'stripeID': stripeId});
+      await FirebaseFirestore.instance.collection('users').doc(userUid).update({'stripeID': stripeId});
       print("Stripe ID Added to firebase");
     } else {
       print('Stripe ID not found in the incoming link');

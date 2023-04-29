@@ -43,3 +43,5 @@ adb shell am start -a android.intent.action.VIEW -d "ourspaceapp://ourspaceapp.c
 
 Look at this
 test case
+
+Build apk: flutter build apk --release

@@ -15,6 +15,7 @@ import 'package:provider/provider.dart';
 import 'home_page_model.dart';
 export 'home_page_model.dart';
 import 'package:easy_debounce/easy_debounce.dart';
+import 'package:our_space_app/components/spaces_per_area.dart';
 
 class HomePageWidget extends StatefulWidget {
   const HomePageWidget({
@@ -66,10 +67,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           height: 100,
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [
-                FlutterFlowTheme.of(context).primary,
-                FlutterFlowTheme.of(context).secondary
-              ],
+              colors: [FlutterFlowTheme.of(context).primary, FlutterFlowTheme.of(context).secondary],
               stops: [0, 1],
               begin: AlignmentDirectional(0, -1),
               end: AlignmentDirectional(0, 1),
@@ -97,8 +95,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         Align(
                           alignment: AlignmentDirectional(0, 0),
                           child: Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(25, 0, 0, 0),
+                            padding: EdgeInsetsDirectional.fromSTEB(25, 0, 0, 0),
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -119,9 +116,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       decoration: InputDecoration(
                                         labelText: 'Min Rate',
                                         hintText: 'Enter min daily rate',
-                                        hintStyle: FlutterFlowTheme.of(context)
-                                            .bodySmall
-                                            .override(
+                                        hintStyle: FlutterFlowTheme.of(context).bodySmall.override(
                                               fontFamily: 'Poppins',
                                               fontSize: 10,
                                             ),
@@ -155,8 +150,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                             topRight: Radius.circular(4.0),
                                           ),
                                         ),
-                                        focusedErrorBorder:
-                                            UnderlineInputBorder(
+                                        focusedErrorBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0x00000000),
                                             width: 1,
@@ -166,37 +160,27 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                             topRight: Radius.circular(4.0),
                                           ),
                                         ),
-                                        suffixIcon: _model
-                                                .minDailyRateController!
-                                                .text
-                                                .isNotEmpty
+                                        suffixIcon: _model.minDailyRateController!.text.isNotEmpty
                                             ? InkWell(
                                                 onTap: () async {
-                                                  _model.minDailyRateController
-                                                      ?.clear();
+                                                  _model.minDailyRateController?.clear();
                                                   setState(() {});
                                                 },
                                                 child: Icon(
                                                   Icons.clear,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
+                                                  color: FlutterFlowTheme.of(context).primaryText,
                                                   size: 22,
                                                 ),
                                               )
                                             : null,
                                       ),
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
+                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
                                             fontFamily: 'Poppins',
                                             fontSize: 15,
                                           ),
                                       textAlign: TextAlign.center,
                                       keyboardType: TextInputType.number,
-                                      validator: _model
-                                          .minDailyRateControllerValidator
-                                          .asValidator(context),
+                                      validator: _model.minDailyRateControllerValidator.asValidator(context),
                                     ),
                                   ),
                                 ),
@@ -224,9 +208,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                   decoration: InputDecoration(
                                     labelText: 'Max Rate',
                                     hintText: 'Enter max daily rate',
-                                    hintStyle: FlutterFlowTheme.of(context)
-                                        .bodySmall
-                                        .override(
+                                    hintStyle: FlutterFlowTheme.of(context).bodySmall.override(
                                           fontFamily: 'Poppins',
                                           fontSize: 10,
                                         ),
@@ -270,39 +252,28 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                         topRight: Radius.circular(4.0),
                                       ),
                                     ),
-                                    suffixIcon: _model.maxDailyRateController!
-                                            .text.isNotEmpty
+                                    suffixIcon: _model.maxDailyRateController!.text.isNotEmpty
                                         ? InkWell(
                                             onTap: () async {
-                                              _model.maxDailyRateController
-                                                  ?.clear();
+                                              _model.maxDailyRateController?.clear();
                                               setState(() {});
                                             },
                                             child: Icon(
                                               Icons.clear,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
+                                              color: FlutterFlowTheme.of(context).primaryText,
                                               size: 22,
                                             ),
                                           )
                                         : null,
                                   ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
+                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
                                         fontFamily: 'Poppins',
                                         fontSize: 15,
                                       ),
                                   textAlign: TextAlign.center,
                                   keyboardType: TextInputType.number,
-                                  validator: _model
-                                      .maxDailyRateControllerValidator
-                                      .asValidator(context),
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp('[0-9]'))
-                                  ],
+                                  validator: _model.maxDailyRateControllerValidator.asValidator(context),
+                                  inputFormatters: [FilteringTextInputFormatter.allow(RegExp('[0-9]'))],
                                 ),
                               ),
                             ),
@@ -316,8 +287,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     child: Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(5, 0, 5, 0),
                       child: FlutterFlowDropDown<String>(
-                        controller: _model.areaController ??=
-                            FormFieldController<String>(null),
+                        controller: _model.areaController ??= FormFieldController<String>(null),
                         options: [
                           'Dublin 1',
                           'Dublin 2',
@@ -336,15 +306,13 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           'Dublin 14',
                           'Dublin Fingal'
                         ],
-                        onChanged: (val) =>
-                            setState(() => _model.areaValue = val),
+                        onChanged: (val) => setState(() => _model.areaValue = val),
                         width: double.infinity,
                         height: 50,
-                        textStyle:
-                            FlutterFlowTheme.of(context).bodyMedium.override(
-                                  fontFamily: 'Poppins',
-                                  color: Colors.black,
-                                ),
+                        textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Poppins',
+                              color: Colors.black,
+                            ),
                         hintText: 'Please select local area...',
                         icon: Icon(
                           Icons.location_on,
@@ -375,8 +343,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         size: 30,
                       ),
                       onPressed: () async {
-                        if (scaffoldKey.currentState!.isDrawerOpen ||
-                            scaffoldKey.currentState!.isEndDrawerOpen) {
+                        if (scaffoldKey.currentState!.isDrawerOpen || scaffoldKey.currentState!.isEndDrawerOpen) {
                           Navigator.pop(context);
                         }
                       },
@@ -405,11 +372,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               _model.minDailyRateController?.clear();
                               _model.maxDailyRateController?.clear();
                             });
-                            setState(
-                                () => _model.firestoreRequestCompleter = null);
+                            setState(() => _model.firestoreRequestCompleter = null);
                             await _model.waitForFirestoreRequestCompleted();
-                            if (scaffoldKey.currentState!.isDrawerOpen ||
-                                scaffoldKey.currentState!.isEndDrawerOpen) {
+                            if (scaffoldKey.currentState!.isDrawerOpen || scaffoldKey.currentState!.isEndDrawerOpen) {
                               Navigator.pop(context);
                             }
                           },
@@ -422,15 +387,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             width: 130,
                             height: 40,
                             padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                            iconPadding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                            iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                             color: FlutterFlowTheme.of(context).primary,
-                            textStyle: FlutterFlowTheme.of(context)
-                                .titleSmall
-                                .override(
+                            textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                                   fontFamily: 'Poppins',
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
+                                  color: FlutterFlowTheme.of(context).primaryText,
                                 ),
                             borderSide: BorderSide(
                               color: Colors.transparent,
@@ -441,11 +402,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         ),
                         FFButtonWidget(
                           onPressed: () async {
-                            setState(
-                                () => _model.firestoreRequestCompleter = null);
+                            setState(() => _model.firestoreRequestCompleter = null);
                             await _model.waitForFirestoreRequestCompleted();
-                            if (scaffoldKey.currentState!.isDrawerOpen ||
-                                scaffoldKey.currentState!.isEndDrawerOpen) {
+                            if (scaffoldKey.currentState!.isDrawerOpen || scaffoldKey.currentState!.isEndDrawerOpen) {
                               Navigator.pop(context);
                             }
                           },
@@ -458,15 +417,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             width: 130,
                             height: 40,
                             padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                            iconPadding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                            iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                             color: FlutterFlowTheme.of(context).primary,
-                            textStyle: FlutterFlowTheme.of(context)
-                                .titleSmall
-                                .override(
+                            textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                                   fontFamily: 'Poppins',
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
+                                  color: FlutterFlowTheme.of(context).primaryText,
                                   fontSize: 13,
                                 ),
                             borderSide: BorderSide(
@@ -532,31 +487,19 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           Align(
                             alignment: AlignmentDirectional(0.0, 0.0),
                             child: FutureBuilder<List<ParkingSpacesRecord>>(
-                              future: (_model.firestoreRequestCompleter ??=
-                                      Completer<List<ParkingSpacesRecord>>()
-                                        ..complete(
-                                          queryParkingSpacesRecordOnce(
-                                            queryBuilder: (parkingSpacesRecord) =>
-                                                parkingSpacesRecord
-                                                    .where('area',
-                                                        isEqualTo:
-                                                            _model.areaValue !=
-                                                                    ''
-                                                                ? _model
-                                                                    .areaValue
-                                                                : null)
-                                                    .where('daily_rate',
-                                                        isLessThanOrEqualTo:
-                                                            double.tryParse(_model
-                                                                .maxDailyRateController
-                                                                .text))
-                                                    .where('daily_rate',
-                                                        isGreaterThanOrEqualTo:
-                                                            double.tryParse(_model
-                                                                .minDailyRateController
-                                                                .text)),
-                                          ),
-                                        ))
+                              future: (_model.firestoreRequestCompleter ??= Completer<List<ParkingSpacesRecord>>()
+                                    ..complete(
+                                      queryParkingSpacesRecordOnce(
+                                        queryBuilder: (parkingSpacesRecord) => parkingSpacesRecord
+                                            .where('area', isEqualTo: _model.areaValue != '' ? _model.areaValue : null)
+                                            .where('daily_rate',
+                                                isLessThanOrEqualTo:
+                                                    double.tryParse(_model.maxDailyRateController.text))
+                                            .where('daily_rate',
+                                                isGreaterThanOrEqualTo:
+                                                    double.tryParse(_model.minDailyRateController.text)),
+                                      ),
+                                    ))
                                   .future,
                               builder: (context, snapshot) {
                                 // Customize what your widget looks like when it's loading.
@@ -566,36 +509,27 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       width: 50.0,
                                       height: 50.0,
                                       child: SpinKitCircle(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
+                                        color: FlutterFlowTheme.of(context).primary,
                                         size: 50.0,
                                       ),
                                     ),
                                   );
                                 }
-                                List<ParkingSpacesRecord>
-                                    tabBarParkingSpacesRecordList =
-                                    snapshot.data!;
+                                List<ParkingSpacesRecord> tabBarParkingSpacesRecordList = snapshot.data!;
                                 return DefaultTabController(
                                   length: 2,
                                   initialIndex: 0,
                                   child: Column(
                                     children: [
                                       TabBar(
-                                        labelColor: FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                        labelStyle: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
-                                        indicatorColor:
-                                            FlutterFlowTheme.of(context)
-                                                .secondary,
+                                        labelColor: FlutterFlowTheme.of(context).primaryText,
+                                        labelStyle: FlutterFlowTheme.of(context).bodyMedium,
+                                        indicatorColor: FlutterFlowTheme.of(context).secondary,
                                         tabs: [
                                           Row(
                                             children: [
                                               Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        0.0, 0.0, 8.0, 0.0),
+                                                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 0.0),
                                                 child: Icon(
                                                   Icons.map,
                                                 ),
@@ -608,12 +542,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           Row(
                                             children: [
                                               Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        0.0, 0.0, 8.0, 0.0),
+                                                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 0.0),
                                                 child: Icon(
-                                                  Icons
-                                                      .format_list_numbered_rounded,
+                                                  Icons.format_list_numbered_rounded,
                                                 ),
                                               ),
                                               Tab(
@@ -625,69 +556,46 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       ),
                                       Expanded(
                                         child: TabBarView(
-                                          physics:
-                                              const NeverScrollableScrollPhysics(),
+                                          physics: const NeverScrollableScrollPhysics(),
                                           children: [
                                             KeepAliveWidgetWrapper(
                                               builder: (context) => Align(
-                                                alignment: AlignmentDirectional(
-                                                    0.0, 0.0),
+                                                alignment: AlignmentDirectional(0.0, 0.0),
                                                 child: FlutterFlowGoogleMap(
-                                                  controller: _model
-                                                      .googleMapsController,
+                                                  controller: _model.googleMapsController,
                                                   onCameraIdle: (latLng) =>
-                                                      setState(() => _model
-                                                              .googleMapsCenter =
-                                                          latLng),
-                                                  initialLocation: _model
-                                                          .googleMapsCenter ??=
-                                                      LatLng(
-                                                          53.34734, -6.25913),
-                                                  markers:
-                                                      tabBarParkingSpacesRecordList
-                                                          .map(
-                                                            (e) =>
-                                                                FlutterFlowMarker(
-                                                              e.location!
-                                                                  .serialize(),
-                                                              e.location!,
-                                                              () async {
-                                                                await showModalBottomSheet(
-                                                                  context:
-                                                                      context,
-                                                                  builder:
-                                                                      (context) {
-                                                                    return Padding(
-                                                                      padding: MediaQuery.of(
-                                                                              context)
-                                                                          .viewInsets,
-                                                                      child:
-                                                                          Container(
-                                                                        height:
-                                                                            350.0,
-                                                                        child:
-                                                                            SpaceDetailsBSheetWidget(
-                                                                          spaceBsSheet:
-                                                                              e,
-                                                                          listDocs:
-                                                                              () async {},
-                                                                        ),
-                                                                      ),
-                                                                    );
-                                                                  },
-                                                                ).then((value) =>
-                                                                    setState(
-                                                                        () {}));
+                                                      setState(() => _model.googleMapsCenter = latLng),
+                                                  initialLocation: _model.googleMapsCenter ??=
+                                                      LatLng(53.34734, -6.25913),
+                                                  markers: tabBarParkingSpacesRecordList
+                                                      .map(
+                                                        (e) => FlutterFlowMarker(
+                                                          e.location!.serialize(),
+                                                          e.location!,
+                                                          () async {
+                                                            await showModalBottomSheet(
+                                                              context: context,
+                                                              builder: (context) {
+                                                                return Padding(
+                                                                  padding: MediaQuery.of(context).viewInsets,
+                                                                  child: Container(
+                                                                    height: 350.0,
+                                                                    child: SpaceDetailsBSheetWidget(
+                                                                      spaceBsSheet: e,
+                                                                      listDocs: () async {},
+                                                                    ),
+                                                                  ),
+                                                                );
                                                               },
-                                                            ),
-                                                          )
-                                                          .withoutNulls
-                                                          .toList(),
-                                                  markerColor:
-                                                      GoogleMarkerColor.rose,
+                                                            ).then((value) => setState(() {}));
+                                                          },
+                                                        ),
+                                                      )
+                                                      .withoutNulls
+                                                      .toList(),
+                                                  markerColor: GoogleMarkerColor.rose,
                                                   mapType: MapType.normal,
-                                                  style:
-                                                      GoogleMapStyle.standard,
+                                                  style: GoogleMapStyle.standard,
                                                   initialZoom: 14.0,
                                                   allowInteraction: true,
                                                   allowZoom: true,
@@ -701,195 +609,206 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                               ),
                                             ),
                                             KeepAliveWidgetWrapper(
-                                                builder:
-                                                    (context) => // Generated code for this Stack Widget...
-                                                        Stack(
-                                                          children: [
-                                                            Column(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              children: [
-                                                                Builder(
-                                                                  builder:
-                                                                      (context) {
-                                                                    final spaceDetails =
-                                                                        tabBarParkingSpacesRecordList
-                                                                            .toList();
-                                                                    return ListView
-                                                                        .builder(
-                                                                      padding:
-                                                                          EdgeInsets
-                                                                              .zero,
-                                                                      shrinkWrap:
-                                                                          true,
-                                                                      scrollDirection:
-                                                                          Axis.vertical,
-                                                                      itemCount:
-                                                                          spaceDetails
-                                                                              .length,
-                                                                      itemBuilder:
-                                                                          (context,
-                                                                              spaceDetailsIndex) {
-                                                                        final spaceDetailsItem =
-                                                                            spaceDetails[spaceDetailsIndex];
-                                                                        return Column(
-                                                                          mainAxisSize:
-                                                                              MainAxisSize.max,
-                                                                          crossAxisAlignment:
-                                                                              CrossAxisAlignment.stretch,
-                                                                          children: [
-                                                                            Material(
-                                                                              color: Colors.transparent,
-                                                                              elevation: 1,
-                                                                              shape: RoundedRectangleBorder(
-                                                                                borderRadius: BorderRadius.circular(15),
-                                                                              ),
-                                                                              child: Container(
-                                                                                width: 100,
-                                                                                height: 100,
-                                                                                decoration: BoxDecoration(
-                                                                                  color: Color.fromARGB(101, 255, 255, 255),
-                                                                                  borderRadius: BorderRadius.circular(15),
-                                                                                  shape: BoxShape.rectangle,
-                                                                                  border: Border.all(
-                                                                                    color: FlutterFlowTheme.of(context).primary,
-                                                                                    width: 1,
+                                                builder: (context) => // Generated code for this Stack Widget...
+                                                    Stack(
+                                                      children: [
+                                                        Builder(
+                                                          builder: (context) {
+                                                            final spaceDetails = tabBarParkingSpacesRecordList.toList();
+                                                            return ListView.builder(
+                                                              physics: AlwaysScrollableScrollPhysics(),
+                                                              padding: EdgeInsets.zero,
+                                                              shrinkWrap: true,
+                                                              scrollDirection: Axis.vertical,
+                                                              itemCount: spaceDetails.length,
+                                                              itemBuilder: (context, spaceDetailsIndex) {
+                                                                final spaceDetailsItem =
+                                                                    spaceDetails[spaceDetailsIndex];
+                                                                return Column(
+                                                                  mainAxisSize: MainAxisSize.max,
+                                                                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                                                                  children: [
+                                                                    Material(
+                                                                      color: Colors.transparent,
+                                                                      elevation: 1,
+                                                                      shape: RoundedRectangleBorder(
+                                                                        borderRadius: BorderRadius.circular(15),
+                                                                      ),
+                                                                      child: Container(
+                                                                        width: 100,
+                                                                        height: 100,
+                                                                        decoration: BoxDecoration(
+                                                                          color: Color.fromARGB(101, 255, 255, 255),
+                                                                          borderRadius: BorderRadius.circular(15),
+                                                                          shape: BoxShape.rectangle,
+                                                                          border: Border.all(
+                                                                            color: FlutterFlowTheme.of(context).primary,
+                                                                            width: 1,
+                                                                          ),
+                                                                        ),
+                                                                        child: InkWell(
+                                                                          splashColor: Colors.transparent,
+                                                                          focusColor: Colors.transparent,
+                                                                          hoverColor: Colors.transparent,
+                                                                          highlightColor: Colors.transparent,
+                                                                          onTap: () async {
+                                                                            await showModalBottomSheet(
+                                                                              isScrollControlled: true,
+                                                                              backgroundColor: Colors.transparent,
+                                                                              barrierColor: Colors.transparent,
+                                                                              enableDrag: false,
+                                                                              context: context,
+                                                                              builder: (bottomSheetContext) {
+                                                                                return GestureDetector(
+                                                                                  onTap: () => FocusScope.of(context)
+                                                                                      .requestFocus(_unfocusNode),
+                                                                                  child: Padding(
+                                                                                    padding: MediaQuery.of(
+                                                                                            bottomSheetContext)
+                                                                                        .viewInsets,
+                                                                                    child: Container(
+                                                                                      height: 350,
+                                                                                      child: SpaceDetailsBSheetWidget(
+                                                                                        spaceBsSheet: spaceDetailsItem,
+                                                                                        listDocs: () async {},
+                                                                                      ),
+                                                                                    ),
+                                                                                  ),
+                                                                                );
+                                                                              },
+                                                                            ).then((value) => setState(() {}));
+                                                                          },
+                                                                          child: Row(
+                                                                            mainAxisSize: MainAxisSize.max,
+                                                                            mainAxisAlignment: MainAxisAlignment.center,
+                                                                            children: [
+                                                                              Padding(
+                                                                                padding: EdgeInsetsDirectional.fromSTEB(
+                                                                                    15, 0, 0, 0),
+                                                                                child: Container(
+                                                                                  width: 60,
+                                                                                  height: 60,
+                                                                                  clipBehavior: Clip.antiAlias,
+                                                                                  decoration: BoxDecoration(
+                                                                                    shape: BoxShape.circle,
+                                                                                  ),
+                                                                                  child: Image.network(
+                                                                                    spaceDetailsItem.imgUrl!,
+                                                                                    fit: BoxFit.cover,
                                                                                   ),
                                                                                 ),
-                                                                                child: InkWell(
-                                                                                  splashColor: Colors.transparent,
-                                                                                  focusColor: Colors.transparent,
-                                                                                  hoverColor: Colors.transparent,
-                                                                                  highlightColor: Colors.transparent,
-                                                                                  onTap: () async {
-                                                                                    await showModalBottomSheet(
-                                                                                      isScrollControlled: true,
-                                                                                      backgroundColor: Colors.transparent,
-                                                                                      barrierColor: Colors.transparent,
-                                                                                      enableDrag: false,
-                                                                                      context: context,
-                                                                                      builder: (bottomSheetContext) {
-                                                                                        return GestureDetector(
-                                                                                          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
-                                                                                          child: Padding(
-                                                                                            padding: MediaQuery.of(bottomSheetContext).viewInsets,
-                                                                                            child: Container(
-                                                                                              height: 350,
-                                                                                              child: SpaceDetailsBSheetWidget(
-                                                                                                spaceBsSheet: spaceDetailsItem,
-                                                                                                listDocs: () async {},
+                                                                              ),
+                                                                              Expanded(
+                                                                                child: Padding(
+                                                                                  padding:
+                                                                                      EdgeInsetsDirectional.fromSTEB(
+                                                                                          15, 0, 0, 0),
+                                                                                  child: Column(
+                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                    mainAxisAlignment:
+                                                                                        MainAxisAlignment.center,
+                                                                                    crossAxisAlignment:
+                                                                                        CrossAxisAlignment.stretch,
+                                                                                    children: [
+                                                                                      Row(
+                                                                                        mainAxisSize: MainAxisSize.max,
+                                                                                        mainAxisAlignment:
+                                                                                            MainAxisAlignment.center,
+                                                                                        children: [
+                                                                                          Text(
+                                                                                            spaceDetailsItem.name!
+                                                                                                .maybeHandleOverflow(
+                                                                                              maxChars: 35,
+                                                                                              replacement: '…',
+                                                                                            ),
+                                                                                            style: FlutterFlowTheme.of(
+                                                                                                    context)
+                                                                                                .bodyMedium,
+                                                                                          ),
+                                                                                        ],
+                                                                                      ),
+                                                                                      Row(
+                                                                                        mainAxisSize: MainAxisSize.max,
+                                                                                        mainAxisAlignment:
+                                                                                            MainAxisAlignment.center,
+                                                                                        children: [
+                                                                                          Text(
+                                                                                            spaceDetailsItem
+                                                                                                .addressLine1!
+                                                                                                .maybeHandleOverflow(
+                                                                                              maxChars: 40,
+                                                                                              replacement: '…',
+                                                                                            ),
+                                                                                            style: FlutterFlowTheme.of(
+                                                                                                    context)
+                                                                                                .bodyMedium,
+                                                                                          ),
+                                                                                        ],
+                                                                                      ),
+                                                                                      Row(
+                                                                                        mainAxisSize: MainAxisSize.max,
+                                                                                        mainAxisAlignment:
+                                                                                            MainAxisAlignment.center,
+                                                                                        children: [
+                                                                                          Text(
+                                                                                            spaceDetailsItem.area!,
+                                                                                            style: FlutterFlowTheme.of(
+                                                                                                    context)
+                                                                                                .bodyMedium,
+                                                                                          ),
+                                                                                        ],
+                                                                                      ),
+                                                                                      Row(
+                                                                                        mainAxisSize: MainAxisSize.max,
+                                                                                        mainAxisAlignment:
+                                                                                            MainAxisAlignment.center,
+                                                                                        children: [
+                                                                                          Text(
+                                                                                            'Daily Rate',
+                                                                                            style: FlutterFlowTheme.of(
+                                                                                                    context)
+                                                                                                .bodyMedium,
+                                                                                          ),
+                                                                                          Padding(
+                                                                                            padding:
+                                                                                                EdgeInsetsDirectional
+                                                                                                    .fromSTEB(
+                                                                                                        10, 0, 0, 0),
+                                                                                            child: Text(
+                                                                                              formatNumber(
+                                                                                                spaceDetailsItem
+                                                                                                    .dailyRate!,
+                                                                                                formatType:
+                                                                                                    FormatType.decimal,
+                                                                                                decimalType: DecimalType
+                                                                                                    .automatic,
+                                                                                                currency: '€',
                                                                                               ),
+                                                                                              style:
+                                                                                                  FlutterFlowTheme.of(
+                                                                                                          context)
+                                                                                                      .bodyMedium,
                                                                                             ),
                                                                                           ),
-                                                                                        );
-                                                                                      },
-                                                                                    ).then((value) => setState(() {}));
-                                                                                  },
-                                                                                  child: Row(
-                                                                                    mainAxisSize: MainAxisSize.max,
-                                                                                    mainAxisAlignment: MainAxisAlignment.center,
-                                                                                    children: [
-                                                                                      Padding(
-                                                                                        padding: EdgeInsetsDirectional.fromSTEB(15, 0, 0, 0),
-                                                                                        child: Container(
-                                                                                          width: 60,
-                                                                                          height: 60,
-                                                                                          clipBehavior: Clip.antiAlias,
-                                                                                          decoration: BoxDecoration(
-                                                                                            shape: BoxShape.circle,
-                                                                                          ),
-                                                                                          child: Image.network(
-                                                                                            spaceDetailsItem.imgUrl!,
-                                                                                            fit: BoxFit.cover,
-                                                                                          ),
-                                                                                        ),
-                                                                                      ),
-                                                                                      Expanded(
-                                                                                        child: Padding(
-                                                                                          padding: EdgeInsetsDirectional.fromSTEB(15, 0, 0, 0),
-                                                                                          child: Column(
-                                                                                            mainAxisSize: MainAxisSize.max,
-                                                                                            mainAxisAlignment: MainAxisAlignment.center,
-                                                                                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                                                                                            children: [
-                                                                                              Row(
-                                                                                                mainAxisSize: MainAxisSize.max,
-                                                                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                                                                children: [
-                                                                                                  Text(
-                                                                                                    spaceDetailsItem.name!.maybeHandleOverflow(
-                                                                                                      maxChars: 35,
-                                                                                                      replacement: '…',
-                                                                                                    ),
-                                                                                                    style: FlutterFlowTheme.of(context).bodyMedium,
-                                                                                                  ),
-                                                                                                ],
-                                                                                              ),
-                                                                                              Row(
-                                                                                                mainAxisSize: MainAxisSize.max,
-                                                                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                                                                children: [
-                                                                                                  Text(
-                                                                                                    spaceDetailsItem.addressLine1!.maybeHandleOverflow(
-                                                                                                      maxChars: 40,
-                                                                                                      replacement: '…',
-                                                                                                    ),
-                                                                                                    style: FlutterFlowTheme.of(context).bodyMedium,
-                                                                                                  ),
-                                                                                                ],
-                                                                                              ),
-                                                                                              Row(
-                                                                                                mainAxisSize: MainAxisSize.max,
-                                                                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                                                                children: [
-                                                                                                  Text(
-                                                                                                    spaceDetailsItem.area!,
-                                                                                                    style: FlutterFlowTheme.of(context).bodyMedium,
-                                                                                                  ),
-                                                                                                ],
-                                                                                              ),
-                                                                                              Row(
-                                                                                                mainAxisSize: MainAxisSize.max,
-                                                                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                                                                children: [
-                                                                                                  Text(
-                                                                                                    'Daily Rate',
-                                                                                                    style: FlutterFlowTheme.of(context).bodyMedium,
-                                                                                                  ),
-                                                                                                  Padding(
-                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
-                                                                                                    child: Text(
-                                                                                                      formatNumber(
-                                                                                                        spaceDetailsItem.dailyRate!,
-                                                                                                        formatType: FormatType.decimal,
-                                                                                                        decimalType: DecimalType.automatic,
-                                                                                                        currency: '€',
-                                                                                                      ),
-                                                                                                      style: FlutterFlowTheme.of(context).bodyMedium,
-                                                                                                    ),
-                                                                                                  ),
-                                                                                                ],
-                                                                                              ),
-                                                                                            ],
-                                                                                          ),
-                                                                                        ),
+                                                                                        ],
                                                                                       ),
                                                                                     ],
                                                                                   ),
                                                                                 ),
                                                                               ),
-                                                                            ),
-                                                                          ],
-                                                                        );
-                                                                      },
-                                                                    );
-                                                                  },
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ],
-                                                        )),
+                                                                            ],
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                );
+                                                              },
+                                                            );
+                                                          },
+                                                        ),
+                                                      ],
+                                                    )),
                                           ],
                                         ),
                                       ),
@@ -897,6 +816,13 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                   ),
                                 );
                               },
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Container(
+                              height: 100, // Replace with desired height
+                              child: SpacesPerArea(),
                             ),
                           ),
                         ],

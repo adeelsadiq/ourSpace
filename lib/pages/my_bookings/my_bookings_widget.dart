@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-
 import 'my_bookings_model.dart';
 export 'my_bookings_model.dart';
 
@@ -22,11 +21,12 @@ class _MyBookingsWidgetState extends State<MyBookingsWidget> {
   late MyBookingsModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
+  late FocusNode _focusNode;
 
   @override
   void initState() {
     super.initState();
+    _focusNode = FocusNode();
     _model = createModel(context, () => MyBookingsModel());
   }
 
@@ -34,14 +34,14 @@ class _MyBookingsWidgetState extends State<MyBookingsWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
+    _focusNode.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_focusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,

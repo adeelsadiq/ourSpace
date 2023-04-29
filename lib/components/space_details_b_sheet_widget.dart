@@ -24,8 +24,7 @@ class SpaceDetailsBSheetWidget extends StatefulWidget {
   final Future<dynamic> Function()? listDocs;
 
   @override
-  _SpaceDetailsBSheetWidgetState createState() =>
-      _SpaceDetailsBSheetWidgetState();
+  _SpaceDetailsBSheetWidgetState createState() => _SpaceDetailsBSheetWidgetState();
 }
 
 final today = DateTime.now();
@@ -54,11 +53,9 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
 
     print(widget.spaceBsSheet!.ffRef?.id.toString());
     final ownerIdRef = spaceDoc.data()?['owner_id'];
-    final ownerId =
-        ownerIdRef.id; // Get the ID as a string from the DocumentReference
+    final ownerId = ownerIdRef.id; // Get the ID as a string from the DocumentReference
 
-    final ownerDoc =
-        await FirebaseFirestore.instance.collection('users').doc(ownerId).get();
+    final ownerDoc = await FirebaseFirestore.instance.collection('users').doc(ownerId).get();
     final ownerStripeId = ownerDoc.data()?['stripeID'];
     SpaceOwnerStripeID = ownerStripeId;
     //got the owner's stripe ID > now I can use this in payment intent to tie the payment to the stripe account.
@@ -70,8 +67,7 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
     return;
   }
 
-  Future<Map<String, dynamic>?> createPaymentIntent(
-      String amount, String currency, String spaceOwnerStripeID) async {
+  Future<Map<String, dynamic>?> createPaymentIntent(String amount, String currency, String spaceOwnerStripeID) async {
     try {
       //get int from amount
       int parsedAmount = int.parse(amount);
@@ -114,8 +110,7 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
 
   //getting the days that have already been booked for the space so they can be blocked from the booking calendar
   void getAlreadyBookedDays() async {
-    QuerySnapshot<Map<String, dynamic>> querySnapshot = await FirebaseFirestore
-        .instance
+    QuerySnapshot<Map<String, dynamic>> querySnapshot = await FirebaseFirestore.instance
         .collection("bookings")
         .where("parking_space_ref", isEqualTo: widget.spaceBsSheet!.ffRef)
         .get();
@@ -124,8 +119,7 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
     if (querySnapshot.size > 0) {
       _blockedRanges = querySnapshot.docs
           .map((eachBooking) => DateTimeRange(
-              start: eachBooking.get("bookingStart").toDate(),
-              end: eachBooking.get("bookingEnd").toDate()))
+              start: eachBooking.get("bookingStart").toDate(), end: eachBooking.get("bookingEnd").toDate()))
           .toList();
       //this gives us list type of DateTimeRange, of ranges of already booked days for the space
 
@@ -133,8 +127,7 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
     }
   }
 
-  Future<void> makePayment(
-      String amount, DateTime dateStart, DateTime? dateEnd) async {
+  Future<void> makePayment(String amount, DateTime dateStart, DateTime? dateEnd) async {
     try {
       int value = double.parse(amount).round().toInt();
       String totalPrice = (value * 100).toString();
@@ -145,16 +138,14 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
       print(paymentIntent);
       // print(paymentIntent);
 
-      var gpay = PaymentSheetGooglePay(
-          merchantCountryCode: "IE", currencyCode: "EUR", testEnv: true);
+      var gpay = PaymentSheetGooglePay(merchantCountryCode: "IE", currencyCode: "EUR", testEnv: true);
       print('line 157');
       print(paymentIntent?['client_secret']);
       //STEP 2: Initialize Payment Sheet - destination charges here: https://stripe.com/docs/connect/destination-charges
       await Stripe.instance
           .initPaymentSheet(
               paymentSheetParameters: SetupPaymentSheetParameters(
-                  paymentIntentClientSecret: paymentIntent?[
-                      'client_secret'], //Gotten from payment intent
+                  paymentIntentClientSecret: paymentIntent?['client_secret'], //Gotten from payment intent
                   style: ThemeMode.dark,
                   merchantDisplayName: 'OurSpace Parking inc',
                   googlePay: gpay))
@@ -167,8 +158,7 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
     }
   }
 
-  displayPaymentSheet(
-      String totalPrice, DateTime dateStart, DateTime? dateEnd) async {
+  displayPaymentSheet(String totalPrice, DateTime dateStart, DateTime? dateEnd) async {
     try {
       await Stripe.instance.presentPaymentSheet().then((value) {
         // print();
@@ -243,8 +233,7 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
                     ],
                   ),
                   Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                     child: Text(
                       valueOrDefault<String>(
                         widget.spaceBsSheet!.name,
@@ -285,16 +274,13 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            24.0, 16.0, 24.0, 4.0),
+                        padding: EdgeInsetsDirectional.fromSTEB(24.0, 16.0, 24.0, 4.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Text(
                               'Price:',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyText2
-                                  .override(
+                              style: FlutterFlowTheme.of(context).bodySmall.override(
                                     fontFamily: 'Poppins',
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -303,44 +289,36 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            24.0, 4.0, 24.0, 0.0),
+                        padding: EdgeInsetsDirectional.fromSTEB(24.0, 4.0, 24.0, 0.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
                               'Daily Price in €',
-                              style: FlutterFlowTheme.of(context).bodyText2,
+                              style: FlutterFlowTheme.of(context).bodySmall,
                             ),
                             Text(
                               widget.spaceBsSheet!.dailyRate.toString(),
-                              style: FlutterFlowTheme.of(context).subtitle2,
+                              style: FlutterFlowTheme.of(context).titleSmall,
                             ),
                           ],
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            16.0, 0.0, 16.0, 24.0),
+                        padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 24.0),
                         child: FFButtonWidget(
                           onPressed: () async {
                             // using calanderDatePicker2 for showing the booking calendar: https://pub.dev/packages/calendar_date_picker2
-                            List<DateTime?>? dateRange =
-                                await showCalendarDatePicker2Dialog(
+                            List<DateTime?>? dateRange = await showCalendarDatePicker2Dialog(
                               context: context,
-                              config:
-                                  CalendarDatePicker2WithActionButtonsConfig(
+                              config: CalendarDatePicker2WithActionButtonsConfig(
                                 calendarType: CalendarDatePicker2Type.range,
                                 selectableDayPredicate: _isValidDateRange,
-                                selectedDayTextStyle: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w700),
-                                selectedDayHighlightColor:
-                                    FlutterFlowTheme.of(context).primary,
+                                selectedDayTextStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.w700),
+                                selectedDayHighlightColor: FlutterFlowTheme.of(context).primary,
                                 centerAlignModePicker: true,
-                                firstDate:
-                                    DateTime.now().add(Duration(days: 1)),
+                                firstDate: DateTime.now().add(Duration(days: 1)),
                                 lastDate: fiftyDaysFromNow,
                               ),
 
@@ -351,23 +329,16 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
                             if (dateRange != null) {
                               if (dateRange.isNotEmpty) {
                                 if (dateRange.length > 1) {
-                                  Duration difference =
-                                      dateRange[1]!.difference(dateRange[0]!);
+                                  Duration difference = dateRange[1]!.difference(dateRange[0]!);
                                   //doing this to ensure that the last day is not left off the total price because as it turns out difference is exclusice
-                                  Duration nDifference =
-                                      difference + Duration(days: 1);
-                                  double totalPrice =
-                                      widget.spaceBsSheet!.dailyRate! *
-                                          nDifference.inDays;
+                                  difference = difference + Duration(days: 1);
+                                  // Duration nDifference =
+                                  //     difference + Duration(days: 1);
+                                  double totalPrice = widget.spaceBsSheet!.dailyRate! * difference.inDays;
 
-                                  makePayment(totalPrice.toString(),
-                                      dateRange[0]!, dateRange[1]!);
+                                  makePayment(totalPrice.toString(), dateRange[0]!, dateRange[1]!);
                                 } else {
-                                  makePayment(
-                                      widget.spaceBsSheet!.dailyRate!
-                                          .toString(),
-                                      dateRange[0]!,
-                                      dateRange[0]!);
+                                  makePayment(widget.spaceBsSheet!.dailyRate!.toString(), dateRange[0]!, dateRange[0]!);
                                 }
                               }
                             }
@@ -376,14 +347,11 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
                           options: FFButtonOptions(
                             width: double.infinity,
                             height: 50.0,
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context).secondary,
-                            textStyle: FlutterFlowTheme.of(context)
-                                .titleSmall
-                                .override(
+                            color: FlutterFlowTheme.of(context).primary,
+                            padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                            iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                            // color: FlutterFlowTheme.of(context).secondary,
+                            textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                                   fontFamily: 'Poppins',
                                   color: Colors.white,
                                 ),
@@ -406,11 +374,9 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
     );
   }
 
-  void addBookingToFirebase(
-      String totalPrice, DateTime startTime, DateTime? endTime) async {
-    DocumentReference userReference = FirebaseFirestore.instance
-        .collection("users")
-        .doc(FirebaseAuth.instance.currentUser!.uid);
+  void addBookingToFirebase(String totalPrice, DateTime startTime, DateTime? endTime) async {
+    DocumentReference userReference =
+        FirebaseFirestore.instance.collection("users").doc(FirebaseAuth.instance.currentUser!.uid);
 
     await FirebaseFirestore.instance.collection("bookings").add({
       "bookingStart": startTime,
@@ -465,7 +431,6 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
 
   bool _isValidDateRange(DateTime day) {
     return !(_blockedRanges.any((range) =>
-        day.isAfter(range.start.subtract(Duration(days: 1))) &&
-        day.isBefore(range.end.add(Duration(days: 1)))));
+        day.isAfter(range.start.subtract(Duration(days: 1))) && day.isBefore(range.end.add(Duration(days: 1)))));
   }
 }

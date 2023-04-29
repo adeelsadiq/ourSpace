@@ -181,8 +181,7 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                5.0, 0.0, 0.0, 0.0),
+                            padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
                             child: TextFormField(
                               controller: _model.titleController,
                               autofocus: true,
@@ -190,12 +189,10 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
                               decoration: InputDecoration(
                                 labelText: 'Title',
                                 hintText: 'Add a title for your space',
-                                hintStyle:
-                                    FlutterFlowTheme.of(context).bodySmall,
+                                hintStyle: FlutterFlowTheme.of(context).bodySmall,
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                    color:
-                                        FlutterFlowTheme.of(context).lineColor,
+                                    color: FlutterFlowTheme.of(context).lineColor,
                                     width: 1.0,
                                   ),
                                   borderRadius: const BorderRadius.only(
@@ -234,20 +231,16 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
                                   ),
                                 ),
                               ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
+                              style: FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Poppins',
                                     color: Color(0xFF282727),
                                     fontSize: 16.0,
                                   ),
-                              validator: _model.titleControllerValidator
-                                  .asValidator(context),
+                              validator: _model.titleControllerValidator.asValidator(context),
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                5.0, 0.0, 0.0, 0.0),
+                            padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
                             child: TextFormField(
                               controller: _model.descriptionController,
                               autofocus: true,
@@ -255,12 +248,10 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
                               decoration: InputDecoration(
                                 labelText: 'Description',
                                 hintText: 'Add a description for your space',
-                                hintStyle:
-                                    FlutterFlowTheme.of(context).bodySmall,
+                                hintStyle: FlutterFlowTheme.of(context).bodySmall,
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                    color:
-                                        FlutterFlowTheme.of(context).lineColor,
+                                    color: FlutterFlowTheme.of(context).lineColor,
                                     width: 1.0,
                                   ),
                                   borderRadius: const BorderRadius.only(
@@ -299,20 +290,16 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
                                   ),
                                 ),
                               ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
+                              style: FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Poppins',
                                     color: Color(0xFF282727),
                                     fontSize: 16.0,
                                   ),
-                              validator: _model.descriptionControllerValidator
-                                  .asValidator(context),
+                              validator: _model.descriptionControllerValidator.asValidator(context),
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                5.0, 0.0, 0.0, 0.0),
+                            padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
                             child: TextFormField(
                               controller: _model.addressController,
                               autofocus: true,
@@ -320,12 +307,10 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
                               decoration: InputDecoration(
                                 labelText: 'Address',
                                 hintText: 'Add the address for your space',
-                                hintStyle:
-                                    FlutterFlowTheme.of(context).bodySmall,
+                                hintStyle: FlutterFlowTheme.of(context).bodySmall,
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                    color:
-                                        FlutterFlowTheme.of(context).lineColor,
+                                    color: FlutterFlowTheme.of(context).lineColor,
                                     width: 1.0,
                                   ),
                                   borderRadius: const BorderRadius.only(
@@ -364,20 +349,16 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
                                   ),
                                 ),
                               ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
+                              style: FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Poppins',
                                     color: Color(0xFF282727),
                                     fontSize: 16.0,
                                   ),
-                              validator: _model.addressControllerValidator
-                                  .asValidator(context),
+                              validator: _model.addressControllerValidator.asValidator(context),
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                5.0, 0.0, 0.0, 0.0),
+                            padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
                             child: TextFormField(
                               controller: _model.dailyRateController,
                               autofocus: true,
@@ -385,12 +366,10 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
                               decoration: InputDecoration(
                                 labelText: 'DailyRate',
                                 hintText: 'Daily Rate for the space..',
-                                hintStyle:
-                                    FlutterFlowTheme.of(context).bodySmall,
+                                hintStyle: FlutterFlowTheme.of(context).bodySmall,
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                    color:
-                                        FlutterFlowTheme.of(context).lineColor,
+                                    color: FlutterFlowTheme.of(context).lineColor,
                                     width: 1.0,
                                   ),
                                   borderRadius: const BorderRadius.only(
@@ -429,22 +408,18 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
                                   ),
                                 ),
                               ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
+                              style: FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Poppins',
                                     color: Color(0xFF282727),
                                     fontSize: 16.0,
                                   ),
-                              validator: _model.dailyRateControllerValidator
-                                  .asValidator(context),
+                              validator: _model.dailyRateControllerValidator.asValidator(context),
                             ),
                           ),
                           Align(
                             alignment: AlignmentDirectional(-0.55, -0.55),
                             child: FlutterFlowDropDown<String>(
-                              controller: _model.areaController ??=
-                                  FormFieldController<String>(null),
+                              controller: _model.areaController ??= FormFieldController<String>(null),
                               options: [
                                 'Dublin 1',
                                 'Dublin 2',
@@ -465,13 +440,10 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
                                 'Lusk',
                                 'Rush'
                               ],
-                              onChanged: (val) =>
-                                  setState(() => _model.areaValue = val),
+                              onChanged: (val) => setState(() => _model.areaValue = val),
                               width: double.infinity,
                               height: 50.0,
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
+                              textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Poppins',
                                     color: Colors.black,
                                   ),
@@ -481,28 +453,22 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
                               borderColor: Colors.transparent,
                               borderWidth: 0.0,
                               borderRadius: 0.0,
-                              margin: EdgeInsetsDirectional.fromSTEB(
-                                  12.0, 4.0, 12.0, 4.0),
+                              margin: EdgeInsetsDirectional.fromSTEB(12.0, 4.0, 12.0, 4.0),
                               hidesUnderline: true,
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 30.0, 0.0, 0.0),
+                            padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 FlutterFlowPlacePicker(
-                                  iOSGoogleMapsApiKey:
-                                      'AIzaSyCOF1LidYj07rxZrXVSt-yGTTWdmdDqdVU',
-                                  androidGoogleMapsApiKey:
-                                      'AIzaSyAozl79XPyZ_cD-pRkMCP4ItGSW8t5AQOA',
-                                  webGoogleMapsApiKey:
-                                      'AIzaSyDWwxq-6kAZQl7ABysDdHSGoSY9KSPtLL0',
+                                  iOSGoogleMapsApiKey: 'AIzaSyCOF1LidYj07rxZrXVSt-yGTTWdmdDqdVU',
+                                  androidGoogleMapsApiKey: 'AIzaSyAozl79XPyZ_cD-pRkMCP4ItGSW8t5AQOA',
+                                  webGoogleMapsApiKey: 'AIzaSyDWwxq-6kAZQl7ABysDdHSGoSY9KSPtLL0',
                                   onSelect: (place) async {
-                                    setState(() =>
-                                        _model.exactLocationValue = place);
+                                    setState(() => _model.exactLocationValue = place);
                                   },
                                   defaultText: 'Select Exact Location',
                                   icon: Icon(
@@ -514,9 +480,7 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
                                     width: 200.0,
                                     height: 40.0,
                                     color: FlutterFlowTheme.of(context).primary,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .override(
+                                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                                           fontFamily: 'Poppins',
                                           color: Colors.white,
                                           fontSize: 14.0,
@@ -532,38 +496,27 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 55.0, 0.0, 25.0),
+                            padding: EdgeInsetsDirectional.fromSTEB(0.0, 55.0, 0.0, 25.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 FFButtonWidget(
                                   onPressed: () async {
-                                    if (((_model
-                                            .titleController.text.isEmpty) ||
-                                        (_model.descriptionController.text
-                                            .isEmpty) ||
-                                        (_model
-                                            .addressController.text.isEmpty) ||
-                                        (_model.dailyRateController.text
-                                            .isEmpty))) {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
+                                    if (((_model.titleController.text.isEmpty) ||
+                                        (_model.descriptionController.text.isEmpty) ||
+                                        (_model.addressController.text.isEmpty) ||
+                                        (_model.dailyRateController.text.isEmpty))) {
+                                      ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
                                           content: Text(
                                             'Please fill all fields',
                                             style: TextStyle(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
+                                              color: FlutterFlowTheme.of(context).primaryText,
                                             ),
                                           ),
-                                          duration:
-                                              Duration(milliseconds: 4000),
-                                          backgroundColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .secondary,
+                                          duration: Duration(milliseconds: 4000),
+                                          backgroundColor: FlutterFlowTheme.of(context).secondary,
                                         ),
                                       );
                                       return;
@@ -571,36 +524,26 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
                                       final parkingSpacesCreateData = {
                                         ...createParkingSpacesRecordData(
                                           name: _model.titleController.text,
-                                          location:
-                                              _model.exactLocationValue.latLng,
-                                          description:
-                                              _model.descriptionController.text,
-                                          addressLine1:
-                                              _model.addressController.text,
+                                          location: _model.exactLocationValue.latLng,
+                                          description: _model.descriptionController.text,
+                                          addressLine1: _model.addressController.text,
                                           area: _model.areaValue,
                                           ownerId: currentUserReference,
-                                          dailyRate: double.tryParse(
-                                              _model.dailyRateController.text),
-                                          imgUrl:
-                                              'https://picsum.photos/200/300?random=1',
+                                          dailyRate: double.tryParse(_model.dailyRateController.text),
+                                          imgUrl: 'https://picsum.photos/200/300?random=1',
                                         ),
-                                        'dateAdded':
-                                            FieldValue.serverTimestamp(),
+                                        'dateAdded': FieldValue.serverTimestamp(),
                                       };
-                                      await ParkingSpacesRecord.collection
-                                          .doc()
-                                          .set(parkingSpacesCreateData);
+                                      await ParkingSpacesRecord.collection.doc().set(parkingSpacesCreateData);
                                       await showDialog(
                                         context: context,
                                         builder: (alertDialogContext) {
                                           return AlertDialog(
                                             title: Text('Space Added'),
-                                            content: Text(
-                                                'The space was added succesfully, click ok to finish!'),
+                                            content: Text('The space was added succesfully, click ok to finish!'),
                                             actions: [
                                               TextButton(
-                                                onPressed: () => Navigator.pop(
-                                                    alertDialogContext),
+                                                onPressed: () => Navigator.pop(alertDialogContext),
                                                 child: Text('Ok'),
                                               ),
                                             ],
@@ -614,8 +557,7 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
                                       extra: <String, dynamic>{
                                         kTransitionInfoKey: TransitionInfo(
                                           hasTransition: true,
-                                          transitionType:
-                                              PageTransitionType.leftToRight,
+                                          transitionType: PageTransitionType.leftToRight,
                                           duration: Duration(milliseconds: 5),
                                         ),
                                       },
@@ -625,14 +567,10 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
                                   options: FFButtonOptions(
                                     width: 130,
                                     height: 40,
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 0, 0),
-                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 0, 0),
+                                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                                    iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                                     color: FlutterFlowTheme.of(context).primary,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .override(
+                                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                                           fontFamily: 'Poppins',
                                           color: Colors.white,
                                         ),
@@ -652,8 +590,7 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
                     ),
                   ],
                 ),
-                if (currentUserDocument?.stripeID == '' &&
-                    _showStripeOnboarding)
+                if (currentUserDocument?.stripeID == '' && _showStripeOnboarding)
                   AuthUserStreamWidget(
                     builder: (context) => Container(
                       width: double.infinity,
@@ -680,18 +617,15 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
                                   Column(
                                     children: [
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 150, 0, 25),
+                                        padding: EdgeInsetsDirectional.fromSTEB(0, 150, 0, 25),
                                         child: Text(
                                           'Please provide your Stripe account \ndetails before adding a space. It is \nessential to have a connected Stripe \naccount to ensure you receive payments. ',
-                                          style: FlutterFlowTheme.of(context)
-                                              .titleSmall,
+                                          style: FlutterFlowTheme.of(context).titleSmall,
                                         ),
                                       ),
                                       ElevatedButton(
                                         onPressed: () async {
-                                          final Uri? onboardingUri =
-                                              await createStripeAccount();
+                                          final Uri? onboardingUri = await createStripeAccount();
                                           if (onboardingUri != null) {
                                             setState(() {
                                               _onboardingUri = onboardingUri;
@@ -706,19 +640,13 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
                                         },
                                         child: Text('Set up Stripe'),
                                         style: ElevatedButton.styleFrom(
-                                          backgroundColor: FlutterFlowTheme.of(
-                                                  context)
-                                              .primary, // Set the button color
+                                          backgroundColor: FlutterFlowTheme.of(context).primary, // Set the button color
                                           shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                                30.0), // Set the rounded edges
+                                            borderRadius: BorderRadius.circular(30.0), // Set the rounded edges
                                           ),
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 20,
-                                              vertical: 12), // Set the padding
-                                          textStyle: TextStyle(
-                                              fontSize:
-                                                  16), // Set the text style
+                                          padding:
+                                              EdgeInsets.symmetric(horizontal: 20, vertical: 12), // Set the padding
+                                          textStyle: TextStyle(fontSize: 16), // Set the text style
                                         ),
                                       )
                                     ],

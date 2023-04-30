@@ -64,10 +64,7 @@ class _ForgotPassWidgetState extends State<ForgotPassWidget> {
           padding: EdgeInsetsDirectional.fromSTEB(24, 0, 0, 0),
           child: Text(
             'Reset Password',
-            style: FlutterFlowTheme.of(context).displaySmall.override(
-                  fontFamily: 'Poppins',
-                  fontSize: 32,
-                ),
+            style: FlutterFlowTheme.of(context).bodyMedium,
           ),
         ),
         actions: [],

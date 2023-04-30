@@ -422,7 +422,7 @@ class _EditSpaceWidgetState extends State<EditSpaceWidget> {
                                 content: Text('Space was edited succesfully!'),
                                 actions: [
                                   TextButton(
-                                    onPressed: () => Navigator.pop(alertDialogContext),
+                                    onPressed: () => context.pushNamed('mySpaces'),
                                     child: Text('Ok'),
                                   ),
                                 ],

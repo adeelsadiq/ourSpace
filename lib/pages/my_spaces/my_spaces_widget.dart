@@ -198,7 +198,7 @@ class _MySpacesWidgetState extends State<MySpacesWidget> {
                                                           Padding(
                                                             padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
                                                             child: Text(
-                                                              'Created on: ',
+                                                              'Created: ',
                                                               style:
                                                                   FlutterFlowTheme.of(context).headlineSmall.override(
                                                                         fontFamily: 'Poppins',
@@ -209,7 +209,7 @@ class _MySpacesWidgetState extends State<MySpacesWidget> {
                                                           Padding(
                                                             padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 1),
                                                             child: Text(
-                                                              dateTimeFormat('EEE, MMM d, yyyy',
+                                                              dateTimeFormat('EEE, MMM d, yy',
                                                                   listViewParkingSpacesRecord.dateAdded!),
                                                               style:
                                                                   FlutterFlowTheme.of(context).headlineSmall.override(
@@ -228,19 +228,9 @@ class _MySpacesWidgetState extends State<MySpacesWidget> {
                                                         Padding(
                                                           padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 1),
                                                           child: Text(
-                                                            'Address: ',
-                                                            style: FlutterFlowTheme.of(context).headlineSmall.override(
-                                                                  fontFamily: 'Poppins',
-                                                                  fontSize: 13,
-                                                                ),
-                                                          ),
-                                                        ),
-                                                        Padding(
-                                                          padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 1),
-                                                          child: Text(
                                                             listViewParkingSpacesRecord.addressLine1!
                                                                 .maybeHandleOverflow(
-                                                              maxChars: 40,
+                                                              maxChars: 30,
                                                               replacement: '…',
                                                             ),
                                                             style: FlutterFlowTheme.of(context).headlineSmall.override(
@@ -257,7 +247,7 @@ class _MySpacesWidgetState extends State<MySpacesWidget> {
                                                         Padding(
                                                           padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 1),
                                                           child: Text(
-                                                            'Date Added: ',
+                                                            'Area: ',
                                                             style: FlutterFlowTheme.of(context).headlineSmall.override(
                                                                   fontFamily: 'Poppins',
                                                                   fontSize: 13,
@@ -267,8 +257,10 @@ class _MySpacesWidgetState extends State<MySpacesWidget> {
                                                         Padding(
                                                           padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
                                                           child: Text(
-                                                            dateTimeFormat('EEE, MMM d, yyyy',
-                                                                listViewParkingSpacesRecord.dateAdded!),
+                                                            listViewParkingSpacesRecord.area!.maybeHandleOverflow(
+                                                              maxChars: 30,
+                                                              replacement: '…',
+                                                            ),
                                                             style: FlutterFlowTheme.of(context).headlineSmall.override(
                                                                   fontFamily: 'Poppins',
                                                                   fontSize: 13,

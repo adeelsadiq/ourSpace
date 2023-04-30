@@ -42,8 +42,8 @@ Future<Uri?> createStripeAccount() async {
   // print(currentUserDocument?.email);
   // String url =
   //     Platform.isAndroid ? 'http://192.168.1.4:3000' : 'http://localhost:3000';
-  // String url = "https://express-server-tau.vercel.app";
-  String url = "http://192.168.1.4:3000";
+  String url = "https://express-server-tau.vercel.app";
+  // String url = "http://192.168.1.4:3000";
   final response = await http.post(
     Uri.parse('$url/create-stripe-account'),
     headers: {

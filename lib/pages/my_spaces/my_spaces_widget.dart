@@ -185,161 +185,158 @@ class _MySpacesWidgetState extends State<MySpacesWidget> {
                                               child: Padding(
                                                 padding: EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
                                                 child: Column(
-                                                    mainAxisSize: MainAxisSize.max,
-                                                    mainAxisAlignment: MainAxisAlignment.center,
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    children: [
-                                                      Padding(
-                                                        padding: const EdgeInsets.fromLTRB(4, 10, 0, 0),
-                                                        child: Row(
-                                                          mainAxisSize: MainAxisSize.max,
-                                                          mainAxisAlignment: MainAxisAlignment.start,
-                                                          children: [
-                                                            Padding(
-                                                              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
-                                                              child: Text(
-                                                                'Created on: ',
-                                                                style:
-                                                                    FlutterFlowTheme.of(context).headlineSmall.override(
-                                                                          fontFamily: 'Poppins',
-                                                                          fontSize: 14,
-                                                                        ),
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                              padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 1),
-                                                              child: Text(
-                                                                dateTimeFormat('EEE, MMM d, yyyy',
-                                                                    listViewParkingSpacesRecord.dateAdded!),
-                                                                style:
-                                                                    FlutterFlowTheme.of(context).headlineSmall.override(
-                                                                          fontFamily: 'Poppins',
-                                                                          fontSize: 14,
-                                                                        ),
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      Row(
+                                                  mainAxisSize: MainAxisSize.max,
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    Padding(
+                                                      padding: const EdgeInsets.fromLTRB(4, 10, 0, 0),
+                                                      child: Row(
                                                         mainAxisSize: MainAxisSize.max,
                                                         mainAxisAlignment: MainAxisAlignment.start,
                                                         children: [
                                                           Padding(
-                                                            padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 1),
-                                                            child: Text(
-                                                              'Address: ',
-                                                              style:
-                                                                  FlutterFlowTheme.of(context).headlineSmall.override(
-                                                                        fontFamily: 'Poppins',
-                                                                        fontSize: 13,
-                                                                      ),
-                                                            ),
-                                                          ),
-                                                          Padding(
-                                                            padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 1),
-                                                            child: Text(
-                                                              listViewParkingSpacesRecord.addressLine1!
-                                                                  .maybeHandleOverflow(
-                                                                maxChars: 40,
-                                                                replacement: '…',
-                                                              ),
-                                                              style:
-                                                                  FlutterFlowTheme.of(context).headlineSmall.override(
-                                                                        fontFamily: 'Poppins',
-                                                                        fontSize: 13,
-                                                                      ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      Row(
-                                                        mainAxisSize: MainAxisSize.max,
-                                                        children: [
-                                                          Padding(
-                                                            padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 1),
-                                                            child: Text(
-                                                              'Date Added: ',
-                                                              style:
-                                                                  FlutterFlowTheme.of(context).headlineSmall.override(
-                                                                        fontFamily: 'Poppins',
-                                                                        fontSize: 13,
-                                                                      ),
-                                                            ),
-                                                          ),
-                                                          Padding(
                                                             padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
+                                                            child: Text(
+                                                              'Created on: ',
+                                                              style:
+                                                                  FlutterFlowTheme.of(context).headlineSmall.override(
+                                                                        fontFamily: 'Poppins',
+                                                                        fontSize: 14,
+                                                                      ),
+                                                            ),
+                                                          ),
+                                                          Padding(
+                                                            padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 1),
                                                             child: Text(
                                                               dateTimeFormat('EEE, MMM d, yyyy',
                                                                   listViewParkingSpacesRecord.dateAdded!),
                                                               style:
                                                                   FlutterFlowTheme.of(context).headlineSmall.override(
                                                                         fontFamily: 'Poppins',
-                                                                        fontSize: 13,
+                                                                        fontSize: 14,
                                                                       ),
                                                             ),
                                                           ),
                                                         ],
                                                       ),
-                                                      Row(
-                                                        mainAxisSize: MainAxisSize.max,
-                                                        mainAxisAlignment: MainAxisAlignment.start,
-                                                        children: [
-                                                          Padding(
-                                                            padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 1),
-                                                            child: Text(
-                                                              '(',
-                                                              style: FlutterFlowTheme.of(context).bodySmall.override(
-                                                                    fontFamily: 'Poppins',
-                                                                    fontSize: 13,
-                                                                  ),
-                                                            ),
+                                                    ),
+                                                    Row(
+                                                      mainAxisSize: MainAxisSize.max,
+                                                      mainAxisAlignment: MainAxisAlignment.start,
+                                                      children: [
+                                                        Padding(
+                                                          padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 1),
+                                                          child: Text(
+                                                            'Address: ',
+                                                            style: FlutterFlowTheme.of(context).headlineSmall.override(
+                                                                  fontFamily: 'Poppins',
+                                                                  fontSize: 13,
+                                                                ),
                                                           ),
-                                                          Text(
-                                                            dateTimeFormat(
-                                                                'relative', listViewParkingSpacesRecord.dateAdded),
+                                                        ),
+                                                        Padding(
+                                                          padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 1),
+                                                          child: Text(
+                                                            listViewParkingSpacesRecord.addressLine1!
+                                                                .maybeHandleOverflow(
+                                                              maxChars: 40,
+                                                              replacement: '…',
+                                                            ),
+                                                            style: FlutterFlowTheme.of(context).headlineSmall.override(
+                                                                  fontFamily: 'Poppins',
+                                                                  fontSize: 13,
+                                                                ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Row(
+                                                      mainAxisSize: MainAxisSize.max,
+                                                      children: [
+                                                        Padding(
+                                                          padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 1),
+                                                          child: Text(
+                                                            'Date Added: ',
+                                                            style: FlutterFlowTheme.of(context).headlineSmall.override(
+                                                                  fontFamily: 'Poppins',
+                                                                  fontSize: 13,
+                                                                ),
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
+                                                          child: Text(
+                                                            dateTimeFormat('EEE, MMM d, yyyy',
+                                                                listViewParkingSpacesRecord.dateAdded!),
+                                                            style: FlutterFlowTheme.of(context).headlineSmall.override(
+                                                                  fontFamily: 'Poppins',
+                                                                  fontSize: 13,
+                                                                ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Row(
+                                                      mainAxisSize: MainAxisSize.max,
+                                                      mainAxisAlignment: MainAxisAlignment.start,
+                                                      children: [
+                                                        Padding(
+                                                          padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 1),
+                                                          child: Text(
+                                                            '(',
                                                             style: FlutterFlowTheme.of(context).bodySmall.override(
                                                                   fontFamily: 'Poppins',
                                                                   fontSize: 13,
                                                                 ),
                                                           ),
-                                                          Text(
-                                                            ')',
+                                                        ),
+                                                        Text(
+                                                          dateTimeFormat(
+                                                              'relative', listViewParkingSpacesRecord.dateAdded),
+                                                          style: FlutterFlowTheme.of(context).bodySmall.override(
+                                                                fontFamily: 'Poppins',
+                                                                fontSize: 13,
+                                                              ),
+                                                        ),
+                                                        Text(
+                                                          ')',
+                                                          style: FlutterFlowTheme.of(context).bodySmall.override(
+                                                                fontFamily: 'Poppins',
+                                                                fontSize: 13,
+                                                              ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Row(
+                                                      mainAxisSize: MainAxisSize.max,
+                                                      children: [
+                                                        Padding(
+                                                          padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
+                                                          child: Text(
+                                                            'Daily Rate: ',
                                                             style: FlutterFlowTheme.of(context).bodySmall.override(
                                                                   fontFamily: 'Poppins',
                                                                   fontSize: 13,
                                                                 ),
                                                           ),
-                                                        ],
-                                                      ),
-                                                      Row(
-                                                        mainAxisSize: MainAxisSize.max,
-                                                        children: [
-                                                          Padding(
-                                                            padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
-                                                            child: Text(
-                                                              'Daily Rate: ',
-                                                              style: FlutterFlowTheme.of(context).bodySmall.override(
-                                                                    fontFamily: 'Poppins',
-                                                                    fontSize: 13,
-                                                                  ),
-                                                            ),
+                                                        ),
+                                                        Text(
+                                                          formatNumber(
+                                                            listViewParkingSpacesRecord!.dailyRate,
+                                                            formatType: FormatType.decimal,
+                                                            decimalType: DecimalType.automatic,
+                                                            currency: '€',
                                                           ),
-                                                          Text(
-                                                            formatNumber(
-                                                              listViewParkingSpacesRecord!.dailyRate,
-                                                              formatType: FormatType.decimal,
-                                                              decimalType: DecimalType.automatic,
-                                                              currency: '€',
-                                                            ),
-                                                            style: FlutterFlowTheme.of(context).bodySmall.override(
-                                                                  fontFamily: 'Poppins',
-                                                                  fontSize: 13,
-                                                                ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ]),
+                                                          style: FlutterFlowTheme.of(context).bodySmall.override(
+                                                                fontFamily: 'Poppins',
+                                                                fontSize: 13,
+                                                              ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
                                             ),
                                             Padding(

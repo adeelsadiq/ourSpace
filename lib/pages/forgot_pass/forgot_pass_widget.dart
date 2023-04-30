@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -40,13 +40,11 @@ class _ForgotPassWidgetState extends State<ForgotPassWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       appBar: AppBar(
-        backgroundColor: Color(0xFFBDEB85),
+        backgroundColor: FlutterFlowTheme.of(context).primary,
         automaticallyImplyLeading: false,
         leading: FlutterFlowIconButton(
           borderColor: Colors.transparent,
@@ -59,7 +57,7 @@ class _ForgotPassWidgetState extends State<ForgotPassWidget> {
             size: 30,
           ),
           onPressed: () async {
-            context.pushNamed('profilePage');
+            context.pop();
           },
         ),
         title: Padding(
@@ -103,7 +101,7 @@ class _ForgotPassWidgetState extends State<ForgotPassWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(24, 4, 24, 0),
                 child: Container(
                   width: double.infinity,
-                  height: 60,
+                  height: 70,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                     boxShadow: [
@@ -121,14 +119,12 @@ class _ForgotPassWidgetState extends State<ForgotPassWidget> {
                     decoration: InputDecoration(
                       labelText: 'Your email address...',
                       labelStyle: FlutterFlowTheme.of(context).bodySmall,
-                      hintText: 'Enter your email...',
-                      hintStyle:
-                          FlutterFlowTheme.of(context).bodyMedium.override(
-                                fontFamily: 'Lexend Deca',
-                                color: Color(0xFF57636C),
-                                fontSize: 14,
-                                fontWeight: FontWeight.normal,
-                              ),
+                      hintStyle: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Lexend Deca',
+                            color: Color(0xFF57636C),
+                            fontSize: 14,
+                            fontWeight: FontWeight.normal,
+                          ),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Color(0x00000000),
@@ -158,23 +154,33 @@ class _ForgotPassWidgetState extends State<ForgotPassWidget> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       filled: true,
-                      fillColor:
-                          FlutterFlowTheme.of(context).secondaryBackground,
-                      contentPadding:
-                          EdgeInsetsDirectional.fromSTEB(24, 24, 20, 24),
+                      fillColor: FlutterFlowTheme.of(context).secondaryBackground,
+                      contentPadding: EdgeInsetsDirectional.fromSTEB(24, 24, 20, 24),
                     ),
                     style: FlutterFlowTheme.of(context).bodyMedium,
                     maxLines: null,
-                    validator: _model.emailAddressControllerValidator
-                        .asValidator(context),
+                    validator: _model.emailAddressControllerValidator.asValidator(context),
                   ),
                 ),
               ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
                 child: FFButtonWidget(
-                  onPressed: () {
-                    print('Button-Login pressed ...');
+                  onPressed: () async {
+                    if (_model.emailAddressController.text.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            'Email required!',
+                          ),
+                        ),
+                      );
+                      return;
+                    }
+                    await authManager.resetPassword(
+                      email: _model.emailAddressController.text,
+                      context: context,
+                    );
                   },
                   text: 'Send Link',
                   options: FFButtonOptions(
@@ -182,11 +188,10 @@ class _ForgotPassWidgetState extends State<ForgotPassWidget> {
                     height: 50,
                     padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                     iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                    color: FlutterFlowTheme.of(context).primaryText,
+                    color: FlutterFlowTheme.of(context).primary,
                     textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                           fontFamily: 'Poppins',
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
+                          color: FlutterFlowTheme.of(context).primaryText,
                         ),
                     elevation: 3,
                     borderSide: BorderSide(

@@ -132,15 +132,15 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
       int value = double.parse(amount).round().toInt();
       String totalPrice = (value * 100).toString();
       String ownerID = spaceOwnerStripeID ?? 'acct_1MznaxQeWD3I90Ag';
-      print('line 155 value');
-      print(value);
+      // print('line 155 value');
+      // print(value);
       paymentIntent = await createPaymentIntent(totalPrice, 'EUR', ownerID);
       print(paymentIntent);
       // print(paymentIntent);
 
       var gpay = PaymentSheetGooglePay(merchantCountryCode: "IE", currencyCode: "EUR", testEnv: true);
-      print('line 157');
-      print(paymentIntent?['client_secret']);
+      // print('line 157');
+      // print(paymentIntent?['client_secret']);
       //STEP 2: Initialize Payment Sheet - destination charges here: https://stripe.com/docs/connect/destination-charges
       await Stripe.instance
           .initPaymentSheet(

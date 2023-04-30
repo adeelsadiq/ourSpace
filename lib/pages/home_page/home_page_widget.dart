@@ -448,24 +448,24 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           textAlign: TextAlign.start,
           style: FlutterFlowTheme.of(context).headlineMedium.override(
                 fontFamily: 'Poppins',
-                color: FlutterFlowTheme.of(context).primaryBtnText,
+                color: Colors.black,
               ),
         ),
         actions: [
-          FlutterFlowIconButton(
-            borderColor: Colors.transparent,
-            borderRadius: 30.0,
-            borderWidth: 1.0,
-            buttonSize: 60.0,
-            icon: FaIcon(
-              FontAwesomeIcons.filter,
-              color: FlutterFlowTheme.of(context).primaryText,
-              size: 30.0,
-            ),
-            onPressed: () async {
-              scaffoldKey.currentState!.openDrawer();
-            },
-          ),
+          // FlutterFlowIconButton(
+          //   borderColor: Colors.transparent,
+          //   borderRadius: 30.0,
+          //   borderWidth: 1.0,
+          //   buttonSize: 60.0,
+          //   icon: FaIcon(
+          //     FontAwesomeIcons.filter,
+          //     color: FlutterFlowTheme.of(context).primaryText,
+          //     size: 30.0,
+          //   ),
+          //   onPressed: () async {
+          //     scaffoldKey.currentState!.openDrawer();
+          //   },
+          // ),
         ],
         centerTitle: false,
         elevation: 2.0,
@@ -713,7 +713,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                                       Row(
                                                                                         mainAxisSize: MainAxisSize.max,
                                                                                         mainAxisAlignment:
-                                                                                            MainAxisAlignment.center,
+                                                                                            MainAxisAlignment.start,
                                                                                         children: [
                                                                                           Text(
                                                                                             spaceDetailsItem.name!
@@ -730,7 +730,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                                       Row(
                                                                                         mainAxisSize: MainAxisSize.max,
                                                                                         mainAxisAlignment:
-                                                                                            MainAxisAlignment.center,
+                                                                                            MainAxisAlignment.start,
                                                                                         children: [
                                                                                           Text(
                                                                                             spaceDetailsItem
@@ -748,7 +748,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                                       Row(
                                                                                         mainAxisSize: MainAxisSize.max,
                                                                                         mainAxisAlignment:
-                                                                                            MainAxisAlignment.center,
+                                                                                            MainAxisAlignment.start,
                                                                                         children: [
                                                                                           Text(
                                                                                             spaceDetailsItem.area!,
@@ -761,7 +761,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                                       Row(
                                                                                         mainAxisSize: MainAxisSize.max,
                                                                                         mainAxisAlignment:
-                                                                                            MainAxisAlignment.center,
+                                                                                            MainAxisAlignment.start,
                                                                                         children: [
                                                                                           Text(
                                                                                             'Daily Rate',
@@ -816,6 +816,35 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                   ),
                                 );
                               },
+                            ),
+                          ),
+                          //filter icon, moved to the bottom after feedback from a user
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Container(
+                                height: 160,
+                                width: 60,
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    // color: Color.fromARGB(255, 118, 14, 87),
+                                    color: FlutterFlowTheme.of(context).primary),
+                                child: FlutterFlowIconButton(
+                                  borderColor: Colors.transparent,
+                                  borderRadius: 40.0,
+                                  borderWidth: 1.0,
+                                  buttonSize: 60.0,
+                                  icon: FaIcon(
+                                    FontAwesomeIcons.filter,
+                                    color: Colors.white,
+                                    size: 30.0,
+                                  ),
+                                  onPressed: () async {
+                                    scaffoldKey.currentState!.openDrawer();
+                                  },
+                                ),
+                              ),
                             ),
                           ),
                           Align(

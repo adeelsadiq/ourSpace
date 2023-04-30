@@ -46,14 +46,15 @@ class SpacesPerArea extends StatelessWidget {
                             color: Colors.white,
                             border: Border.all(
                               width: 1.0,
-                              color: FlutterFlowTheme.of(context).primary,
+                              color: Colors.white,
+                              // color: FlutterFlowTheme.of(context).primary,
                             ),
                             boxShadow: [
                               BoxShadow(
                                 color: FlutterFlowTheme.of(context).primary.withOpacity(0.6),
-                                spreadRadius: 4,
-                                blurRadius: 5,
-                                offset: Offset(0, 3), // changes position of shadow
+                                spreadRadius: 1,
+                                blurRadius: 1,
+                                offset: Offset(0, 1), // changes position of shadow
                               ),
                             ],
                           ),

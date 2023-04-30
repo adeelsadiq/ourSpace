@@ -45,3 +45,6 @@ Look at this
 test case
 
 Build apk: flutter build apk --release
+
+Debug filters:
+!D/EGL_emulation, !I/Count, !E/SurfaceSyncerters, !E/FrameEvents, !E/BufferQueueProducer, !E/SurfaceSyncer

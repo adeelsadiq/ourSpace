@@ -22,17 +22,6 @@ import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 export 'package:our_space_app/backend/stripeLogicHandling.dart';
 
-// Future<void> refreshUserData(BuildContext context) async {
-//   // Get the current user's ID
-//   final String currentUserId = FirebaseAuth.instance.currentUser!.uid;
-
-//   // Fetch the updated user data from Firebase
-//   DocumentSnapshot<Map<String, dynamic>> documentSnapshot = await FirebaseFirestore.instance.collection('users').doc(currentUserId).get();
-
-//   // Update the app state with the refreshed user data
-//   Provider.of<FFAppState>(context, listen: false).updateUserData(documentSnapshot.data());
-// }
-
 Future<void> initUniLinks(context) async {
   try {
     Uri? initialLink = await getInitialUri();
@@ -41,7 +30,7 @@ Future<void> initUniLinks(context) async {
       handleIncomingLink(url, context);
     }
   } on PlatformException {
-    // Handle exception
+    print('Failed to handle the incoming link.');
   }
 }
 
@@ -50,7 +39,7 @@ Future<Uri?> createStripeAccount() async {
     'email': currentUserDocument?.email,
     'name': currentUserDocument?.displayName,
   };
-  print(currentUserDocument?.email);
+  // print(currentUserDocument?.email);
   // String url =
   //     Platform.isAndroid ? 'http://192.168.1.4:3000' : 'http://localhost:3000';
   // String url = "https://express-server-tau.vercel.app";
@@ -64,9 +53,9 @@ Future<Uri?> createStripeAccount() async {
   );
   if (response.statusCode == 200) {
     final Map<String, dynamic> account = json.decode(response.body);
-    print('Stripe account created: $account');
+    // print('Stripe account created: $account');
     final Uri onboardingUri = Uri.parse(account['onboardingUri']);
-    print('Stripe account created (line 67 handling): $onboardingUri');
+    // print('Stripe account created (line 67 handling): $onboardingUri');
     return onboardingUri;
   } else {
     print('Failed to create Stripe account. Status code: ${response.statusCode}');
@@ -88,9 +77,27 @@ void handleIncomingLink(String url, context) async {
 
       // Update the user's account data in Firestore with the new Stripe ID
       await FirebaseFirestore.instance.collection('users').doc(userUid).update({'stripeID': stripeId});
-      print("Stripe ID Added to firebase");
+      // print("Stripe ID Added to firebase");
     } else {
       print('Stripe ID not found in the incoming link');
     }
+  }
+  if (link.path == '/refresh') {
+    // Extract the Stripe ID from the incoming link
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          'Stripe Account creation not completed.',
+          style: TextStyle(
+            color: FlutterFlowTheme.of(context).primaryText,
+          ),
+        ),
+        duration: Duration(milliseconds: 4000),
+        backgroundColor: FlutterFlowTheme.of(context).secondary,
+      ),
+    );
+
+    context.pushNamed('homePage');
   }
 }

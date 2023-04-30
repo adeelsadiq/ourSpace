@@ -98,8 +98,7 @@ class _BookingPageWidgetState extends State<BookingPageWidget> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 8.0, 0.0, 0.0),
+                          padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -114,8 +113,7 @@ class _BookingPageWidgetState extends State<BookingPageWidget> {
                                 child: Stack(
                                   children: [
                                     StreamBuilder<ParkingSpacesRecord>(
-                                      stream: ParkingSpacesRecord.getDocument(
-                                          widget.fromMap!.reference),
+                                      stream: ParkingSpacesRecord.getDocument(widget.fromMap!.reference),
                                       builder: (context, snapshot) {
                                         // Customize what your widget looks like when it's loading.
                                         if (!snapshot.hasData) {
@@ -124,28 +122,19 @@ class _BookingPageWidgetState extends State<BookingPageWidget> {
                                               width: 50.0,
                                               height: 50.0,
                                               child: SpinKitCircle(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryColor,
+                                                color: FlutterFlowTheme.of(context).primaryColor,
                                                 size: 50.0,
                                               ),
                                             ),
                                           );
                                         }
-                                        final googleMapParkingSpacesRecord =
-                                            snapshot.data!;
+                                        final googleMapParkingSpacesRecord = snapshot.data!;
                                         return Builder(builder: (context) {
-                                          final _googleMapMarker =
-                                              googleMapParkingSpacesRecord
-                                                  .location;
+                                          final _googleMapMarker = googleMapParkingSpacesRecord.location;
                                           return FlutterFlowGoogleMap(
-                                            controller:
-                                                _model.googleMapsController,
-                                            onCameraIdle: (latLng) => _model
-                                                .googleMapsCenter = latLng,
-                                            initialLocation:
-                                                _model.googleMapsCenter ??=
-                                                    currentUserLocationValue!,
+                                            controller: _model.googleMapsController,
+                                            onCameraIdle: (latLng) => _model.googleMapsCenter = latLng,
+                                            initialLocation: _model.googleMapsCenter ??= currentUserLocationValue!,
                                             markers: [
                                               if (_googleMapMarker != null)
                                                 FlutterFlowMarker(
@@ -153,8 +142,7 @@ class _BookingPageWidgetState extends State<BookingPageWidget> {
                                                   _googleMapMarker,
                                                 ),
                                             ],
-                                            markerColor:
-                                                GoogleMarkerColor.violet,
+                                            markerColor: GoogleMarkerColor.violet,
                                             mapType: MapType.normal,
                                             style: GoogleMapStyle.standard,
                                             initialZoom: 14.0,
@@ -171,28 +159,22 @@ class _BookingPageWidgetState extends State<BookingPageWidget> {
                                       },
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          16.0, 16.0, 16.0, 16.0),
+                                      padding: EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 16.0),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           Row(
                                             mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
                                               Card(
-                                                clipBehavior:
-                                                    Clip.antiAliasWithSaveLayer,
+                                                clipBehavior: Clip.antiAliasWithSaveLayer,
                                                 color: Color(0x3A000000),
                                                 shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
+                                                  borderRadius: BorderRadius.circular(8.0),
                                                 ),
                                                 child: FlutterFlowIconButton(
-                                                  borderColor:
-                                                      Colors.transparent,
+                                                  borderColor: Colors.transparent,
                                                   borderRadius: 30.0,
                                                   buttonSize: 46.0,
                                                   icon: Icon(
@@ -201,7 +183,7 @@ class _BookingPageWidgetState extends State<BookingPageWidget> {
                                                     size: 24.0,
                                                   ),
                                                   onPressed: () async {
-                                                    context.pop();
+                                                    context.pushNamed('homepage');
                                                   },
                                                 ),
                                               ),
@@ -217,22 +199,19 @@ class _BookingPageWidgetState extends State<BookingPageWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              24.0, 20.0, 24.0, 0.0),
+                          padding: EdgeInsetsDirectional.fromSTEB(24.0, 20.0, 24.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Text(
                                 bookingPageParkingSpacesRecord.name!,
-                                style:
-                                    FlutterFlowTheme.of(context).displaySmall,
+                                style: FlutterFlowTheme.of(context).displaySmall,
                               ),
                             ],
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              24.0, 4.0, 24.0, 0.0),
+                          padding: EdgeInsetsDirectional.fromSTEB(24.0, 4.0, 24.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [
@@ -244,8 +223,7 @@ class _BookingPageWidgetState extends State<BookingPageWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              24.0, 4.0, 24.0, 0.0),
+                          padding: EdgeInsetsDirectional.fromSTEB(24.0, 4.0, 24.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [
@@ -257,8 +235,7 @@ class _BookingPageWidgetState extends State<BookingPageWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              24.0, 4.0, 24.0, 0.0),
+                          padding: EdgeInsetsDirectional.fromSTEB(24.0, 4.0, 24.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [
@@ -270,8 +247,7 @@ class _BookingPageWidgetState extends State<BookingPageWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              24.0, 16.0, 24.0, 0.0),
+                          padding: EdgeInsetsDirectional.fromSTEB(24.0, 16.0, 24.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [
@@ -283,19 +259,16 @@ class _BookingPageWidgetState extends State<BookingPageWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              24.0, 4.0, 24.0, 0.0),
+                          padding: EdgeInsetsDirectional.fromSTEB(24.0, 4.0, 24.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Expanded(
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 24.0),
+                                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 24.0),
                                   child: Text(
                                     bookingPageParkingSpacesRecord.description!,
-                                    style:
-                                        FlutterFlowTheme.of(context).bodySmall,
+                                    style: FlutterFlowTheme.of(context).bodySmall,
                                   ),
                                 ),
                               ),
@@ -322,8 +295,7 @@ class _BookingPageWidgetState extends State<BookingPageWidget> {
                       borderRadius: BorderRadius.circular(16.0),
                     ),
                     child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(
-                          16.0, 16.0, 16.0, 16.0),
+                      padding: EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 16.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -338,28 +310,22 @@ class _BookingPageWidgetState extends State<BookingPageWidget> {
                                 children: [
                                   Text(
                                     '\$156',
-                                    style: FlutterFlowTheme.of(context)
-                                        .titleMedium
-                                        .override(
+                                    style: FlutterFlowTheme.of(context).titleMedium.override(
                                           fontFamily: 'Poppins',
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryBackground,
+                                          color: FlutterFlowTheme.of(context).secondaryBackground,
                                         ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        4.0, 0.0, 0.0, 0.0),
+                                    padding: EdgeInsetsDirectional.fromSTEB(4.0, 0.0, 0.0, 0.0),
                                     child: Text(
                                       '+ taxes',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodySmall,
+                                      style: FlutterFlowTheme.of(context).bodySmall,
                                     ),
                                   ),
                                 ],
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 4.0, 0.0, 0.0),
+                                padding: EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
                                 child: Text(
                                   'per night',
                                   style: FlutterFlowTheme.of(context).bodySmall,
@@ -375,14 +341,10 @@ class _BookingPageWidgetState extends State<BookingPageWidget> {
                             options: FFButtonOptions(
                               width: 130.0,
                               height: 50.0,
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 0.0),
-                              iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 0.0),
+                              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                              iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                               color: FlutterFlowTheme.of(context).primary,
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .titleSmall
-                                  .override(
+                              textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                                     fontFamily: 'Lexend Deca',
                                     color: Colors.white,
                                     fontSize: 16.0,

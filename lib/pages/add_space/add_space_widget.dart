@@ -57,7 +57,7 @@ class _MyInAppWebViewState extends State<MyInAppWebView> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Stripe Onboarding'),
-        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).primary,
       ),
       body: InAppWebView(
         initialUrlRequest: URLRequest(url: widget.url),
@@ -181,7 +181,7 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                            padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                             child: TextFormField(
                               controller: _model.titleController,
                               autofocus: true,
@@ -240,7 +240,7 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                            padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                             child: TextFormField(
                               controller: _model.descriptionController,
                               autofocus: true,
@@ -299,7 +299,7 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                            padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                             child: TextFormField(
                               controller: _model.addressController,
                               autofocus: true,
@@ -358,7 +358,7 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                            padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                             child: TextFormField(
                               controller: _model.dailyRateController,
                               autofocus: true,
@@ -468,7 +468,9 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
                                   androidGoogleMapsApiKey: 'AIzaSyAozl79XPyZ_cD-pRkMCP4ItGSW8t5AQOA',
                                   webGoogleMapsApiKey: 'AIzaSyDWwxq-6kAZQl7ABysDdHSGoSY9KSPtLL0',
                                   onSelect: (place) async {
-                                    setState(() => _model.exactLocationValue = place);
+                                    setState(() {
+                                      _model.exactLocationValue = place;
+                                    });
                                   },
                                   defaultText: 'Select Exact Location',
                                   icon: Icon(
@@ -597,10 +599,10 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
                       height: double.infinity,
                       constraints: BoxConstraints(
                         maxWidth: 800,
-                        maxHeight: 600,
+                        maxHeight: 800,
                       ),
                       decoration: BoxDecoration(
-                        color: Color.fromARGB(244, 241, 244, 248),
+                        color: Color.fromARGB(244, 249, 189, 226),
                       ),
                       child: SingleChildScrollView(
                         child: Column(

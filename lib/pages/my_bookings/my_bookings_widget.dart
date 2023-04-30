@@ -189,7 +189,7 @@ class _MyBookingsWidgetState extends State<MyBookingsWidget> {
                                                   mainAxisAlignment: MainAxisAlignment.start,
                                                   children: [
                                                     Padding(
-                                                      padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 4),
+                                                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 2),
                                                       child: Text(
                                                         'Created on: ',
                                                         style: FlutterFlowTheme.of(context).headlineSmall.override(
@@ -199,7 +199,7 @@ class _MyBookingsWidgetState extends State<MyBookingsWidget> {
                                                       ),
                                                     ),
                                                     Padding(
-                                                      padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 4),
+                                                      padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 2),
                                                       child: Text(
                                                         dateTimeFormat(
                                                             'EEE, MMM d, yyyy', listViewBookingsRecord.bookedAt!),
@@ -217,23 +217,23 @@ class _MyBookingsWidgetState extends State<MyBookingsWidget> {
                                                 mainAxisAlignment: MainAxisAlignment.start,
                                                 children: [
                                                   Padding(
-                                                    padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 4),
+                                                    padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 2),
                                                     child: Text(
                                                       'Booking Start: ',
                                                       style: FlutterFlowTheme.of(context).headlineSmall.override(
                                                             fontFamily: 'Poppins',
-                                                            fontSize: 13,
+                                                            fontSize: 14,
                                                           ),
                                                     ),
                                                   ),
                                                   Padding(
-                                                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 4),
+                                                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 2),
                                                     child: Text(
                                                       dateTimeFormat(
                                                           'EEE, MMM d, yyyy', listViewBookingsRecord.bookingStart!),
                                                       style: FlutterFlowTheme.of(context).headlineSmall.override(
                                                             fontFamily: 'Poppins',
-                                                            fontSize: 13,
+                                                            fontSize: 14,
                                                           ),
                                                     ),
                                                   ),
@@ -243,61 +243,61 @@ class _MyBookingsWidgetState extends State<MyBookingsWidget> {
                                                 mainAxisSize: MainAxisSize.max,
                                                 children: [
                                                   Padding(
-                                                    padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 4),
+                                                    padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 2),
                                                     child: Text(
                                                       'Booking End: ',
                                                       style: FlutterFlowTheme.of(context).headlineSmall.override(
                                                             fontFamily: 'Poppins',
-                                                            fontSize: 13,
+                                                            fontSize: 14,
                                                           ),
                                                     ),
                                                   ),
                                                   Padding(
-                                                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 4),
+                                                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 2),
                                                     child: Text(
                                                       dateTimeFormat(
                                                           'EEE, MMM d, yyyy', listViewBookingsRecord.bookingEnd!),
                                                       style: FlutterFlowTheme.of(context).headlineSmall.override(
                                                             fontFamily: 'Poppins',
-                                                            fontSize: 13,
+                                                            fontSize: 14,
                                                           ),
                                                     ),
                                                   ),
                                                 ],
                                               ),
+                                              // Row(
+                                              //   mainAxisSize: MainAxisSize.max,
+                                              //   mainAxisAlignment: MainAxisAlignment.start,
+                                              //   children: [
+                                              //     Padding(
+                                              //       padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 2),
+                                              //       child: Text(
+                                              //         'Booked ',
+                                              //         style: FlutterFlowTheme.of(context).bodySmall.override(
+                                              //               fontFamily: 'Poppins',
+                                              //               fontSize: 14,
+                                              //             ),
+                                              //       ),
+                                              //     ),
+                                              //     Text(
+                                              //       dateTimeFormat('relative', listViewBookingsRecord.bookedAt!),
+                                              //       style: FlutterFlowTheme.of(context).bodySmall.override(
+                                              //             fontFamily: 'Poppins',
+                                              //             fontSize: 14,
+                                              //           ),
+                                              //     ),
+                                              //   ],
+                                              // ),
                                               Row(
                                                 mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment: MainAxisAlignment.start,
                                                 children: [
                                                   Padding(
-                                                    padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 4),
-                                                    child: Text(
-                                                      'Booked ',
-                                                      style: FlutterFlowTheme.of(context).bodySmall.override(
-                                                            fontFamily: 'Poppins',
-                                                            fontSize: 13,
-                                                          ),
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    dateTimeFormat('relative', listViewBookingsRecord.bookedAt!),
-                                                    style: FlutterFlowTheme.of(context).bodySmall.override(
-                                                          fontFamily: 'Poppins',
-                                                          fontSize: 13,
-                                                        ),
-                                                  ),
-                                                ],
-                                              ),
-                                              Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Padding(
-                                                    padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 4),
+                                                    padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 2),
                                                     child: Text(
                                                       'Total: ',
                                                       style: FlutterFlowTheme.of(context).bodySmall.override(
                                                             fontFamily: 'Poppins',
-                                                            fontSize: 13,
+                                                            fontSize: 14,
                                                           ),
                                                     ),
                                                   ),
@@ -310,7 +310,7 @@ class _MyBookingsWidgetState extends State<MyBookingsWidget> {
                                                     ),
                                                     style: FlutterFlowTheme.of(context).bodySmall.override(
                                                           fontFamily: 'Poppins',
-                                                          fontSize: 13,
+                                                          fontSize: 14,
                                                         ),
                                                   ),
                                                 ],

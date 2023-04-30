@@ -451,22 +451,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                 color: Colors.black,
               ),
         ),
-        actions: [
-          // FlutterFlowIconButton(
-          //   borderColor: Colors.transparent,
-          //   borderRadius: 30.0,
-          //   borderWidth: 1.0,
-          //   buttonSize: 60.0,
-          //   icon: FaIcon(
-          //     FontAwesomeIcons.filter,
-          //     color: FlutterFlowTheme.of(context).primaryText,
-          //     size: 30.0,
-          //   ),
-          //   onPressed: () async {
-          //     scaffoldKey.currentState!.openDrawer();
-          //   },
-          // ),
-        ],
         centerTitle: false,
         elevation: 2.0,
       ),
@@ -682,19 +666,28 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                             mainAxisSize: MainAxisSize.max,
                                                                             mainAxisAlignment: MainAxisAlignment.center,
                                                                             children: [
-                                                                              Padding(
-                                                                                padding: EdgeInsetsDirectional.fromSTEB(
-                                                                                    15, 0, 0, 0),
-                                                                                child: Container(
-                                                                                  width: 60,
-                                                                                  height: 60,
-                                                                                  clipBehavior: Clip.antiAlias,
-                                                                                  decoration: BoxDecoration(
-                                                                                    shape: BoxShape.circle,
-                                                                                  ),
-                                                                                  child: Image.network(
-                                                                                    spaceDetailsItem.imgUrl!,
-                                                                                    fit: BoxFit.cover,
+                                                                              Container(
+                                                                                width: 125,
+                                                                                height: 160,
+                                                                                decoration: BoxDecoration(
+                                                                                    color: Color.fromARGB(
+                                                                                        255, 216, 204, 204),
+                                                                                    shape: BoxShape.rectangle,
+                                                                                    borderRadius:
+                                                                                        BorderRadius.circular(15)),
+                                                                                child: Padding(
+                                                                                  padding:
+                                                                                      EdgeInsetsDirectional.fromSTEB(
+                                                                                          2, 2, 2, 2),
+                                                                                  child: ClipRRect(
+                                                                                    borderRadius:
+                                                                                        BorderRadius.circular(15),
+                                                                                    child: Image.network(
+                                                                                      spaceDetailsItem.imgUrl!,
+                                                                                      width: 150,
+                                                                                      height: 160,
+                                                                                      fit: BoxFit.cover,
+                                                                                    ),
                                                                                   ),
                                                                                 ),
                                                                               ),
@@ -702,7 +695,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                                 child: Padding(
                                                                                   padding:
                                                                                       EdgeInsetsDirectional.fromSTEB(
-                                                                                          15, 0, 0, 0),
+                                                                                          10, 0, 0, 0),
                                                                                   child: Column(
                                                                                     mainAxisSize: MainAxisSize.max,
                                                                                     mainAxisAlignment:
@@ -718,7 +711,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                                           Text(
                                                                                             spaceDetailsItem.name!
                                                                                                 .maybeHandleOverflow(
-                                                                                              maxChars: 35,
+                                                                                              maxChars: 30,
                                                                                               replacement: '…',
                                                                                             ),
                                                                                             style: FlutterFlowTheme.of(
@@ -736,7 +729,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                                             spaceDetailsItem
                                                                                                 .addressLine1!
                                                                                                 .maybeHandleOverflow(
-                                                                                              maxChars: 40,
+                                                                                              maxChars: 30,
                                                                                               replacement: '…',
                                                                                             ),
                                                                                             style: FlutterFlowTheme.of(

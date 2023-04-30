@@ -221,7 +221,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
                               child: Text(
-                                'Booking History',
+                                'Your Bookings',
                                 style: FlutterFlowTheme.of(context).bodyMedium,
                               ),
                             ),

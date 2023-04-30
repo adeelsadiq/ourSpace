@@ -392,36 +392,46 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
       context: context,
       builder: (context) {
         return Dialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              SizedBox(
-                height: 24.0,
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(6.0, 0.0, 0.0, 0.0),
+                child: SizedBox(height: 16.0),
               ),
-              Text("Your Parking space has been Booked Successfully"),
-              SizedBox(
-                height: 100.0,
+              Text(
+                "Your Parking Space Has Been Booked Successfully",
+                style: TextStyle(
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
+              SizedBox(height: 32.0),
+              Icon(Icons.check_circle, color: Colors.green, size: 40.0),
+              SizedBox(height: 32.0),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  CupertinoButton(
-                    child: Text("Cancel"),
+                  TextButton(
+                    child: Text(
+                      "Cancel",
+                      style: TextStyle(color: Colors.grey[700]),
+                    ),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
                   ),
-                  CupertinoButton(
-                    child: Text("Ok"),
+                  OutlinedButton(
+                    child: Text("View Bookings"),
                     onPressed: () {
+                      Navigator.of(context).pop();
                       context.pushNamed('myBookings');
                     },
                   ),
                 ],
               ),
-              SizedBox(
-                height: 24.0,
-              ),
+              SizedBox(height: 16.0),
             ],
           ),
         );

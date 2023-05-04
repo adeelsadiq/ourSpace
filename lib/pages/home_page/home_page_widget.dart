@@ -587,7 +587,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                   showLocation: true,
                                                   showCompass: false,
                                                   showMapToolbar: false,
-                                                  showTraffic: true,
+                                                  showTraffic: false,
                                                   centerMapOnMarkerTap: true,
                                                 ),
                                               ),

@@ -29,7 +29,7 @@ class SpaceDetailsBSheetWidget extends StatefulWidget {
 
 final today = DateTime.now();
 final fiftyDaysFromNow = today.add(const Duration(days: 50));
-String SpaceOwnerStripeID = '';
+// String SpaceOwnerStripeID = '';
 
 class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
   late SpaceDetailsBSheetModel _model;
@@ -51,13 +51,13 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
         .doc(widget.spaceBsSheet!.ffRef?.id.toString())
         .get();
 
-    print(widget.spaceBsSheet!.ffRef?.id.toString());
+    // print(widget.spaceBsSheet!.ffRef?.id.toString());
     final ownerIdRef = spaceDoc.data()?['owner_id'];
     final ownerId = ownerIdRef.id; // Get the ID as a string from the DocumentReference
 
     final ownerDoc = await FirebaseFirestore.instance.collection('users').doc(ownerId).get();
     final ownerStripeId = ownerDoc.data()?['stripeID'];
-    SpaceOwnerStripeID = ownerStripeId;
+    // SpaceOwnerStripeID = ownerStripeId;
     //got the owner's stripe ID > now I can use this in payment intent to tie the payment to the stripe account.
 
     if (ownerStripeId == null) {
@@ -96,7 +96,7 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
 
       if (response.statusCode == 200) {
         final responseBody = jsonDecode(response.body);
-        print('Response from the backend: $responseBody');
+        // print('Response from the backend: $responseBody');
         return responseBody;
       } else {
         print('Request failed with status: ${response.statusCode}.');
@@ -135,12 +135,10 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
       // print('line 155 value');
       // print(value);
       paymentIntent = await createPaymentIntent(totalPrice, 'EUR', ownerID);
-      print(paymentIntent);
       // print(paymentIntent);
 
       var gpay = PaymentSheetGooglePay(merchantCountryCode: "IE", currencyCode: "EUR", testEnv: true);
-      // print('line 157');
-      // print(paymentIntent?['client_secret']);
+
       //STEP 2: Initialize Payment Sheet - destination charges here: https://stripe.com/docs/connect/destination-charges
       await Stripe.instance
           .initPaymentSheet(
@@ -164,8 +162,8 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
         // print();
         addBookingToFirebase(totalPrice, dateStart, dateEnd);
       });
-    } catch (e) {
-      print('$e');
+    } catch (error) {
+      print('$error');
     }
   }
 
@@ -408,7 +406,7 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
                 ),
               ),
               SizedBox(height: 32.0),
-              Icon(Icons.check_circle, color: Colors.green, size: 40.0),
+              Icon(Icons.check_circle, color: Color.fromARGB(255, 128, 187, 130), size: 40.0),
               SizedBox(height: 32.0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -422,7 +420,7 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
                       Navigator.of(context).pop();
                     },
                   ),
-                  OutlinedButton(
+                  TextButton(
                     child: Text("View Bookings"),
                     onPressed: () {
                       Navigator.of(context).pop();

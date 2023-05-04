@@ -83,7 +83,7 @@ void handleIncomingLink(String url, context) async {
     }
   }
   if (link.path == '/refresh') {
-    // Extract the Stripe ID from the incoming link
+    // handle a refresh link by showing a fail messsage and landing the user back at home page
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(

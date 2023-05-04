@@ -354,7 +354,7 @@ class _MySpacesWidgetState extends State<MySpacesWidget> {
                                                               return AlertDialog(
                                                                 title: Text('Caution!'),
                                                                 content: Text(
-                                                                    'Are you sure you want to delete the booking! This can not be undone!'),
+                                                                    'Are you sure you want to delete this space! This can not be undone!'),
                                                                 actions: [
                                                                   TextButton(
                                                                     onPressed: () async {

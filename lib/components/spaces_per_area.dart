@@ -67,6 +67,7 @@ class SpacesPerArea extends StatelessWidget {
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16,
+                                    color: FlutterFlowTheme.of(context).black600,
                                   ),
                                 ),
                                 SizedBox(width: 8.0),

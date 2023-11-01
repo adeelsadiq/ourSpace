@@ -88,7 +88,7 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
         Uri.parse('https://api.stripe.com/v1/payment_intents'),
         headers: {
           'Authorization':
-              'Bearer sk_test_51Ms8klHP4fXKJAPbjz0Y6p6qTkko7mGxJjImrUpOe3pY6NTS5ABeR1KXXNT66MwEAYRcGLSms70D5jTcLsgjIcqz00EN6sauD5',
+              '<add your Bearer token>,
           'Content-Type': 'application/x-www-form-urlencoded'
         },
         body: body,
@@ -131,7 +131,7 @@ class _SpaceDetailsBSheetWidgetState extends State<SpaceDetailsBSheetWidget> {
     try {
       int value = double.parse(amount).round().toInt();
       String totalPrice = (value * 100).toString();
-      String ownerID = spaceOwnerStripeID ?? 'acct_1MznaxQeWD3I90Ag';
+      String ownerID = spaceOwnerStripeID ?? '<add your stripe account>';
       // print('line 155 value');
       // print(value);
       paymentIntent = await createPaymentIntent(totalPrice, 'EUR', ownerID);

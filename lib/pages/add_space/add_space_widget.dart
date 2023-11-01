@@ -464,9 +464,9 @@ class _AddSpaceWidgetState extends State<AddSpaceWidget> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 FlutterFlowPlacePicker(
-                                  iOSGoogleMapsApiKey: 'AIzaSyCOF1LidYj07rxZrXVSt-yGTTWdmdDqdVU',
-                                  androidGoogleMapsApiKey: 'AIzaSyAozl79XPyZ_cD-pRkMCP4ItGSW8t5AQOA',
-                                  webGoogleMapsApiKey: 'AIzaSyDWwxq-6kAZQl7ABysDdHSGoSY9KSPtLL0',
+                                  iOSGoogleMapsApiKey: '<add your API key>',
+                                  androidGoogleMapsApiKey: '<add your API key>',
+                                  webGoogleMapsApiKey: '<add your API key>',
                                   onSelect: (place) async {
                                     setState(() {
                                       _model.exactLocationValue = place;

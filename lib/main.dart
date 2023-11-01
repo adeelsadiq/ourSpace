@@ -19,7 +19,7 @@ void main() async {
 
   await FlutterFlowTheme.initialize();
   Stripe.publishableKey =
-      "pk_test_51Ms8klHP4fXKJAPbxbGgB6xnR5DwC1XNgWUt9WJOWtwJvq8ex2GQ2hagBqV89VVKFbk5yiqL5SZHEd7TfCfFMJmw00tgNqlxcI";
+      "<add your Stripe.publishableKey>";
   final appState = FFAppState(); // Initialize FFAppState
 
   runApp(ChangeNotifierProvider(create: (context) => appState, child: MyApp()));

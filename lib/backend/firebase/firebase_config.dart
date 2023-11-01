@@ -11,22 +11,22 @@ Future initFirebase() async {
     log("HALLLOSOSS");
     return Firebase.initializeApp(
         options: const FirebaseOptions(
-      appId: '1:279631615180:ios:6a74322fc1dece8207de69',
-      apiKey: 'AIzaSyCOF1LidYj07rxZrXVSt-yGTTWdmdDqdVU',
-      storageBucket: "flutter-practice-119dc.appspot.com",
-      projectId: 'flutter-practice-119dc',
+      appId: '',
+      apiKey: '<add your API key>',
+      storageBucket: "",
+      projectId: '<add your project-Id>',
       messagingSenderId: '279631615180',
-      iosBundleId: 'com.mycompany.flutterpractice',
+      iosBundleId: '<add your isoBundleId>',
     ));
   } else if (kIsWeb) {
     await Firebase.initializeApp(
         options: FirebaseOptions(
-            apiKey: "AIzaSyDWwxq-6kAZQl7ABysDdHSGoSY9KSPtLL0",
+            apiKey: "<add your API key>",
             authDomain: "flutter-practice-119dc.firebaseapp.com",
-            projectId: "flutter-practice-119dc",
+            projectId: "<add your project-Id>",
             storageBucket: "flutter-practice-119dc.appspot.com",
             messagingSenderId: "279631615180",
-            appId: "1:279631615180:web:9cb8e86b84f3124e07de69"));
+            appId: ""));
   } else {
     print("Firebse Else");
     await Firebase.initializeApp();

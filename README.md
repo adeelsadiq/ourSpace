@@ -1,7 +1,6 @@
 # OurSpaceApp
 
 Author: Adeel Sadiq
-Student Number: D18125723
 For final submission DT249 Bsc in Information systems and information technology.
 
 ## Getting Started
